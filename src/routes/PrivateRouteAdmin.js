@@ -1,13 +1,14 @@
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
-const PrivateRouteAdmin = ({component: Component, ...rest}) => {
-    //const user = null;
-    //const user = {id:'1'};
+const PrivateRouteAdmin = ({ component: Component, ...rest }) => {
+
     const auth = useAuth();
+    const location = useLocation();
+
     return (
         <Route {...rest}>
-            {auth.isLogged() ? <Component /> : <Redirect to='/admin/signin'/>}
+            {auth.isLogged() ? <Component /> : <Redirect to={{ pathname: '/admin/signin', state: { from: location } }} />}
         </Route>
     )
 }
