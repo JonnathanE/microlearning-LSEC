@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Admin = (req, res) => {
+const NotFoundPage = (req, res) => {
     return(
         <>
             <div>
-                Admin panel
+                NotFoundPage
             </div>
         </>
     )
 }
 
-export default Admin;
+export default NotFoundPage;
