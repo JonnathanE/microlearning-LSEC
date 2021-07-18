@@ -6,7 +6,7 @@ const DashBoard = (req, res) => {
         <>
             <NavigationAdmin />
             <div>
-                Admin panel
+                Admin panel 2
             </div>
         </>
     )

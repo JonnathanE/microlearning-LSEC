@@ -9,6 +9,7 @@ import Signup from '../components/Signup';
 import DashBoard from '../layout/DashBoard';
 import SigninAdmin from '../components/SigninAdmin';
 import NotFoundPage from '../layout/NotFoundPage';
+import PrivateRouteAdmin from './PrivateRouteAdmin';
 
 const Routes = () => {
     return (
@@ -18,8 +19,8 @@ const Routes = () => {
                 <Route path='/home' exact component={Home} />
                 <Route path='/signin' exact component={Sigin} />
                 <Route path='/signup' exact component={Signup} />
-                <Route path='/admin/dashboard' exact component={DashBoard} />
                 <Route path='/admin/signin' exact component={SigninAdmin} />
+                <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />

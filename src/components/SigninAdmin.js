@@ -3,14 +3,18 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { signin } from '../core/apiCore'
+import useAuth from '../auth/useAuth';
 
 const SigninAdmin = (req, res) => {
     // // state
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
+
+    const auth = useAuth();
+    const history = useHistory();
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
@@ -34,7 +38,9 @@ const SigninAdmin = (req, res) => {
             setLoading(false);
             console.log(resData.error)
         } else {
+            auth.login();
             console.log(resData)
+            history.push('/admin/dashboard')
         }
     }
 
