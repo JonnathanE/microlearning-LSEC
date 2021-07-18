@@ -3,9 +3,12 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Redirect, useHistory } from 'react-router-dom';
-import { signin } from '../core/apiCore'
+import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { authenticateAdmin, signin } from '../core/apiCore'
 import useAuth from '../auth/useAuth';
+import Loading from './Loading';
+
+import './Signin.css';
 
 const SigninAdmin = (req, res) => {
     // // state
@@ -15,6 +18,8 @@ const SigninAdmin = (req, res) => {
 
     const auth = useAuth();
     const history = useHistory();
+    const location = useLocation();
+    const previusObjectUrl = location.state?.from;
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
@@ -28,54 +33,68 @@ const SigninAdmin = (req, res) => {
     });
 
     // submit method
-    const clickSubmit = async data => {
+    const clickSubmit = data => {
         setError(false);
         setLoading(true);
-        signin()
-        const resData = await signin(data);
-        if (resData.error) {
-            setError(resData.error);
-            setLoading(false);
-            console.log(resData.error)
-        } else {
-            auth.login();
-            console.log(resData)
-            history.push('/admin/dashboard')
-        }
-    }
+        signin(data)
+            .then(data => {
+                if (data.error) {
+                    setError(data.error);
+                    setLoading(false);
+                } else {
+                    if (authenticateAdmin(data)) {
+                        auth.login(data);
+                        history.push(previusObjectUrl || '/admin/dashboard')
+                    } else {
+                        setError('No admitido');
+                        setLoading(false);
+                    }
+                }
+            });
+    };
 
     // shows the validation error of the inputs
     const errorValidator = (messageError) => (
-        <span class="helper-text" style={{ color: '#ff0000' }}>{messageError}</span>
+        <p style={{ color: '#ff0000' }}>{messageError}</p>
     )
 
+    // form structure
     const signInForm = () => (
-        <form onSubmit={handleSubmit(clickSubmit)}>
-            <div className='input-field'>
-                <i className="material-icons prefix">account_circle</i>
-                <label htmlFor="input_emailAdmin">Correo electrónico</label>
-                <input type='email' id="input_emailAdmin" {...register('email')} className='validate' />
-                {errors.email && errorValidator('el correo electrónico debe ser un correo electrónico válido')}
+        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
+            <div className="form-group">
+                <label className="text-muted">Email</label>
+                <input type="email" {...register('email')} className='form-control' />
+                {errors.email && errorValidator(errors.email.message)}
             </div>
-            <div className='input-field'>
-                <i className="material-icons prefix">password</i>
-                <label htmlFor="intput_passwordAdmin">Contraseña</label>
-                <input type='password' id="intput_passwordAdmin" {...register('password')} className='validate' />
-                {errors.password && errorValidator('la contraseña es un campo requerido')}
+            <div className="form-group">
+                <label className="text-muted">Password</label>
+                <input type="password" {...register('password')} className='form-control' />
+                {errors.password && errorValidator(errors.password.message)}
             </div>
-            <button type='submit' className='btn waves-effect waves-light'>Enviar<i className="material-icons right">send</i></button>
+            <input type='submit' className="btn btn-primary" />
         </form>
     )
 
+    // show backend error alert
+    const showError = () => (
+        <div className='alert alert-danger' role="alert" style={{ display: error ? '' : 'none' }}>
+            {error}
+        </div>
+    )
+
+    // shows loading when submit is executing
+    const showLoading = () =>
+        loading && (
+            <Loading />
+        )
+
     return (
         <>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col s12 l6'>
-                        <h4 className="center-align">Iniciar sesión para Administrador</h4>
-                        {signInForm()}
-                    </div>
-                </div>
+            <div className="mt-5">
+                <h4 className="text-center mb-5">Log In</h4>
+                {showError()}
+                {showLoading()}
+                {signInForm()}
             </div>
         </>
     )
