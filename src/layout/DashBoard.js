@@ -1,7 +1,7 @@
 import React from 'react';
 import NavigationAdmin from './NavigationAdmin';
 
-const Admin = (req, res) => {
+const DashBoard = (req, res) => {
     return(
         <>
             <NavigationAdmin />
@@ -12,4 +12,4 @@ const Admin = (req, res) => {
     )
 }
 
-export default Admin;
+export default DashBoard;
