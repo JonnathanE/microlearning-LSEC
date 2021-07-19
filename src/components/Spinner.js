@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spinner } from 'reactstrap';
 
-import './Loading.css'
+import './Spinner.css'
 
 const Loading = () => {
     return (

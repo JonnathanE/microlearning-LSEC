@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Redirect, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { authenticateAdmin, signin } from '../core/apiCore'
 import useAuth from '../auth/useAuth';
-import Loading from './Loading';
+import Spinner from './Spinner';
 
 import './Signin.css';
 
@@ -14,7 +14,6 @@ const SigninAdmin = (req, res) => {
     // // state
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-    const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
     const auth = useAuth();
     const history = useHistory();
@@ -66,7 +65,7 @@ const SigninAdmin = (req, res) => {
                 <input type="email" {...register('email')} className='form-control' />
                 {errors.email && errorValidator(errors.email.message)}
             </div>
-            <div className="form-group">
+            <div className="form-group mb-3">
                 <label className="text-muted">Password</label>
                 <input type="password" {...register('password')} className='form-control' />
                 {errors.password && errorValidator(errors.password.message)}
@@ -77,7 +76,10 @@ const SigninAdmin = (req, res) => {
 
     // show backend error alert
     const showError = () => (
-        <div className='alert alert-danger' role="alert" style={{ display: error ? '' : 'none' }}>
+        <div className='alert alert-danger align-middle' role="alert" style={{ display: error ? '' : 'none' }}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
             {error}
         </div>
     )
@@ -85,7 +87,7 @@ const SigninAdmin = (req, res) => {
     // shows loading when submit is executing
     const showLoading = () =>
         loading && (
-            <Loading />
+            <Spinner />
         )
 
     return (
@@ -96,6 +98,7 @@ const SigninAdmin = (req, res) => {
                 {showLoading()}
                 {signInForm()}
             </div>
+
         </>
     )
 }

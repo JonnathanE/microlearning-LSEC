@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, withRouter, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
 const NavigationAdmin = () => {
@@ -32,9 +32,10 @@ const NavigationAdmin = () => {
                                 <NavLink exact to='/admin/modulos' className='nav-link'>Pruebas</NavLink>
                             </li>
                             <li className='Navbar text with an inline element'>
-                                <button onClick={auth.logout} className='active'>Cerrar sesión</button>
+                                
                             </li>
                         </ul>
+                        <button onClick={auth.logout} className='active'>Cerrar sesión</button>
                     </div>
                 </div>
             </nav>
