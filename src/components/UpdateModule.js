@@ -11,7 +11,7 @@ import Spinner from './Spinner';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
-const UpdateModule = (props) => {
+const UpdateModule = () => {
 
     const [module, setModule] = useState({});
     const [loading, setLoading] = useState(false);
@@ -51,12 +51,11 @@ const UpdateModule = (props) => {
 
     useEffect(() => {
         loadSingleModule(moduleId);
-    }, [props])
+    }, [])
 
     // submit method
     const clickSubmit = data => {
         setLoading(false);
-        console.log(data);
         MySwal.fire({
             title: <p>¿Quieres guardar los cambios?</p>,
             showDenyButton: true,

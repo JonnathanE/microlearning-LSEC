@@ -1,27 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import NavigationAdmin from '../layout/NavigationAdmin';
-import { getModules } from '../core/apiCore';
+import { getModules, deleteModule } from '../core/apiCore';
 import { NavLink } from 'react-router-dom';
+import useAuth from '../auth/useAuth';
+
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const ShowModules = () => {
 
     // state
     const [modules, setModules] = useState([]);
-    const [error, setError] = useState(false);
+
+    const auth = useAuth();
+
+    const MySwal = withReactContent(Swal);
 
     const loadModules = () => {
         getModules().then(data => {
             if (data.error) {
-                setError(data.error);
-                console.log(data.error)
+                MySwal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: data.error
+                })
             } else {
                 setModules(data);
             }
         });
     }
 
-    const deleteModule = (id) => {
-        alert(id)
+    const btndeleteModule = (moduleId) => {
+        MySwal.fire({
+            title: '¿Estas seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, bórralo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteModule(moduleId, auth.user.token)
+                    .then(data => {
+                        if (data.error) {
+                            MySwal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: data.error
+                            })
+                        } else {
+                            loadModules();
+                            Swal.fire(
+                                '¡Eliminado!',
+                                'Su archivo ha sido eliminado',
+                                'success'
+                            )
+                        }
+                    });
+            }
+        })
     }
 
     useEffect(() => {
@@ -48,7 +86,7 @@ const ShowModules = () => {
                                 <th>{module.number}</th>
                                 <td>{module.name}</td>
                                 <td>
-                                    <button onClick={(e) => deleteModule(module._id, e)} className='btn btn-danger me-1'>Eliminar</button>
+                                    <button onClick={(e) => btndeleteModule(module._id, e)} className='btn btn-danger me-1'>Eliminar</button>
                                     <NavLink to={`/admin/module/update/${module._id}`}>
                                         <button className='btn btn-success'>Modificar</button>
                                     </NavLink>

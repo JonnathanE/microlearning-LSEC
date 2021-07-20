@@ -68,7 +68,7 @@ export const readModule = async (moduleId) => {
         .catch(err => console.log(err))
 }
 
-// create a category
+// update a module
 export const updateModule = (moduleId, token, module) => {
     return fetch(`${API}/module/${moduleId}`, {
         method: 'PUT',
@@ -78,6 +78,20 @@ export const updateModule = (moduleId, token, module) => {
             authorization: `Bearer ${token}`
         },
         body: JSON.stringify(module)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// delete a module
+export const deleteModule = (moduleId, token) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
     })
         .then(response => response.json())
         .catch(err => console.log(err))
