@@ -49,3 +49,12 @@ export const isAdmin = (roles) => {
     }
     return false;
 }
+
+export const getModules = async () => {
+    try {
+        const response = await axios.get(`${API}/module`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
