@@ -49,3 +49,65 @@ export const isAdmin = (roles) => {
     }
     return false;
 }
+
+// create a module
+export const createteModule = (token, module) => {
+    return fetch(`${API}/module/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(module)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+export const getModules = async () => {
+    try {
+        const response = await axios.get(`${API}/module`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const readModule = async (moduleId) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// update a module
+export const updateModule = (moduleId, token, module) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(module)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// delete a module
+export const deleteModule = (moduleId, token) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
