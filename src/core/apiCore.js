@@ -67,3 +67,18 @@ export const readModule = async (moduleId) => {
     })
         .catch(err => console.log(err))
 }
+
+// create a category
+export const updateModule = (moduleId, token, module) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(module)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
