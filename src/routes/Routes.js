@@ -11,6 +11,7 @@ import SigninAdmin from '../components/SigninAdmin';
 import NotFoundPage from '../layout/NotFoundPage';
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import PublicRouteAdmin from './PublicRouteAdmin';
+import ShowModules from '../components/ShowModules';
 
 const Routes = () => {
     return (
@@ -22,6 +23,7 @@ const Routes = () => {
                 <Route path='/signup' exact component={Signup} />
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
                 <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
+                <PrivateRouteAdmin path='/admin/showmodules' exact component={ShowModules} />
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />
