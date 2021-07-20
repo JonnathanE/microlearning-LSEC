@@ -50,6 +50,21 @@ export const isAdmin = (roles) => {
     return false;
 }
 
+// create a module
+export const createteModule = (token, module) => {
+    return fetch(`${API}/module/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(module)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
 export const getModules = async () => {
     try {
         const response = await axios.get(`${API}/module`);
