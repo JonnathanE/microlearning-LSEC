@@ -13,6 +13,7 @@ const ShowModules = () => {
         getModules().then(data => {
             if (data.error) {
                 setError(data.error);
+                console.log(data.error)
             } else {
                 setModules(data);
             }
@@ -48,10 +49,7 @@ const ShowModules = () => {
                                 <td>{module.name}</td>
                                 <td>
                                     <button onClick={(e) => deleteModule(module._id, e)} className='btn btn-danger me-1'>Eliminar</button>
-                                    <NavLink to={`/module/${module._id}`}>
-                                        <button className='btn btn-info me-1'>Ver</button>
-                                    </NavLink>
-                                    <NavLink to={`/module/update/${module._id}`}>
+                                    <NavLink to={`/admin/module/update/${module._id}`}>
                                         <button className='btn btn-success'>Modificar</button>
                                     </NavLink>
                                 </td>

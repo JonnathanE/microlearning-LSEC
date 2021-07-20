@@ -58,3 +58,12 @@ export const getModules = async () => {
         console.error(error);
     }
 }
+
+export const readModule = async (moduleId) => {
+    return fetch(`${API}/module/${moduleId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
