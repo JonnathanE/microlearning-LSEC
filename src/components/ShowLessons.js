@@ -87,6 +87,9 @@ const ShowLessons = () => {
                                 <td>{lesson.name}</td>
                                 <td>
                                     <button onClick={(e) => btndeleteLesson(lesson._id, e)} className='btn btn-danger me-1'>Eliminar</button>
+                                    <NavLink to={`/admin/lesson/${lesson._id}`} className='me-1'>
+                                        <button className='btn btn-primary'>Ver más</button>
+                                    </NavLink>
                                     <NavLink to={`/admin/lesson/update/${lesson._id}`}>
                                         <button className='btn btn-success'>Modificar</button>
                                     </NavLink>

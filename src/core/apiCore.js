@@ -122,6 +122,16 @@ export const getLessons = async () => {
         .catch(err => console.log(err))
 }
 
+// get single lesson
+export const readLesson = async (lessonId) => {
+    return fetch(`${API}/lesson/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
 // delete a lesson
 export const deleteLesson = (lessonId, token) => {
     return fetch(`${API}/lesson/${lessonId}`, {
