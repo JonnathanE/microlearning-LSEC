@@ -112,6 +112,20 @@ export const deleteModule = (moduleId, token) => {
         .catch(err => console.log(err))
 }
 
+// create a lesson
+export const createteLesson = (token, lesson) => {
+    return fetch(`${API}/lesson/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: lesson
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
 // get all lessons
 export const getLessons = async () => {
     return fetch(`${API}/lesson/`, {

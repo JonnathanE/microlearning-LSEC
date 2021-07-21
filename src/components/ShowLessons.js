@@ -72,7 +72,7 @@ const ShowLessons = () => {
             <div className='container'>
 
                 <table className='table table-striped table-hover caption-top table-responsive align-middle'>
-                    <caption className='text-center fw-bold fs-2 text-wrap'>Lista de Modulos</caption>
+                    <caption className='text-center fw-bold fs-2 text-wrap'>Lista de Lecciones</caption>
                     <thead className='table-dark'>
                         <tr>
                             <th className='text-center'># Modulo</th>

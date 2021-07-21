@@ -33,6 +33,8 @@ const NavigationAdmin = () => {
                                 <NavLink exact to='#' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">Lecciones</NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                     <li><NavLink to='/admin/lesson/create' className="dropdown-item">Crear Lección</NavLink></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><NavLink to='/admin/showlessons' className="dropdown-item">Listar todas las lecciones</NavLink></li>
                                 </ul>
                             </li>
                             <li className='nav-item dropdown'>
