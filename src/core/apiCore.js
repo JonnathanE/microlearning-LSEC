@@ -111,3 +111,51 @@ export const deleteModule = (moduleId, token) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// create a lesson
+export const createteLesson = (token, lesson) => {
+    return fetch(`${API}/lesson/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: lesson
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// get all lessons
+export const getLessons = async () => {
+    return fetch(`${API}/lesson/`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// get single lesson
+export const readLesson = async (lessonId) => {
+    return fetch(`${API}/lesson/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// delete a lesson
+export const deleteLesson = (lessonId, token) => {
+    return fetch(`${API}/lesson/${lessonId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}

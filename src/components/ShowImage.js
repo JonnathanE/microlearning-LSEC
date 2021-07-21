@@ -1,14 +1,15 @@
 import React from 'react';
+import { API } from '../config';
+
 import './ShowImage.css';
 
 const ShowImage = ({ item, url }) => {
     return (
         <div className="product-img">
             <img
-                src={url}
+                src={`${API}/${url}/${item._id}`}
                 alt={item.name}
-                className="mb-3 img-cont"
-                style={{ maxHeight: "600px", maxWidth: "300px" }}
+                className="img-fluid rounded-start"
             />
         </div>
     )

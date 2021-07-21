@@ -17,7 +17,7 @@ const DashBoard = (req, res) => {
                         <li><NavLink to='/admin/showmodules'>Listar modulos</NavLink> </li>
                     </ul>
                     <ul>
-                        <li><NavLink to='/admin/signin'>Listar lecciones</NavLink> </li>
+                        <li><NavLink to='/admin/showlessons'>Listar lecciones</NavLink> </li>
                     </ul>
                     <ul>
                         <li><NavLink to='/admin/signin'>Listar microcontenido</NavLink> </li>
