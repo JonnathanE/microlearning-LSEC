@@ -14,6 +14,7 @@ import PublicRouteAdmin from './PublicRouteAdmin';
 import ShowModules from '../components/ShowModules';
 import UpdateModule from '../components/UpdateModule';
 import AddModule from '../components/AddModule';
+import ShowLessons from '../components/ShowLessons';
 
 const Routes = () => {
     return (
@@ -28,6 +29,7 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/showmodules' exact component={ShowModules} />
                 <PrivateRouteAdmin path='/admin/module/create' exact component={AddModule} />
                 <PrivateRouteAdmin path='/admin/module/update/:moduleId' exact component={UpdateModule} />
+                <PrivateRouteAdmin path='/admin/showlessons' exact component={ShowLessons} />
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />
