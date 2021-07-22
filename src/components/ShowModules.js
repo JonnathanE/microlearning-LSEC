@@ -38,6 +38,7 @@ const ShowModules = () => {
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
+            cancelButtonText: 'Cancelar',
             confirmButtonText: '¡Sí, bórralo!'
         }).then((result) => {
             if (result.isConfirmed) {
