@@ -162,8 +162,8 @@ export const deleteLesson = (lessonId, token) => {
 
 // update lesson icon
 export const updateLessonIcon = (token, lessonId, icon) => {
-    return fetch(`${API}/lesson//icon/update/${lessonId}`, {
-        method: 'POST',
+    return fetch(`${API}/lesson/icon/update/${lessonId}`, {
+        method: 'PUT',
         headers: {
             Accept: 'application/json',
             authorization: `Bearer ${token}`

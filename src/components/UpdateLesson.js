@@ -4,20 +4,20 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink, useParams } from 'react-router-dom';
 
-import { getModules, readLesson, updateLesson, updateLessonIcon } from '../core/apiCore';
+import { getModules, readLesson, updateLesson } from '../core/apiCore';
 import NavigationAdmin from '../layout/NavigationAdmin';
 import useAuth from '../auth/useAuth';
 import Spinner from './Spinner';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import UpdateIcon from './UpdateIcon';
 
 const UpdateLesson = () => {
 
     const [modules, setModules] = useState([]);
     const [singleModule, setSingleModule] = useState({});
     const [lesson, setLesson] = useState({});
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
     // get param moduleId for url
@@ -34,46 +34,11 @@ const UpdateLesson = () => {
     });
 
     // initialize the React Hook Form methods
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+    const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: yupResolver(schema)
     });
 
-    // submit icon method
-    const clickSubmitIcon = data => {
-        formData.append('icon', data.icon[0]);
-        MySwal.fire({
-            title: <p>¿Quieres guardar los cambios?</p>,
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: `Guardar cambios`,
-            denyButtonText: `No guardar`,
-        }).then((result) => {
-            if (result.isConfirmed) {
-                setLoading(true);
-                updateLessonIcon(auth.user.token, lesson._id, formData).then(data => {
-                    if (data.error) {
-                        setLoading(false);
-                        MySwal.fire({
-                            icon: 'error',
-                            title: 'Oops...',
-                            text: data.error
-                        })
-                    } else {
-                        setLoading(false);
-                        MySwal.fire('¡El icono se actualizó correctamente!', '', 'success');
-                        reset({
-                            icon: ''
-                        });
-                    }
-                })
-
-            } else if (result.isDenied) {
-                MySwal.fire('Los cambios no se guardan', '', 'info')
-            }
-        })
-    };
-
-    // submit icon method
+    // submit method
     const clickSubmit = data => {
         MySwal.fire({
             title: <p>¿Quieres guardar los cambios?</p>,
@@ -136,24 +101,11 @@ const UpdateLesson = () => {
     useEffect(() => {
         allModules();
         loadSingleLesson(lessonId);
-        setFormData(new FormData());
     }, [])
 
     // shows the validation error of the inputs
     const errorValidator = (messageError) => (
         <p style={{ color: '#ff0000' }}>{messageError}</p>
-    )
-
-    const iconForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmitIcon)}>
-            <div className='form-group'>
-                <label className='form-label' htmlFor="iconFile">Icono
-                </label>
-                <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='form-control' />
-                {errors.icon && errorValidator(errors.icon.message)}
-            </div>
-            <input type='submit' className="btn btn-primary" />
-        </form>
     )
 
     // form structure
@@ -194,10 +146,11 @@ const UpdateLesson = () => {
             <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
-                    <h2 className='text-center mt-2'>Actualizar</h2>
+                    <h2 className='text-center mt-2'>Actualizar lección {lesson.name}</h2>
                 </div>
                 <div className='row'>
                     {showLoading()}
+                    {<UpdateIcon lesson={lesson}/>}
                     {lessonForm()}
                 </div>
             </div>
