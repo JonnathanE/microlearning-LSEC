@@ -81,6 +81,7 @@ const UpdateModule = () => {
                         }
                     })
             } else if (result.isDenied) {
+                setLoading(false);
                 MySwal.fire('Los cambios no se guardan', '', 'info')
             }
         })

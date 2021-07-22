@@ -159,3 +159,32 @@ export const deleteLesson = (lessonId, token) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// update lesson icon
+export const updateLessonIcon = (token, lessonId, icon) => {
+    return fetch(`${API}/lesson/icon/update/${lessonId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: icon
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// update a lesson
+export const updateLesson = (token, lessonId ,lesson) => {
+    return fetch(`${API}/lesson/${lessonId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(lesson)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
