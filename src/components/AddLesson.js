@@ -132,7 +132,7 @@ const AddLesson = () => {
             <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
-                    <h2 className='text-center mt-2'>Crear nuevo módulo</h2>
+                    <h2 className='text-center mt-2'>Crear nueva Lección</h2>
                 </div>
                 <div className='row'>
                     {showLoading()}

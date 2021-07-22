@@ -17,6 +17,7 @@ import AddModule from '../components/AddModule';
 import ShowLessons from '../components/ShowLessons';
 import Lesson from '../components/Lesson';
 import AddLesson from '../components/AddLesson';
+import UpdateLesson from '../components/UpdateLesson';
 
 const Routes = () => {
     return (
@@ -33,6 +34,7 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/module/update/:moduleId' exact component={UpdateModule} />
                 <PrivateRouteAdmin path='/admin/showlessons' exact component={ShowLessons} />
                 <PrivateRouteAdmin path='/admin/lesson/create' exact component={AddLesson} />
+                <PrivateRouteAdmin path='/admin/lesson/update/:lessonId' exact component={UpdateLesson} />
                 <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={Lesson} />
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
