@@ -11,7 +11,7 @@ import Spinner from './Spinner';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import UpdateIcon from './UpdateIcon';
+import UpdateImage from './UpdateImage';
 
 const UpdateMicrolearning = () => {
 
@@ -150,7 +150,7 @@ const UpdateMicrolearning = () => {
                 </div>
                 <div className='row'>
                     {showLoading()}
-                    
+                    <UpdateImage content={microlearning} />
                     {lessonForm()}
                 </div>
             </div>
