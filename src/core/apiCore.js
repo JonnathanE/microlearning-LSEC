@@ -189,7 +189,21 @@ export const updateLesson = (token, lessonId ,lesson) => {
         .catch(err => console.log(err))
 }
 
-// get all lessons
+// create a microlearning
+export const createteMicrolearning = (token, micro) => {
+    return fetch(`${API}/micro/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: micro
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// get all Microlearning
 export const getMicrolearnings = async () => {
     return fetch(`${API}/micro/`, {
         method: "GET"
