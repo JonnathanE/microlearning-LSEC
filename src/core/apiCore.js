@@ -265,3 +265,17 @@ export const updateMicrolearningGif = (token, microId, gif) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// delete a lesson
+export const deleteMicrolearning = (microId, token) => {
+    return fetch(`${API}/micro/${microId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}

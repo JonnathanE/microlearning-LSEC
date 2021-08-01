@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavigationAdmin from '../layout/NavigationAdmin';
-import { getMicrolearnings, readLesson } from '../core/apiCore';
+import { getMicrolearnings, deleteMicrolearning } from '../core/apiCore';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
 const ShowMicrolearning = () => {
-     // state
+    // state
     const [microlearning, setMicrolearning] = useState([]);
 
     const auth = useAuth();
@@ -27,6 +27,38 @@ const ShowMicrolearning = () => {
                 setMicrolearning(data);
             }
         });
+    }
+
+    const btndeleteMicrolearning = (microId) => {
+        MySwal.fire({
+            title: '¿Estas seguro?',
+            text: "¡No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '¡Sí, bórralo!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteMicrolearning(microId, auth.user.token)
+                    .then(data => {
+                        if (data.error) {
+                            MySwal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: data.error
+                            })
+                        } else {
+                            loadMicrolearning();
+                            Swal.fire(
+                                '¡Eliminado!',
+                                'Su archivo ha sido eliminado',
+                                'success'
+                            )
+                        }
+                    });
+            }
+        })
     }
 
     useEffect(() => {
@@ -48,12 +80,12 @@ const ShowMicrolearning = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {microlearning.map((micro, i) => (
+                        {microlearning.map((micro, i) => (
                             <tr key={i}>
                                 <td>{micro.title}</td>
-                                <th>{micro.lesson? micro.lesson.name : 'No asignado'}</th>
+                                <th>{micro.lesson ? micro.lesson.name : 'No asignado'}</th>
                                 <td>
-                                    
+                                    <button onClick={(e) => btndeleteMicrolearning(micro._id, e)} className='btn btn-danger me-1'>Eliminar</button>
                                     <NavLink to={`/admin/micro/${micro._id}`} className='me-1'>
                                         <button className='btn btn-primary'>Ver más</button>
                                     </NavLink>
