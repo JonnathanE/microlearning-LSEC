@@ -19,6 +19,7 @@ import Lesson from '../components/Lesson';
 import AddLesson from '../components/AddLesson';
 import UpdateLesson from '../components/UpdateLesson';
 import ShowMicrolearning from '../components/ShowMicrolearning';
+import Microlearning from '../components/Microlearning';
 
 const Routes = () => {
     return (
@@ -39,10 +40,11 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/showlessons' exact component={ShowLessons} />
                 <PrivateRouteAdmin path='/admin/lesson/create' exact component={AddLesson} />
                 <PrivateRouteAdmin path='/admin/lesson/update/:lessonId' exact component={UpdateLesson} />
+                <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={Lesson} />
 
                 <PrivateRouteAdmin path='/admin/showmicrolearnings' exact component={ShowMicrolearning} />
+                <PrivateRouteAdmin path='/admin/micro/:microId' exact component={Microlearning} />
                 
-                <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={Lesson} />
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />

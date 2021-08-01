@@ -24,7 +24,6 @@ const ShowMicrolearning = () => {
                     text: data.error
                 })
             } else {
-                console.log(data)
                 setMicrolearning(data);
             }
         });

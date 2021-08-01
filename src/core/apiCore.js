@@ -198,3 +198,13 @@ export const getMicrolearnings = async () => {
     })
         .catch(err => console.log(err))
 }
+
+// get single microlearning
+export const readMicrolearning = async (lessonId) => {
+    return fetch(`${API}/micro/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
