@@ -188,3 +188,13 @@ export const updateLesson = (token, lessonId ,lesson) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// get all lessons
+export const getMicrolearnings = async () => {
+    return fetch(`${API}/micro/`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}

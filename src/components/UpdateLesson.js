@@ -119,7 +119,7 @@ const UpdateLesson = () => {
             <div className='form-group'>
                 <label className='text-muted'>Módulo</label>
                 <select type='text' {...register('module')} className='form-select' >
-                    <option value={singleModule._id}>{singleModule.name}</option>
+                    <option value={singleModule? singleModule._id : ''}>{singleModule? singleModule.name: 'Seleccione un módulo'}</option>
                     {modules && modules.map((c, i) => (
                         <option key={i} value={c._id}>{c.name}</option>
                     ))}

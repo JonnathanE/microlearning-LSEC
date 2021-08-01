@@ -45,9 +45,9 @@ const Lesson = () => {
                     <div className="card-body">
                         <h5 className="card-title mb-2 text-center">{lesson.name}</h5>
                         <p className="card-text fw-bold">Número de Módulo:</p>
-                        <p className="card-text">{module.number}</p> 
+                        <p className="card-text">{module? module.number : 'No asignado'}</p> 
                         <p className="card-text fw-bold">Nombre de Módulo:</p>
-                        <p className="card-text">{module.name}</p> 
+                        <p className="card-text">{module? module.name : 'No asignado'}</p> 
                         <NavLink to={`/admin/lesson/update/${lesson._id}`}>
                             <button className='btn btn-success'>Modificar Lección</button>
                         </NavLink>

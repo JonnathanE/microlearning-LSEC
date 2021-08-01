@@ -83,7 +83,7 @@ const ShowLessons = () => {
                     <tbody>
                         {lessons.map((lesson, i) => (
                             <tr key={i}>
-                                <th>{lesson.module.number}</th>
+                                <th>{lesson.module? lesson.module.number : 'No asignado'}</th>
                                 <td>{lesson.name}</td>
                                 <td>
                                     <button onClick={(e) => btndeleteLesson(lesson._id, e)} className='btn btn-danger me-1'>Eliminar</button>
