@@ -12,6 +12,7 @@ import Spinner from './Spinner';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import UpdateImage from './UpdateImage';
+import UpdateGif from './UpdateGif';
 
 const UpdateMicrolearning = () => {
 
@@ -151,6 +152,7 @@ const UpdateMicrolearning = () => {
                 <div className='row'>
                     {showLoading()}
                     <UpdateImage content={microlearning} />
+                    <UpdateGif content={microlearning} />
                     {lessonForm()}
                 </div>
             </div>

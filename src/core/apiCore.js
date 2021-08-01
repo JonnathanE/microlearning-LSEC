@@ -251,3 +251,17 @@ export const updateMicrolearningImage = (token, microId, image) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// update microlearning gif
+export const updateMicrolearningGif = (token, microId, gif) => {
+    return fetch(`${API}/micro/gif/${microId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: gif
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
