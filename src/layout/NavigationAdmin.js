@@ -40,7 +40,9 @@ const NavigationAdmin = () => {
                             <li className='nav-item dropdown'>
                                 <NavLink exact to='#' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">Microcontenido</NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
-                                    <li><NavLink to='/admin/microlerning/create' className="dropdown-item">Crear Microcontenido</NavLink></li>
+                                    <li><NavLink to='/admin/micro/create' className="dropdown-item">Crear Microcontenido</NavLink></li>
+                                    <li><hr className="dropdown-divider" /></li>
+                                    <li><NavLink to='/admin/showmicrolearnings' className="dropdown-item">Listar todos los Microcontenidos</NavLink></li>
                                 </ul>
                             </li>
                             <li className='nav-item dropdown'>

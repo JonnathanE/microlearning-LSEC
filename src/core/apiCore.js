@@ -188,3 +188,94 @@ export const updateLesson = (token, lessonId ,lesson) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// create a microlearning
+export const createteMicrolearning = (token, micro) => {
+    return fetch(`${API}/micro/`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: micro
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// get all Microlearning
+export const getMicrolearnings = async () => {
+    return fetch(`${API}/micro/`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// get single microlearning
+export const readMicrolearning = async (microId) => {
+    return fetch(`${API}/micro/${microId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// update a Microlearning
+export const updateMicrolearning = (token, microId, micro) => {
+    return fetch(`${API}/micro/${microId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(micro)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// update microlearning image
+export const updateMicrolearningImage = (token, microId, image) => {
+    return fetch(`${API}/micro/image/${microId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: image
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// update microlearning gif
+export const updateMicrolearningGif = (token, microId, gif) => {
+    return fetch(`${API}/micro/gif/${microId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: gif
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// delete a lesson
+export const deleteMicrolearning = (microId, token) => {
+    return fetch(`${API}/micro/${microId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}

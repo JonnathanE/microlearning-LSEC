@@ -4,24 +4,25 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NavLink, useParams } from 'react-router-dom';
 
-import { getModules, readLesson, updateLesson } from '../core/apiCore';
+import { updateMicrolearning, getLessons, readMicrolearning } from '../core/apiCore';
 import NavigationAdmin from '../layout/NavigationAdmin';
 import useAuth from '../auth/useAuth';
 import Spinner from './Spinner';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import UpdateIcon from './UpdateIcon';
+import UpdateImage from './UpdateImage';
+import UpdateGif from './UpdateGif';
 
-const UpdateLesson = () => {
+const UpdateMicrolearning = () => {
 
-    const [modules, setModules] = useState([]);
-    const [singleModule, setSingleModule] = useState({});
-    const [lesson, setLesson] = useState({});
+    const [lessons, setLessons] = useState([]);
+    const [singleLesson, setSingleLeson] = useState({});
+    const [microlearning, setMicrolearning] = useState({});
     const [loading, setLoading] = useState(false);
 
     // get param moduleId for url
-    const { lessonId } = useParams();
+    const { microId } = useParams();
 
     const auth = useAuth();
 
@@ -29,8 +30,8 @@ const UpdateLesson = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        name: yup.string().required('El nombre de la lección es requerido'),
-        module: yup.string().ensure().required('Debe de elegir un módulo'),
+        title: yup.string().required('El nombre de la lección es requerido'),
+        lesson: yup.string().ensure().required('Debe de elegir un módulo'),
     });
 
     // initialize the React Hook Form methods
@@ -49,7 +50,7 @@ const UpdateLesson = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 setLoading(true);
-                updateLesson(auth.user.token, lesson._id, data).then(data => {
+                updateMicrolearning(auth.user.token, microlearning._id, data).then(data => {
                     if (data.error) {
                         setLoading(false);
                         MySwal.fire({
@@ -59,7 +60,7 @@ const UpdateLesson = () => {
                         })
                     } else {
                         setLoading(false);
-                        MySwal.fire('¡La lección se actualizó correctamente!', '', 'success');
+                        MySwal.fire('¡El Microcontenido se actualizó correctamente!', '', 'success');
                     }
                 })
             } else if (result.isDenied) {
@@ -69,8 +70,8 @@ const UpdateLesson = () => {
         })
     }
 
-    const allModules = () => {
-        getModules().then(data => {
+    const allLesons = () => {
+        getLessons().then(data => {
             if (data.error) {
                 MySwal.fire({
                     icon: 'error',
@@ -78,13 +79,13 @@ const UpdateLesson = () => {
                     text: data.error
                 })
             } else {
-                setModules(data);
+                setLessons(data);
             }
         })
     }
 
-    const loadSingleLesson = lessonId => {
-        readLesson(lessonId).then(data => {
+    const loadSingleMicrolearning = lessonId => {
+        readMicrolearning(lessonId).then(data => {
             if (data.error) {
                 MySwal.fire({
                     icon: 'error',
@@ -92,15 +93,15 @@ const UpdateLesson = () => {
                     text: data.error
                 })
             } else {
-                setLesson(data);
-                setSingleModule(data.module);
+                setMicrolearning(data);
+                setSingleLeson(data.lesson);
             }
         })
     }
 
     useEffect(() => {
-        allModules();
-        loadSingleLesson(lessonId);
+        allLesons();
+        loadSingleMicrolearning(microId);
     }, [])
 
     // shows the validation error of the inputs
@@ -112,15 +113,15 @@ const UpdateLesson = () => {
     const lessonForm = () => (
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
-                <label className="text-muted">Nombre de la lección</label>
-                <input type="text" {...register('name')} defaultValue={lesson.name} className='form-control' />
-                {errors.name && errorValidator(errors.name.message)}
+                <label className="text-muted">Título del Microcontenio</label>
+                <input type="text" {...register('title')} defaultValue={microlearning.title} className='form-control' />
+                {errors.title && errorValidator(errors.title.message)}
             </div>
             <div className='form-group'>
-                <label className='text-muted'>Módulo</label>
-                <select type='text' {...register('module')} className='form-select' >
-                    <option value={singleModule? singleModule._id : ''}>{singleModule? singleModule.name: 'Seleccione un módulo'}</option>
-                    {modules && modules.map((c, i) => (
+                <label className='text-muted'>Lección</label>
+                <select type='text' {...register('lesson')} className='form-select' >
+                    <option value={singleLesson? singleLesson._id : ''}>{singleLesson? singleLesson.name: 'Seleccione un módulo'}</option>
+                    {lessons && lessons.map((c, i) => (
                         <option key={i} value={c._id}>{c.name}</option>
                     ))}
                 </select>
@@ -146,11 +147,12 @@ const UpdateLesson = () => {
             <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
-                    <h2 className='text-center mt-2'>Actualizar lección {lesson.name}</h2>
+                    <h2 className='text-center mt-2'>Actualizar Microcontenido {microlearning.name}</h2>
                 </div>
                 <div className='row'>
                     {showLoading()}
-                    {<UpdateIcon lesson={lesson}/>}
+                    <UpdateImage content={microlearning} />
+                    <UpdateGif content={microlearning} />
                     {lessonForm()}
                 </div>
             </div>
@@ -158,4 +160,4 @@ const UpdateLesson = () => {
     )
 }
 
-export default UpdateLesson;
+export default UpdateMicrolearning;
