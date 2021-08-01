@@ -214,11 +214,26 @@ export const getMicrolearnings = async () => {
 }
 
 // get single microlearning
-export const readMicrolearning = async (lessonId) => {
-    return fetch(`${API}/micro/${lessonId}`, {
+export const readMicrolearning = async (microId) => {
+    return fetch(`${API}/micro/${microId}`, {
         method: "GET"
     }).then(response => {
         return response.json();
     })
+        .catch(err => console.log(err))
+}
+
+// update a Microlearning
+export const updateMicrolearning = (token, microId, micro) => {
+    return fetch(`${API}/micro/${microId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(micro)
+    })
+        .then(response => response.json())
         .catch(err => console.log(err))
 }
