@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
-import { authenticateAdmin, signin } from '../core/apiCore'
+import { authenticateStudent, signin } from '../core/apiCore'
 
 import useAuth from '../auth/useAuth';
 import Spinner from './Spinner';
@@ -42,7 +42,7 @@ const Signin = (req, res) => {
                     setError(data.error);
                     setLoading(false);
                 } else {
-                    if (authenticateAdmin(data)) {
+                    if (authenticateStudent(data)) {
                         auth.login(data);
                         history.push(previusObjectUrl || '/home')
                     } else {

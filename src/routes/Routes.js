@@ -22,15 +22,17 @@ import ShowMicrolearning from '../components/ShowMicrolearning';
 import Microlearning from '../components/Microlearning';
 import AddMicrolearning from '../components/AddMicrolearning';
 import UpdateMicrolearning from '../components/UpdateMicrolearning';
+import PublicRouteStudent from './PublicRouteStudent';
+import PrivateRouteStudent from './PrivateRouteStudent';
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={LandingPage} />
-                <Route path='/home' exact component={Home} />
-                <Route path='/signin' exact component={Sigin} />
-                <Route path='/signup' exact component={Signup} />
+                <PublicRouteStudent path='/signin' exact component={Sigin} />
+                <PublicRouteStudent path='/signup' exact component={Signup} />
+                <PrivateRouteStudent path='/home' exact component={Home} />
 
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
                 <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
