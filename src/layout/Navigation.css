@@ -1,0 +1,70 @@
+* {
+    padding   : 0px;
+    margin    : 0px;
+    box-sizing: border-box;
+
+}
+
+header .jumbotron {
+    position        : relative;
+    top             : 10%;
+    border-radius   : 5px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color           : #fff;
+}
+
+header .jumbotron h3 {
+    font-size: 3.5rem;
+}
+
+header .jumbotron h5 {
+    font-size: 1.5rem;
+}
+
+header .jumbotron button {
+    padding  : 2% 5%;
+    font-size: 1.5rem;
+}
+
+.cover {
+    background-image   : url('https://images.pexels.com/photos/1139556/pexels-photo-1139556.jpeg?cs=srgb&dl=architecture-buildings-city-1139556.jpg&fm=jpg');
+    background-position: center;
+    background-size    : cover;
+    overflow           : hidden;
+    height             : 46rem;
+    background-repeat  : no-repeat;
+    display            : flex;
+    justify-content    : center;
+    align-items        : center;
+    text-align         : center;
+}
+
+section .container {
+    max-width: 1400px;
+    padding  : 4% 0 5% 0;
+}
+
+section .container .caption h3 a {
+    color          : #000;
+    text-decoration: none;
+}
+
+section .container .caption h3 a:hover {
+    color: #333;
+}
+
+footer {
+    color           : #fff;
+    background-color: #000;
+}
+
+@media (max-width:766px) {
+    header .jumbotron {
+        margin: -2% 10% 0 10%;
+        width : 90%;
+    }
+
+    section .container .col-sm-4 {
+        margin: 1%;
+    }
+}

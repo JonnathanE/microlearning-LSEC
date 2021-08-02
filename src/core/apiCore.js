@@ -25,6 +25,7 @@ export const authenticateAdmin = (data) => {
             if (data.user.roles) {
                 if (isAdmin(data.user.roles)) {
                     localStorage.setItem('jwt', JSON.stringify(data));
+                    localStorage.setItem('auth', JSON.stringify(1));
                     return true;
                 }
                 return false;
@@ -43,6 +44,38 @@ export const isAdmin = (roles) => {
     if (roles) {
         for (let i = 0; i < roles.length; i++) {
             if (roles[i].name === 'admin') {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// save the token and the data in the localStorage
+export const authenticateStudent = (data) => {
+    try {
+        if (typeof window !== 'undefined') {
+            if (data.user.roles) {
+                if (isStudent(data.user.roles)) {
+                    localStorage.setItem('jwt', JSON.stringify(data));
+                    return true;
+                }
+                return false;
+            } else {
+                return false;
+            }
+        }
+        return false;
+    } catch (error) {
+        localStorage.removeItem('jwt');
+        console.error(error);
+    }
+}
+
+export const isStudent = (roles) => {
+    if (roles) {
+        for (let i = 0; i < roles.length; i++) {
+            if (roles[i].name === 'student') {
                 return true;
             }
         }

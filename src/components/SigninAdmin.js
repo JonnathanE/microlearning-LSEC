@@ -43,6 +43,7 @@ const SigninAdmin = (req, res) => {
                 } else {
                     if (authenticateAdmin(data)) {
                         auth.login(data);
+                        auth.role(1);
                         history.push(previusObjectUrl || '/admin/dashboard')
                     } else {
                         setError('No admitido');
