@@ -1,11 +1,12 @@
 import React from 'react';
+import Navigation from './Navigation';
+
 
 const LandingPage = (req, res) => {
-    return(
+
+    return (
         <>
-            <div>
-                LandingPage
-            </div>
+            <Navigation />
         </>
     )
 }
