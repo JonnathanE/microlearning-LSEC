@@ -100,6 +100,15 @@ export const isStudent = (roles) => {
     return false;
 }
 
+export const home = async () => {
+    try {
+        const response = await axios.get(`${API}/home/modules`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {
