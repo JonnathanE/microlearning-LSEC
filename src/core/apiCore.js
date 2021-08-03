@@ -18,6 +18,23 @@ export const signin = async (user) => {
         })
 }
 
+export const signup = async (user) => {
+    return fetch(`${API}/auth/signup`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
 // save the token and the data in the localStorage
 export const authenticateAdmin = (data) => {
     try {
