@@ -36,7 +36,7 @@ const Navigation = () => {
                                     <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                         <li><NavLink to='/user' className="dropdown-item"><FaUserCog /> Configuraciones</NavLink></li>
                                         <li><hr className="dropdown-divider" /></li>
-                                        <li><Link
+                                        <li><Link to=''
                                             onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
                                     </ul>
                                 </li>

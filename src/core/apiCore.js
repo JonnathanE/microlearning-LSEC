@@ -18,6 +18,23 @@ export const signin = async (user) => {
         })
 }
 
+export const signup = async (user) => {
+    return fetch(`${API}/auth/signup`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
 // save the token and the data in the localStorage
 export const authenticateAdmin = (data) => {
     try {
@@ -81,6 +98,24 @@ export const isStudent = (roles) => {
         }
     }
     return false;
+}
+
+export const home = async () => {
+    try {
+        const response = await axios.get(`${API}/home/modules`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export const lessonByModule = async (moduleId) => {
+    try {
+        const response = await axios.get(`${API}/home/lessons/${moduleId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 // create a module

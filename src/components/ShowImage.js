@@ -1,11 +1,9 @@
 import React from 'react';
 import { API } from '../config';
 
-import './ShowImage.css';
-
 const ShowImage = ({ item, url }) => {
     return (
-        <div className="product-img">
+        <div>
             <img
                 src={`${API}/${url}/${item._id}`}
                 alt={item.name}
