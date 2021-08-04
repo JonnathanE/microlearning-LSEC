@@ -109,6 +109,15 @@ export const home = async () => {
     }
 }
 
+export const lessonByModule = async (moduleId) => {
+    try {
+        const response = await axios.get(`${API}/home/lessons/${moduleId}`);
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {

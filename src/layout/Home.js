@@ -6,7 +6,10 @@ import useAuth from '../auth/useAuth';
 
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
-import Card from '../components/Card';
+
+import Section from '../components/Section';
+
+import './Home.css';
 
 const Home = () => {
 
@@ -27,7 +30,6 @@ const Home = () => {
                 })
             } else {
                 setModules(data);
-                console.log(modules);
             }
         });
     }
@@ -39,12 +41,18 @@ const Home = () => {
     return (
         <>
             <Navigation />
-            <div className='container'>
+            <div className='container mb-5'>
                 {modules.map((module, i) => (
-                    <div key={i} className='row'>
-                        <h2>{module.number}</h2>
-                        <div className='col-sm-12'>
-                            <Card module={module}/>
+                    <div key={i} className=''>
+                        <div className='row justify-content-center'>
+                            <div className='col-4 col-sm-3'>
+                                <h2 className='display-1 number-module border border-dark rounded-circle'>{module.number}</h2>
+                            </div>
+                        </div>
+                        <div>
+                            <div className='col-sm-12'>
+                                <Section module={module} />
+                            </div>
                         </div>
                     </div>
                 ))}
