@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { lessonByModule } from '../core/apiCore';
 import { API } from '../config';
 
+import { NavLink, useParams, useHistory, useLocation } from 'react-router-dom';
+
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import ShowImage from './ShowImage';
@@ -14,6 +16,10 @@ import './Section.css'
 const Section = ({ module }) => {
 
     const [lessons, setLessons] = useState([]);
+
+    const history = useHistory();
+    const location = useLocation();
+    const previusObjectUrl = location.state?.from;
 
     const loadLessons = () => {
         lessonByModule(module._id).then(data => {
@@ -26,7 +32,7 @@ const Section = ({ module }) => {
     }
 
     const clicKLesson = (lessonId) => {
-        console.log(lessonId)
+        history.push(previusObjectUrl || `learn/${lessonId}`)
     }
 
     useEffect(() => {

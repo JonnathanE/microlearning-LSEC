@@ -44,7 +44,7 @@ const Signin = (req, res) => {
                 } else {
                     if (authenticateStudent(data)) {
                         auth.login(data);
-                        history.push(previusObjectUrl || '/home')
+                        history.push(previusObjectUrl || '/learn')
                     } else {
                         setError('No admitido');
                         setLoading(false);
@@ -107,7 +107,7 @@ const Signin = (req, res) => {
             <Navigation />
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-6 mx-auto mt-5'>
+                    <div className='col-md-4 mx-auto mt-5'>
                         <div className='myform form'>
                             <div className="logo mb-3">
                                 <div className="col-md-12 text-center">

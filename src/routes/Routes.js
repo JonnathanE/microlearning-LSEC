@@ -24,6 +24,7 @@ import AddMicrolearning from '../components/AddMicrolearning';
 import UpdateMicrolearning from '../components/UpdateMicrolearning';
 import PublicRouteStudent from './PublicRouteStudent';
 import PrivateRouteStudent from './PrivateRouteStudent';
+import LearningCapsule from '../components/LearningCapsule';
 
 const Routes = () => {
     return (
@@ -32,7 +33,8 @@ const Routes = () => {
                 <Route path='/' exact component={LandingPage} />
                 <PublicRouteStudent path='/signin' exact component={Sigin} />
                 <PublicRouteStudent path='/signup' exact component={Signup} />
-                <PrivateRouteStudent path='/home' exact component={Home} />
+                <PrivateRouteStudent path='/learn' exact component={Home} />
+                <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
 
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
                 <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
