@@ -118,6 +118,15 @@ export const lessonByModule = async (moduleId) => {
     }
 }
 
+export const learnContent = async (lessonId) => {
+    return fetch(`${API}/home/learn/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {

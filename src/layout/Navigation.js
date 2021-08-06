@@ -12,7 +12,7 @@ const Navigation = () => {
         <>
             <nav className='navbar sticky-top navbar-expand-sm navbar-dark bg-dark'>
                 <div className='container'>
-                    <NavLink exact to='/home' className='navbar-brand'>LSEC</NavLink>
+                    <NavLink exact to='/learn' className='navbar-brand'>LSEC</NavLink>
 
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
