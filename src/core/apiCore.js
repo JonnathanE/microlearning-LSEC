@@ -391,3 +391,46 @@ export const readCard = async (cardId) => {
     })
         .catch(err => console.log(err))
 }
+
+// update a Card
+export const updateCard = (token, cardId, card) => {
+    return fetch(`${API}/card/${cardId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(card)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// update card gif
+export const updateCardGif = (token, cardId, gif) => {
+    return fetch(`${API}/card/gif/${cardId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: gif
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// delete a lesson
+export const deleteCard = (cardId, token) => {
+    return fetch(`${API}/card/${cardId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}

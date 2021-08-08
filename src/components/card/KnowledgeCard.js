@@ -40,13 +40,17 @@ const KnowledgeCard = () => {
     const cardLayoud = () => (
         <div className="card m-10 card-cont">
             <div className="row g-0">
-                <div className="col-md-4">
+                <div className="col-md-4 mb-2">
                     <p className="card-text fw-bold">Gif de la lengua de seña:</p>
                     <ShowImage className='' item={card} url='card/gif' />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
                         <h5 className="card-title mb-2 text-center">{card.question}</h5>
+                        <p className="card-text fw-bold">Restpuesta correcta:</p>
+                        <p className="card-text">{card.correctAnswer}</p>
+                        <p className="card-text fw-bold">Restpuesta incorrecta:</p>
+                        <p className="card-text">{card.wrongAnswer}</p>
                         <p className="card-text fw-bold">Nombre de la lección:</p>
                         <p className="card-text">{lesson ? lesson.name : 'No asignado'}</p>
                         <NavLink to={`/admin/card/update/${card._id}`}>

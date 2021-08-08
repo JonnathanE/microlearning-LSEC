@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavigationAdmin from '../../layout/NavigationAdmin';
-import { getCards, deleteMicrolearning } from '../../core/apiCore';
+import { getCards, deleteCard } from '../../core/apiCore';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../auth/useAuth';
 
@@ -29,7 +29,7 @@ const ShowCards = () => {
         });
     }
 
-    const btndeleteMicrolearning = (microId) => {
+    const btndeleteCard= (cardId) => {
         MySwal.fire({
             title: '¿Estas seguro?',
             text: "¡No podrás revertir esto!",
@@ -40,7 +40,7 @@ const ShowCards = () => {
             confirmButtonText: '¡Sí, bórralo!'
         }).then((result) => {
             if (result.isConfirmed) {
-                deleteMicrolearning(microId, auth.user.token)
+                deleteCard(cardId, auth.user.token)
                     .then(data => {
                         if (data.error) {
                             MySwal.fire({
@@ -49,7 +49,7 @@ const ShowCards = () => {
                                 text: data.error
                             })
                         } else {
-                            //loadMicrolearning();
+                            loadCards();
                             Swal.fire(
                                 '¡Eliminado!',
                                 'Su archivo ha sido eliminado',
@@ -85,7 +85,7 @@ const ShowCards = () => {
                                 <td>{card.question}</td>
                                 <th>{card.lesson ? card.lesson.name : 'No asignado'}</th>
                                 <td>
-                                    <button onClick={(e) => btndeleteMicrolearning(card._id, e)} className='btn btn-danger me-1'>Eliminar</button>
+                                    <button onClick={e => btndeleteCard(card._id, e)} className='btn btn-danger me-1'>Eliminar</button>
                                     <NavLink to={`/admin/card/${card._id}`} className='me-1'>
                                         <button className='btn btn-primary'>Ver más</button>
                                     </NavLink>

@@ -28,6 +28,7 @@ import LearningCapsule from '../components/LearningCapsule';
 import ShowCards from '../components/card/ShowCards';
 import AddCard from '../components/card/AddCard';
 import KnowledgeCard from '../components/card/KnowledgeCard';
+import UpdateCard from '../components/card/UpdateCard';
 
 const Routes = () => {
     return (
@@ -58,6 +59,7 @@ const Routes = () => {
                 
                 <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
                 <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
+                <PrivateRouteAdmin path='/admin/card/update/:cardId' exact component={UpdateCard} />
                 <PrivateRouteAdmin path='/admin/card/:cardId' exact component={KnowledgeCard} />
 
                 <Route path='/404'  component={NotFoundPage} />
