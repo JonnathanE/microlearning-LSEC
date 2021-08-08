@@ -356,3 +356,13 @@ export const deleteMicrolearning = (microId, token) => {
         .then(response => response.json())
         .catch(err => console.log(err))
 }
+
+// get all Cards
+export const getCards = async () => {
+    return fetch(`${API}/card`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}

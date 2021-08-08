@@ -52,7 +52,7 @@ const NavigationAdmin = () => {
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                     <li><NavLink to='/admin/card/create' className="dropdown-item"><FaPlus /> Crear Prueba</NavLink></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><NavLink to='/admin/showmicards' className="dropdown-item"><FaList /> Listar todas las preubas</NavLink></li>
+                                    <li><NavLink to='/admin/showcards' className="dropdown-item"><FaList /> Listar todas las pruebas</NavLink></li>
                                 </ul>
                             </li>
                         </ul>

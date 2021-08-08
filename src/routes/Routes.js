@@ -25,6 +25,7 @@ import UpdateMicrolearning from '../components/UpdateMicrolearning';
 import PublicRouteStudent from './PublicRouteStudent';
 import PrivateRouteStudent from './PrivateRouteStudent';
 import LearningCapsule from '../components/LearningCapsule';
+import ShowCards from '../components/card/ShowCards';
 
 const Routes = () => {
     return (
@@ -53,6 +54,8 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/micro/update/:microId' exact component={UpdateMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/:microId' exact component={Microlearning} />
                 
+                <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
+
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />
