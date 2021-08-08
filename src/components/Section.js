@@ -40,17 +40,17 @@ const Section = ({ module }) => {
     }, [])
 
     return (
-        <div className="card my-card m-10 card-cont shadow">
+        <div className="card my-card m-10 card-cont shadow-lg p-3 mb-5 bg-body rounded rounded-3 ">
             <div className='row justify-content-center align-items-center mt-5'>
                 {lessons.map((lesson, i) => (
-                    <div key={i} className='col-6 col-sm-4 text-center mb-5' onClick={(e) => clicKLesson(lesson._id, e)}>
-                        <div className='my-contend'>
+                    <div key={i} className='col-6 col-sm-3 text-center mb-5' onClick={(e) => clicKLesson(lesson._id, e)}>
+                        <div className='my-contend border border-info'>
                             <img
                                 src={`${API}/lesson/icon/${lesson._id}`}
                                 alt={lesson.name}
                                 className="icon-lesson mx-auto d-block"
                             />
-                            <p className='title-lesson h4 mt-3'>{lesson.name}</p>
+                            <p className='title-lesson h6 mt-3'>{lesson.name}</p>
                         </div>
                     </div>
                 ))}

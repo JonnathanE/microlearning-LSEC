@@ -1,9 +1,12 @@
 .my-card {
-    border-radius: 30px;
+    border-radius: 30px !important;
+    background-color: #fff !important;
 }
 
 .my-contend {
     cursor: pointer;
+    border-radius: 80px !important;
+    background-color: #EEEEEE  !important;
 }
 
 .title-lesson {
