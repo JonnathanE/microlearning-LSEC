@@ -27,6 +27,7 @@ import PrivateRouteStudent from './PrivateRouteStudent';
 import LearningCapsule from '../components/LearningCapsule';
 import ShowCards from '../components/card/ShowCards';
 import AddCard from '../components/card/AddCard';
+import KnowledgeCard from '../components/card/KnowledgeCard';
 
 const Routes = () => {
     return (
@@ -57,6 +58,7 @@ const Routes = () => {
                 
                 <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
                 <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
+                <PrivateRouteAdmin path='/admin/card/:cardId' exact component={KnowledgeCard} />
 
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>

@@ -381,3 +381,13 @@ export const getCards = async () => {
     })
         .catch(err => console.log(err))
 }
+
+// get single card
+export const readCard = async (cardId) => {
+    return fetch(`${API}/card/${cardId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
