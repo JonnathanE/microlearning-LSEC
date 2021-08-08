@@ -128,6 +128,15 @@ export const learnContent = async (lessonId) => {
         .catch(err => console.log(err))
 }
 
+export const learnCard = async (lessonId) => {
+    return fetch(`${API}/home/card/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {
@@ -253,7 +262,7 @@ export const updateLessonIcon = (token, lessonId, icon) => {
 }
 
 // update a lesson
-export const updateLesson = (token, lessonId ,lesson) => {
+export const updateLesson = (token, lessonId, lesson) => {
     return fetch(`${API}/lesson/${lessonId}`, {
         method: 'PUT',
         headers: {
@@ -421,7 +430,7 @@ export const updateCardGif = (token, cardId, gif) => {
         .catch(err => console.log(err))
 }
 
-// delete a lesson
+// delete a card
 export const deleteCard = (cardId, token) => {
     return fetch(`${API}/card/${cardId}`, {
         method: 'DELETE',

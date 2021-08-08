@@ -4,8 +4,8 @@ import { getCards, deleteCard } from '../../core/apiCore';
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../auth/useAuth';
 
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const ShowCards = () => {
     // state

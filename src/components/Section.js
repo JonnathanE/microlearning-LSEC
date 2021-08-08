@@ -35,6 +35,10 @@ const Section = ({ module }) => {
         history.push(previusObjectUrl || `learn/${lessonId}`)
     }
 
+    const clicKPractice = (lessonId) => {
+        history.push(previusObjectUrl || `learn/practice/${lessonId}`)
+    }
+
     useEffect(() => {
         loadLessons();
     }, [])
@@ -43,14 +47,17 @@ const Section = ({ module }) => {
         <div className="card my-card m-10 card-cont shadow-lg p-3 mb-5 bg-body rounded rounded-3 ">
             <div className='row justify-content-center align-items-center mt-5'>
                 {lessons.map((lesson, i) => (
-                    <div key={i} className='col-6 col-sm-3 text-center mb-5' onClick={(e) => clicKLesson(lesson._id, e)}>
-                        <div className='my-contend border border-info'>
+                    <div key={i} className='col-6 col-sm-3 text-center mb-5'>
+                        <div className='my-contend border border-info' onClick={(e) => clicKLesson(lesson._id, e)}>
                             <img
                                 src={`${API}/lesson/icon/${lesson._id}`}
                                 alt={lesson.name}
                                 className="icon-lesson mx-auto d-block"
                             />
                             <p className='title-lesson h6 mt-3'>{lesson.name}</p>
+                        </div>
+                        <div>
+                            <button className='rounded-pill p-3 mb-2 bg-info text-dark' onClick={(e) => clicKPractice(lesson._id, e)}>Practicar</button>
                         </div>
                     </div>
                 ))}

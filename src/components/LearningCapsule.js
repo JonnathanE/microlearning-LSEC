@@ -3,7 +3,7 @@ import { NavLink, useParams, Redirect } from 'react-router-dom';
 import { learnContent } from '../core/apiCore';
 import { Progress } from 'reactstrap';
 
-import { FaAngleRight, FaAngleLeft, FaTimesCircle, FaGraduationCap } from "react-icons/fa";
+import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
 import ShowImage from './ShowImage';
 
 import './LearningCapsule.css'
@@ -94,11 +94,17 @@ const LearningCapsule = () => {
             </div>
             <div className='row justify-content-center align-items-center mt-5'>
                 <div className='col-6 text-center mb-4'>
+
                     {count > 0 && <button className='btn btn-danger rounded-pill' onClick={() => backContent()}><FaAngleLeft /> Atrás</button>}
+
                     {count === 0 && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Lecciones</NavLink>}
                 </div>
                 <div className='col-6 text-center mb-4'>
-                    <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Siguiente <FaAngleRight /></button>
+
+                    {count < total - 1 && <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Siguiente <FaAngleRight /></button>}
+
+                    {count === total - 1 && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Terminar lección</NavLink>}
+
                 </div>
             </div>
         </div>

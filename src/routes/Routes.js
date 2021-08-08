@@ -29,6 +29,7 @@ import ShowCards from '../components/card/ShowCards';
 import AddCard from '../components/card/AddCard';
 import KnowledgeCard from '../components/card/KnowledgeCard';
 import UpdateCard from '../components/card/UpdateCard';
+import Practice from '../components/learn/Practice';
 
 const Routes = () => {
     return (
@@ -38,6 +39,7 @@ const Routes = () => {
                 <PublicRouteStudent path='/signin' exact component={Sigin} />
                 <PublicRouteStudent path='/signup' exact component={Signup} />
                 <PrivateRouteStudent path='/learn' exact component={Home} />
+                <PrivateRouteStudent path='/learn/practice/:lessonId' exact component={Practice} />
                 <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
 
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
