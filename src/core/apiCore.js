@@ -1,5 +1,6 @@
 import { API } from '../config';
 import axios from 'axios';
+import { CardHeader } from 'reactstrap';
 
 export const signin = async (user) => {
     return fetch(`${API}/auth/signin`, {
@@ -352,6 +353,20 @@ export const deleteMicrolearning = (microId, token) => {
             'Content-Type': 'application/json',
             authorization: `Bearer ${token}`
         },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// create a card
+export const createteCard = (token, card) => {
+    return fetch(`${API}/card`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: card
     })
         .then(response => response.json())
         .catch(err => console.log(err))
