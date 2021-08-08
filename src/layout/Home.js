@@ -45,8 +45,8 @@ const Home = () => {
                 {modules.map((module, i) => (
                     <div key={i} className=''>
                         <div className='row justify-content-center'>
-                            <div className='col-4 col-sm-3'>
-                                <h2 className='display-1 number-module border border-dark rounded-circle'>{module.number}</h2>
+                            <div className='col-4 col-sm-2'>
+                                <h2 className='display-4 number-module border border-dark rounded-circle'>{module.number}</h2>
                             </div>
                         </div>
                         <div>
