@@ -9,6 +9,16 @@
     background-color: #EEEEEE  !important;
 }
 
+.my-contend-complete {
+    cursor: pointer;
+    border-radius: 80px !important;
+    background-color: #18a178  !important;
+}
+
 .title-lesson {
     font-family: 'Rubik', sans-serif;
+}
+
+.my-icon {
+    
 }

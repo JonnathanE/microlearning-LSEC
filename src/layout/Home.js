@@ -41,7 +41,7 @@ const Home = () => {
     return (
         <>
             <Navigation />
-            <div className='container mb-5'>
+            <div className='container mb-2'>
                 {modules.map((module, i) => (
                     <div key={i} className=''>
                         <div className='row justify-content-center'>

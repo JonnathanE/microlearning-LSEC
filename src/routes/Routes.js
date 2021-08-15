@@ -30,6 +30,7 @@ import AddCard from '../components/card/AddCard';
 import KnowledgeCard from '../components/card/KnowledgeCard';
 import UpdateCard from '../components/card/UpdateCard';
 import Practice from '../components/learn/Practice';
+import Progress from '../components/student/Progress';
 
 const Routes = () => {
     return (
@@ -40,6 +41,7 @@ const Routes = () => {
                 <PublicRouteStudent path='/signup' exact component={Signup} />
                 <PrivateRouteStudent path='/learn' exact component={Home} />
                 <PrivateRouteStudent path='/learn/practice/:lessonId' exact component={Practice} />
+                <PrivateRouteStudent path='/learn/progress' exact component={Progress} />
                 <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
 
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
