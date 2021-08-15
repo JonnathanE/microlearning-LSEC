@@ -71,7 +71,7 @@ const ShowLessons = () => {
             <NavigationAdmin />
             <div className='container'>
 
-                <table className='table table-striped table-hover caption-top table-responsive align-middle'>
+                <table className='table table-striped table-hover caption-top table-responsive align-middle text-center'>
                     <caption className='text-center fw-bold fs-2 text-wrap'>Lista de Lecciones</caption>
                     <thead className='table-dark'>
                         <tr>
