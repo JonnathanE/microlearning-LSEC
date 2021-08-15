@@ -22,7 +22,7 @@ const Navigation = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav m-auto mb-2 mb-lg-0 navbar-right">
                             <li><NavLink to='/learn' className='nav-link h4'><FaGraduationCap /> Aprender</NavLink></li>
-                            <li><NavLink to='/learn' className='nav-link h4'><FcStatistics /> Progreso</NavLink></li>
+                            <li><NavLink to='/learn/progress' className='nav-link h4'><FcStatistics /> Progreso</NavLink></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
 
