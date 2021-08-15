@@ -4,8 +4,7 @@ import useAuth from '../../auth/useAuth';
 
 import Navigation from '../../layout/Navigation';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
-
-
+import { Doughnut } from 'react-chartjs-2';
 
 const Progress = () => {
 
@@ -39,10 +38,54 @@ const Progress = () => {
         loadLessons();
     }, [])
 
+    const data = {
+        labels: ['Completado', 'Por completar'],
+        datasets: [{
+            label: 'Net sales',
+            data: [completeLesson.length, lessons.length - completeLesson.length],
+            parsing: {
+                yAxisKey: 'net'
+            },
+            backgroundColor: [
+                '#3FB42F',
+                '#F74D4D'
+            ],
+            borderColor: [
+                '#000'
+            ],
+            hoverOffset: 4
+        }],
+    }
+
+    const optionsDaughnut = {
+        maintainAspectRatio: false,
+        plugins: {
+            title: {
+                display: false,
+                text: 'Lecciones Completadas',
+                padding: {
+                    top: 10,
+                    bottom: 30
+                },
+                fullSize: true
+            }
+        }
+    }
+
     return (
         <>
             <Navigation />
             <div className='container'>
+                <div className='row'>
+                    <div className='col-12'>
+                        <h2>Avance de las Lecciones</h2>
+                    </div>
+                </div>
+                <div className='row mt-1'>
+                    <div className='col-12'>
+                        <Doughnut data={data} height={400} width={600} options={optionsDaughnut} />
+                    </div>
+                </div>
                 <div className='row'>
                     <div className='col-12'>
                         <table className="table table-hover text-center">
@@ -56,7 +99,7 @@ const Progress = () => {
                             <tbody>
                                 {lessons.map((lesson, i) => (
                                     <tr key={i}>
-                                        <th scope="row">{lesson.module ? lesson.module.number : 'No asignado'}</th>
+                                        <th scope="row">{lesson.module ? lesson.module.number : 'Próximamente'}</th>
                                         <td>{lesson.name}</td>
                                         {
                                             completeLesson.find(element => element === lesson._id)
