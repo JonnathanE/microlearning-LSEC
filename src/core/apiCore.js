@@ -146,6 +146,22 @@ export const completeLearn = async (userId) => {
         .catch(err => console.log(err))
 }
 
+export const addCompleteLearn = async (lessonId, userId) => {
+    const user = {
+        user: userId
+    }
+    return fetch(`${API}/home/complete/lesson/${lessonId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {
