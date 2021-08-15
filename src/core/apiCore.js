@@ -137,6 +137,15 @@ export const learnCard = async (lessonId) => {
         .catch(err => console.log(err))
 }
 
+export const completeLearn = async (userId) => {
+    return fetch(`${API}/home/complete/learn/${userId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
 // create a module
 export const createteModule = (token, module) => {
     return fetch(`${API}/module/`, {

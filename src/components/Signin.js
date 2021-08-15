@@ -107,7 +107,7 @@ const Signin = (req, res) => {
             <Navigation />
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-4 mx-auto mt-5'>
+                    <div className='col-md-3 mx-auto mt-5'>
                         <div className='myform form'>
                             <div className="logo mb-3">
                                 <div className="col-md-12 text-center">
