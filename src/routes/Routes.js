@@ -25,6 +25,12 @@ import UpdateMicrolearning from '../components/UpdateMicrolearning';
 import PublicRouteStudent from './PublicRouteStudent';
 import PrivateRouteStudent from './PrivateRouteStudent';
 import LearningCapsule from '../components/LearningCapsule';
+import ShowCards from '../components/card/ShowCards';
+import AddCard from '../components/card/AddCard';
+import KnowledgeCard from '../components/card/KnowledgeCard';
+import UpdateCard from '../components/card/UpdateCard';
+import Practice from '../components/learn/Practice';
+import Progress from '../components/student/Progress';
 
 const Routes = () => {
     return (
@@ -34,6 +40,8 @@ const Routes = () => {
                 <PublicRouteStudent path='/signin' exact component={Sigin} />
                 <PublicRouteStudent path='/signup' exact component={Signup} />
                 <PrivateRouteStudent path='/learn' exact component={Home} />
+                <PrivateRouteStudent path='/learn/practice/:lessonId' exact component={Practice} />
+                <PrivateRouteStudent path='/learn/progress' exact component={Progress} />
                 <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
 
                 <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
@@ -53,6 +61,11 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/micro/update/:microId' exact component={UpdateMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/:microId' exact component={Microlearning} />
                 
+                <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
+                <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
+                <PrivateRouteAdmin path='/admin/card/update/:cardId' exact component={UpdateCard} />
+                <PrivateRouteAdmin path='/admin/card/:cardId' exact component={KnowledgeCard} />
+
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />

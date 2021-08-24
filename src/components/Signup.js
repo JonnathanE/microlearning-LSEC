@@ -44,7 +44,7 @@ const Signup = () => {
                     setLoading(false);
                 } else {
                     auth.login(data);
-                    history.push(previusObjectUrl || '/home')
+                    history.push(previusObjectUrl || '/learn')
                 }
             });
     };

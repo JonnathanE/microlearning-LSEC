@@ -1,5 +1,6 @@
 import { API } from '../config';
 import axios from 'axios';
+import { CardHeader } from 'reactstrap';
 
 export const signin = async (user) => {
     return fetch(`${API}/auth/signin`, {
@@ -124,6 +125,40 @@ export const learnContent = async (lessonId) => {
     }).then(response => {
         return response.json();
     })
+        .catch(err => console.log(err))
+}
+
+export const learnCard = async (lessonId) => {
+    return fetch(`${API}/home/card/${lessonId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+export const completeLearn = async (userId) => {
+    return fetch(`${API}/home/complete/learn/${userId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+export const addCompleteLearn = async (lessonId, userId) => {
+    const user = {
+        user: userId
+    }
+    return fetch(`${API}/home/complete/lesson/${lessonId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user)
+    })
+        .then(response => response.json())
         .catch(err => console.log(err))
 }
 
@@ -252,7 +287,7 @@ export const updateLessonIcon = (token, lessonId, icon) => {
 }
 
 // update a lesson
-export const updateLesson = (token, lessonId ,lesson) => {
+export const updateLesson = (token, lessonId, lesson) => {
     return fetch(`${API}/lesson/${lessonId}`, {
         method: 'PUT',
         headers: {
@@ -346,6 +381,83 @@ export const updateMicrolearningGif = (token, microId, gif) => {
 // delete a lesson
 export const deleteMicrolearning = (microId, token) => {
     return fetch(`${API}/micro/${microId}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// create a card
+export const createteCard = (token, card) => {
+    return fetch(`${API}/card`, {
+        method: 'POST',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: card
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// get all Cards
+export const getCards = async () => {
+    return fetch(`${API}/card`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// get single card
+export const readCard = async (cardId) => {
+    return fetch(`${API}/card/${cardId}`, {
+        method: "GET"
+    }).then(response => {
+        return response.json();
+    })
+        .catch(err => console.log(err))
+}
+
+// update a Card
+export const updateCard = (token, cardId, card) => {
+    return fetch(`${API}/card/${cardId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(card)
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// update card gif
+export const updateCardGif = (token, cardId, gif) => {
+    return fetch(`${API}/card/gif/${cardId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            authorization: `Bearer ${token}`
+        },
+        body: gif
+    })
+        .then(response => response.json())
+        .catch(err => console.log(err))
+}
+
+// delete a card
+export const deleteCard = (cardId, token) => {
+    return fetch(`${API}/card/${cardId}`, {
         method: 'DELETE',
         headers: {
             Accept: 'application/json',

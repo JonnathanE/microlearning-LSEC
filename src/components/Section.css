@@ -1,11 +1,24 @@
 .my-card {
-    border-radius: 30px;
+    border-radius: 30px !important;
+    background-color: #fff !important;
 }
 
 .my-contend {
     cursor: pointer;
+    border-radius: 80px !important;
+    background-color: #EEEEEE  !important;
+}
+
+.my-contend-complete {
+    cursor: pointer;
+    border-radius: 80px !important;
+    background-color: #18a178  !important;
 }
 
 .title-lesson {
     font-family: 'Rubik', sans-serif;
+}
+
+.my-icon {
+    
 }
