@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 
 :root {
-  --primary: #00ADB5;
+  --primary      : #00ADB5;
   --primary-hover: #20b7c2;
 }
 
@@ -19,6 +19,10 @@ code {
     monospace;
 }
 
+.text-primary {
+  color: var(--primary) !important;
+}
+
 .navbar .btn {
   padding: .625rem 1.25rem !important;
 }
@@ -29,10 +33,10 @@ code {
 
 .btn-primary {
   background-color: var(--primary) !important;
-  border-color: var(--primary) !important;
+  border-color    : var(--primary) !important;
 }
 
 .btn-primary:hover {
   background-color: var(--primary-hover) !important;
-  border-color: var(--primary-hover) !important;
+  border-color    : var(--primary-hover) !important;
 }
