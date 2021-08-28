@@ -117,9 +117,11 @@ const Practice = () => {
     }, [])
 
     const progress = () => (
-        <div>
+        <>
             <div className='row mt-4 justify-content-center'>
-                <div className="col-6 text-center">{count + 1} de {total}</div>
+                <div className="col-6">
+                    <p className='text-center fw-bold mt-2'>{count + 1} de {total}</p>
+                </div>
             </div>
             <div className='row justify-content-center'>
                 <div className='col-1 me-4 bounce-top ps-4'>
@@ -129,11 +131,11 @@ const Practice = () => {
                     <Progress value={count + 1} max={total} />
                 </div>
             </div>
-        </div>
+        </>
     )
 
     const capsule = () => (
-        <div>
+        <>
             <div className='row justify-content-center'>
                 <div className='col-12 text-focus-in'>
                     <h2>
@@ -141,11 +143,13 @@ const Practice = () => {
                     </h2>
                 </div>
             </div>
-            <div className='row justify-content-center'>
-                <div className='col-6'>
-                    <ShowImage className='' item={content} url='card/gif' />
+
+            <div className='row d-flex'>
+                <div className='content col-12 col-lg-6 mx-auto align-self-center'>
+                    <ShowImage styles='gif img-fluid' item={content} url='card/gif' />
                 </div>
             </div>
+
             <div className='row justify-content-center mt-3 answer-content'>
                 {aleatorio === 0 &&
                     <div className='col-4 col-md-1' onChange={onChangeValue}>
@@ -172,8 +176,8 @@ const Practice = () => {
                         </div>
                     </div>
                 }
-
             </div>
+
             <div className='row justify-content-center align-items-center mt-2'>
                 <div className='col-6 text-center mb-4'>
 
@@ -182,12 +186,10 @@ const Practice = () => {
                     {count === 0 && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Lecciones</NavLink>}
                 </div>
                 <div className='col-6 text-center mb-4'>
-
                     <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Comprobar <FaAngleRight /></button>
-
                 </div>
             </div>
-        </div>
+        </>
     )
 
     // show backend error alert
@@ -203,7 +205,7 @@ const Practice = () => {
 
     return (
         <>
-            <div className='container shadow-drop-center rounded'>
+            <div className='container shadow-drop-center'>
                 {showError()}
                 {Object.keys(content).length > 0 && progress()}
                 {Object.keys(content).length > 0 && capsule()}

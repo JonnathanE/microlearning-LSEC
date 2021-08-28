@@ -103,7 +103,7 @@ const LearningCapsule = () => {
                     </div>
                 </div>
                 <div className='col-12 col-lg-6 d-flex'>
-                    <div className='content mx-auto align-self-center'>
+                    <div className='content-gif mx-auto align-self-center'>
                         <ShowImage styles='img-fluid' item={content} url='micro/gif' />
                     </div>
                 </div>
