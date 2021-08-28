@@ -8,6 +8,8 @@ import ShowImage from '../ShowImage';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
+import './KnowledgeCard.css';
+
 const KnowledgeCard = () => {
 
     const [card, setCard] = useState({});
@@ -40,9 +42,9 @@ const KnowledgeCard = () => {
     const cardLayoud = () => (
         <div className="card m-10 card-cont">
             <div className="row g-0">
-                <div className="col-md-4 mb-2">
+                <div className="content col-md-4 mb-2">
                     <p className="card-text fw-bold">Gif de la lengua de seña:</p>
-                    <ShowImage className='' item={card} url='card/gif' />
+                    <ShowImage item={card} url='card/gif' />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">

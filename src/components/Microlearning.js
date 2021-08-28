@@ -6,6 +6,8 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import ShowImage from './ShowImage';
 
+import './Microlearning.css';
+
 const Microlearning = () => {
 
     const [microlearning, setMicrolearning] = useState({});
@@ -38,9 +40,9 @@ const Microlearning = () => {
     const card = () => (
         <div className="card m-10 card-cont">
             <div className="row g-0">
-                <div className="col-md-4">
+                <div className="content col-md-4">
                     <p className="card-text fw-bold">Gif de la lengua de seña:</p>
-                    <ShowImage className='' item={microlearning} url='micro/gif' />
+                    <ShowImage styles='img-fluid' item={microlearning} url='micro/gif' />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
@@ -52,7 +54,7 @@ const Microlearning = () => {
                         </NavLink>
                     </div>
                 </div>
-                <div className="col-md-4">
+                <div className="content col-md-4">
                     <p className="card-text fw-bold">Imágen representativa:</p>
                     <ShowImage className='' item={microlearning} url='micro/image' />
                 </div>
