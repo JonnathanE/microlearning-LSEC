@@ -7,7 +7,7 @@ const Loading = () => {
     return (
         <div className='divPadre'>
             <div className='divHijo'>
-                <Spinner color='primary' className='spinnerReacstrap'/>
+                <Spinner color='primary' className='spinnerReacstrap' children='' />
             </div>
         </div>
     );

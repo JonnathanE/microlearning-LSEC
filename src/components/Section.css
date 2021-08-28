@@ -16,9 +16,10 @@
 }
 
 .title-lesson {
+    cursor: pointer;
     font-family: 'Rubik', sans-serif;
 }
 
 .my-icon {
-    
+    max-width: 80px;
 }
