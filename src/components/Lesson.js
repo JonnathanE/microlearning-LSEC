@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import ShowImage from './ShowImage';
 
-import './ShowImage.css';
+import './Lesson.css';
 
 const Lesson = () => {
 
@@ -40,8 +40,8 @@ const Lesson = () => {
     const card = () => (
         <div className="card m-10 card-cont">
             <div className="row g-0">
-                <div className="col-md-4">
-                    <ShowImage className='' item={lesson} url='lesson/icon' />
+                <div className="content col-md-4">
+                    <ShowImage styles='img-fluid' item={lesson} url='lesson/icon' />
                 </div>
                 <div className="col-md-8">
                     <div className="card-body">
