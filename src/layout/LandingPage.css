@@ -2,6 +2,31 @@
     max-width: 500px;
 }
 
+section {
+    height: 650px;
+}
+
 .logo {
     max-width: 80px;
+}
+
+.step {
+    position       : relative;
+    display        : flex;
+    justify-content: center;
+}
+
+.step::after {
+    content     : '';
+    border-right: 1px solid var(--dark);
+    height      : 60px;
+    position    : absolute;
+    top         : 34px;
+    opacity     : .2;
+}
+
+@media (max-width: 992px) {
+    section {
+        height: unset;
+    }
 }

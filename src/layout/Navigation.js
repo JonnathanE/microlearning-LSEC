@@ -4,8 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
 import { VscAccount } from "react-icons/vsc";
-import { FcStatistics } from "react-icons/fc";
-import { FaSignInAlt, FaUserAstronaut, FaSignOutAlt, FaUserCog, FaGraduationCap } from "react-icons/fa";
+import { FaSignInAlt, FaUserAstronaut, FaSignOutAlt, FaUserCog, FaGraduationCap, FaTrophy } from "react-icons/fa";
 
 import './Navigation.css'
 
@@ -25,11 +24,11 @@ const Navigation = () => {
                     <div className="collapse navbar-collapse" id="navbarNav">
 
                         <ul className="navbar-nav m-auto mb-2 mb-lg-0">
-                            <li className='nav-item d-flex'>
+                            <li className='nav-item d-flex focus-item'>
                                 <NavLink to='/learn' className='nav-link aling-self-center h5'><FaGraduationCap /> Aprender</NavLink>
                             </li>
                             <li className='nav-item d-flex'>
-                                <NavLink to='/learn/progress' className='nav-link aling-self-center h5'><FcStatistics /> Progreso</NavLink>
+                                <NavLink to='/learn/progress' className='nav-link aling-self-center h5'><FaTrophy /> Progreso</NavLink>
                             </li>
                         </ul>
                         
