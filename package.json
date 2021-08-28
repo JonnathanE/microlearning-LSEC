@@ -1,6 +1,6 @@
 {
   "name": "microlearning_lsec",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^2.6.1",
