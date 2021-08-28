@@ -23,9 +23,9 @@ const Signup = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        email: yup.string().email('Debe ser un correo electrónico válido').required('Correo electronico es requerido'),
-        password: yup.string().required('Debe de ingresar una contraseña'),
-        name: yup.string().required('Debe de especificar un nombre')
+        email: yup.string().email('El correo electrónico debe ser un correo electrónico válido').required('El correo electrónico es un campo obligatorio'),
+        password: yup.string().required('La contraseña es un campo requerido'),
+        name: yup.string().required('El nombre es un campo obligatorio')
     });
 
     // initialize the React Hook Form methods
@@ -56,13 +56,14 @@ const Signup = () => {
 
     // form structure
     const signInForm = () => (
-        <form className="" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group">
+        <form onSubmit={handleSubmit(clickSubmit)}>
+
+            <div className="form-group mb-3">
                 <label className="text-muted">Nombre</label>
                 <input type="text" {...register('name')} className='form-control' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
-            <div className="form-group">
+            <div className="form-group mb-3">
                 <label className="text-muted">Email</label>
                 <input type="email" {...register('email')} className='form-control' />
                 {errors.email && errorValidator(errors.email.message)}
@@ -72,18 +73,19 @@ const Signup = () => {
                 <input type="password" {...register('password')} className='form-control' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
-            <div className='col-md-12 text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" />
+
+            <div className='text-center'>
+                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Registrate' />
             </div>
-            <div className="col-md-12 ">
-                <div className="login-or">
-                    <hr className="hr-or" />
-                    <span className="span-or">or</span>
-                </div>
+
+            <div className="login-or">
+                <hr className="hr-or" />
+                <span className="span-or"> O </span>
             </div>
             <div className="form-group">
-                <p className="text-center">¿Ya tienes cuenta? <NavLink to='/signin' id="signup">Inicia Sesión aquí</NavLink></p>
+                <p className="text-center">¿Tienes una cuenta? <NavLink to='/signin' id="signup">Inicia sesión</NavLink></p>
             </div>
+
         </form>
     )
 
@@ -108,17 +110,17 @@ const Signup = () => {
             <Navigation />
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-6 mx-auto mt-5'>
-                        <div className='myform form'>
-                            <div className="logo mb-3">
-                                <div className="col-md-12 text-center">
-                                    <h1>Crear Cuenta</h1>
-                                </div>
+                    <div className='col-md-6 col-lg-5 mx-auto mt-5'>
+
+                        <div className='card my-card'>
+                            <div className="card-body">
+                                <h3 className='text-center mb-3'>Crear Cuenta</h3>
+                                {showError()}
+                                {showLoading()}
+                                {signInForm()}
                             </div>
-                            {showError()}
-                            {showLoading()}
-                            {signInForm()}
                         </div>
+
                     </div>
                 </div>
             </div>

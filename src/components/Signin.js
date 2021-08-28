@@ -74,15 +74,15 @@ const Signin = (req, res) => {
             </div>
 
             <div className='text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" />
+                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión'/>
             </div>
 
             <div className="login-or">
                 <hr className="hr-or" />
-                <span className="span-or">or</span>
+                <span className="span-or"> O </span>
             </div>
             <div className="form-group">
-                <p className="text-center">¿No tienes cuenta? <NavLink to='/signup' id="signup">Regístrate aquí</NavLink></p>
+                <p className="text-center">¿No tienes una cuenta? <NavLink to='/signup' id="signup">Regístrate</NavLink></p>
             </div>
 
         </form>
