@@ -4,8 +4,9 @@ import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../auth/useAuth';
 
 import { VscAccount } from "react-icons/vsc";
-import { FcStatistics } from "react-icons/fc";
-import { FaSignInAlt, FaUserAstronaut, FaSignOutAlt, FaUserCog, FaGraduationCap } from "react-icons/fa";
+import { FaSignInAlt, FaUserAstronaut, FaSignOutAlt, FaUserCog, FaGraduationCap, FaTrophy } from "react-icons/fa";
+
+import './Navigation.css'
 
 const Navigation = () => {
     const auth = useAuth();
@@ -13,38 +14,57 @@ const Navigation = () => {
         <>
             <nav className='navbar sticky-top navbar-expand-sm navbar-dark bg-dark'>
                 <div className='container'>
-                    <NavLink exact to='/learn' className='navbar-brand h4'>LSEC</NavLink>
+
+                    <NavLink exact to='/learn' className='navbar-brand fw-bold'>Aprende LSEC</NavLink>
 
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                         <span className="navbar-toggler-icon"></span>
                     </button>
 
                     <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav m-auto mb-2 mb-lg-0 navbar-right">
-                            <li><NavLink to='/learn' className='nav-link h4'><FaGraduationCap /> Aprender</NavLink></li>
-                            <li><NavLink to='/learn/progress' className='nav-link h4'><FcStatistics /> Progreso</NavLink></li>
+
+                        <ul className="navbar-nav m-auto mb-2 mb-lg-0">
+                            <li className='nav-item d-flex focus-item'>
+                                <NavLink to='/learn' className='nav-link aling-self-center h5'><FaGraduationCap /> Aprender</NavLink>
+                            </li>
+                            <li className='nav-item d-flex'>
+                                <NavLink to='/learn/progress' className='nav-link aling-self-center h5'><FaTrophy /> Progreso</NavLink>
+                            </li>
                         </ul>
-                        <ul className="nav navbar-nav navbar-right">
+                        
+                        <ul className="navbar-nav">
 
                             {!auth.isLogged() && (
                                 <>
-                                    <li><NavLink to='/signup' className='nav-link h4'><VscAccount /> Crear cuenta</NavLink></li>
-                                    <li><NavLink to='/signin' className='nav-link h4'><FaSignInAlt /> Iniciar Sesión</NavLink></li>
+                                    <li className='nav-item me-1'>
+                                        <NavLink to='/signin' className='btn btn-light'><FaSignInAlt /> Iniciar Sesión</NavLink>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <NavLink to='/signup' className='btn btn-primary'><VscAccount /> Crear cuenta</NavLink>
+                                    </li>
                                 </>
                             )}
 
                             {auth.isLogged() && (
                                 <li className='nav-item dropdown'>
-                                    <NavLink exact to='#' className='nav-link dropdown-toggle h4' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaUserAstronaut /> {auth.user.user.name}</NavLink>
+
+                                    <NavLink exact to='#' className='nav-link dropdown-toggle h5' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"> {auth.user.user.name} <FaUserAstronaut /></NavLink>
+
                                     <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
+                                        {/** 
                                         <li><NavLink to='/user' className="dropdown-item"><FaUserCog /> Configuraciones</NavLink></li>
                                         <li><hr className="dropdown-divider" /></li>
+                                        */}
                                         <li><Link to=''
-                                            onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
+                                            onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link>
+                                        </li>
                                     </ul>
+
                                 </li>
                             )}
+                            
                         </ul>
+
                     </div>
                 </div>
             </nav>

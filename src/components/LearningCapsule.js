@@ -69,9 +69,11 @@ const LearningCapsule = () => {
     }, [])
 
     const progress = () => (
-        <div>
-            <div className='row mt-5 justify-content-center'>
-                <div className="col-6 text-center">{count + 1} de {total}</div>
+        <>
+            <div className='row mt-4 justify-content-center'>
+                <div className="col-6">
+                    <p className='text-center fw-bold mt-2'>{count + 1} de {total}</p>
+                </div>
             </div>
             <div className='row justify-content-center'>
                 <div className='col-1 me-4 bounce-top ps-4'>
@@ -81,33 +83,41 @@ const LearningCapsule = () => {
                     <Progress value={count + 1} max={total} />
                 </div>
             </div>
-        </div>
+        </>
     )
 
     const capsule = () => (
-        <div>
+        <>
             <div className='row justify-content-center'>
-                <div className='col-12 text-focus-in'>
+                <div className='col-12'>
                     <h2>
                         {content.title}
                     </h2>
                 </div>
             </div>
-            <div className='row justify-content-center'>
-                <div className='col-6'>
-                    <ShowImage className='' item={content} url='micro/image' />
+
+            <div className='row'>
+                <div className='col-12 col-lg-6 d-flex'>
+                    <div className='content mx-auto align-self-center'>
+                        <ShowImage styles='my-image img-fluid' item={content} url='micro/image' />
+                    </div>
                 </div>
-                <div className='col-6'>
-                    <ShowImage className='' item={content} url='micro/gif' />
+                <div className='col-12 col-lg-6 d-flex'>
+                    <div className='content-gif mx-auto align-self-center'>
+                        <ShowImage styles='img-fluid' item={content} url='micro/gif' />
+                    </div>
                 </div>
             </div>
+
             <div className='row justify-content-center align-items-center mt-5'>
                 <div className='col-6 text-center mb-4'>
 
                     {count > 0 && <button className='btn btn-danger rounded-pill' onClick={() => backContent()}><FaAngleLeft /> Atrás</button>}
 
                     {count === 0 && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Lecciones</NavLink>}
+
                 </div>
+
                 <div className='col-6 text-center mb-4'>
 
                     {count < total - 1 && <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Siguiente <FaAngleRight /></button>}
@@ -116,7 +126,7 @@ const LearningCapsule = () => {
 
                 </div>
             </div>
-        </div>
+        </>
     )
 
     // show backend error alert
@@ -132,7 +142,7 @@ const LearningCapsule = () => {
 
     return (
         <>
-            <div className='container shadow-drop-center rounded'>
+            <div className='container shadow-drop-center mb-4'>
                 {showError()}
                 {Object.keys(content).length > 0 && progress()}
                 {Object.keys(content).length > 0 && capsule()}
