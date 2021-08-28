@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 import { lessonByModule, completeLearn } from '../core/apiCore';
 import { API } from '../config';
 
-import { NavLink, useParams, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import useAuth from '../auth/useAuth';
 
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
-import ShowImage from './ShowImage';
-
-import './ShowImage.css';
 import './Section.css'
 
 const Section = ({ module }) => {

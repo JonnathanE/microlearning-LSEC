@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '../layout/Navigation';
-import { getModules, deleteModule, home } from '../core/apiCore';
-import { NavLink } from 'react-router-dom';
+import { home } from '../core/apiCore';
 import useAuth from '../auth/useAuth';
 
 import Swal from 'sweetalert2'
