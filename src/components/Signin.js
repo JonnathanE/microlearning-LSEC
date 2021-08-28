@@ -23,8 +23,8 @@ const Signin = (req, res) => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        email: yup.string().email().required(),
-        password: yup.string().required(),
+        email: yup.string().email('El correo electrónico debe ser un correo electrónico válido').required('El correo electrónico es un campo obligatorio'),
+        password: yup.string().required('La contraseña es un campo requerido'),
     });
 
     // initialize the React Hook Form methods
@@ -60,8 +60,9 @@ const Signin = (req, res) => {
 
     // form structure
     const signInForm = () => (
-        <form className="" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group">
+        <form onSubmit={handleSubmit(clickSubmit)}>
+
+            <div className="form-group mb-3">
                 <label className="text-muted">Email</label>
                 <input type="email" {...register('email')} className='form-control' />
                 {errors.email && errorValidator(errors.email.message)}
@@ -71,18 +72,19 @@ const Signin = (req, res) => {
                 <input type="password" {...register('password')} className='form-control' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
-            <div className='col-md-12 text-center'>
+
+            <div className='text-center'>
                 <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" />
             </div>
-            <div className="col-md-12 ">
-                <div className="login-or">
-                    <hr className="hr-or" />
-                    <span className="span-or">or</span>
-                </div>
+
+            <div className="login-or">
+                <hr className="hr-or" />
+                <span className="span-or">or</span>
             </div>
             <div className="form-group">
-                <p className="text-center">¿No tienes cuenta? <NavLink to='/signup' id="signup">Registrate aquí</NavLink></p>
+                <p className="text-center">¿No tienes cuenta? <NavLink to='/signup' id="signup">Regístrate aquí</NavLink></p>
             </div>
+
         </form>
     )
 
@@ -107,17 +109,17 @@ const Signin = (req, res) => {
             <Navigation />
             <div className='container'>
                 <div className='row'>
-                    <div className='col-md-3 mx-auto mt-5'>
-                        <div className='myform form'>
-                            <div className="logo mb-3">
-                                <div className="col-md-12 text-center">
-                                    <h1>Iniciar Sesión</h1>
-                                </div>
+                    <div className='col-md-6 col-lg-5 mx-auto mt-5'>
+
+                        <div className='card my-card'>
+                            <div className="card-body">
+                                <h3 className='card-title text-center mb-3'>Iniciar Sesión</h3>
+                                {showError()}
+                                {showLoading()}
+                                {signInForm()}
                             </div>
-                            {showError()}
-                            {showLoading()}
-                            {signInForm()}
                         </div>
+
                     </div>
                 </div>
             </div>

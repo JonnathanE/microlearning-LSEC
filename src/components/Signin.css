@@ -8,9 +8,8 @@
     margin       : 0 auto;
 }
 
-.btn-primary {
-    text-align: center !important;
-    margin    : 0 auto !important;
+.my-card {
+    border-radius: 50;
 }
 
 .s-btn {

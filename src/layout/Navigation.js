@@ -47,13 +47,17 @@ const Navigation = () => {
 
                             {auth.isLogged() && (
                                 <li className='nav-item dropdown'>
-                                    <NavLink exact to='#' className='nav-link dropdown-toggle h4' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaUserAstronaut /> {auth.user.user.name}</NavLink>
+
+                                    <NavLink exact to='#' className='nav-link dropdown-toggle h5' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"> {auth.user.user.name} <FaUserAstronaut /></NavLink>
+
                                     <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                         <li><NavLink to='/user' className="dropdown-item"><FaUserCog /> Configuraciones</NavLink></li>
                                         <li><hr className="dropdown-divider" /></li>
                                         <li><Link to=''
-                                            onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
+                                            onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link>
+                                        </li>
                                     </ul>
+
                                 </li>
                             )}
                             
