@@ -60,34 +60,45 @@ const Section = ({ module }) => {
     }, [])
 
     return (
-        <div className="card my-card m-10 card-cont shadow-lg p-3 mb-4 bg-body rounded rounded-3 ">
-            <div className='row justify-content-center align-items-center mt-5'>
+        <div className="card my-card shadow p-3 mb-4 bg-body rounded">
+
+            <div className='row justify-content-center align-items-center'>
+
                 {lessons.map((lesson, i) => (
-                    <div key={i} className='col-6 col-md-3 m-md-5 text-center mb-5'>
-                        <div 
+
+                    <div key={i} className='col-6 col-md-2 m-md-5 text-center mb-4'>
+
+                        <div
                             className={
                                 completeLesson.find(element => element === lesson._id)
-                                ?'my-contend-complete border text-white'
-                                :'my-contend border'} 
-                                onClick={(e) => clicKLesson(lesson._id, e)}
+                                    ? 'my-contend-complete'
+                                    : 'my-contend'}
+                            onClick={(e) => clicKLesson(lesson._id, e)}
                         >
                             <img
                                 src={`${API}/lesson/icon/${lesson._id}`}
                                 alt={lesson.name}
-                                className="my-icon icon-lesson mx-auto d-block"
+                                className="my-icon mx-auto d-block"
                             />
-                            <p className='title-lesson h6 mt-3'>{lesson.name}</p>
                         </div>
-                        {
+                        
+                        <p className='title-lesson fw-bold mt-3' onClick={(e) => clicKLesson(lesson._id, e)}>{lesson.name}</p>
+
+                        <button className={completeLesson.find(element => element === lesson._id) 
+                            ? `rounded-pill p-2 mb-3 mb-lg-1 my-contend-complete text-white` 
+                            : `rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark`} 
+                            onClick={(e) => clicKPractice(lesson._id, e)}>Practicar</button>
+
+                        {/*
                             completeLesson.find(element => element === lesson._id) &&
                             <p className='text-success'>Completado</p>
-                        }
-                        <div>
-                            <button className={completeLesson.find(element => element === lesson._id)? `rounded-pill p-3 mb-2 my-contend-complete text-white`:`rounded-pill p-3 mb-2 mt-1 bg-info text-dark`} onClick={(e) => clicKPractice(lesson._id, e)}>Practicar</button>
-                        </div>
+                        */}
                     </div>
+
                 ))}
+
             </div>
+
         </div>
     );
 }

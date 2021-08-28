@@ -41,21 +41,28 @@ const Home = () => {
     return (
         <>
             <Navigation />
-            <div className='container mb-2'>
+            <div className='container'>
+
                 {modules.map((module, i) => (
-                    <div key={i} className=''>
+
+                    <div key={i}>
+
                         <div className='row justify-content-center'>
-                            <div className='col-4 col-sm-2'>
-                                <h2 className='display-4 number-module border border-dark rounded-circle'>{module.number}</h2>
+                            <div className='col-2 col-sm-2 mt-3'>
+                                <p className='display-4 number-module rounded-circle text-center'>{module.number}</p>
                             </div>
                         </div>
-                        <div>
+
+                        <div className='row'>
                             <div className='col-sm-12'>
                                 <Section module={module} />
                             </div>
                         </div>
+
                     </div>
+
                 ))}
+
             </div>
         </>
     )
