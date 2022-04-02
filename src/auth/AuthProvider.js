@@ -4,16 +4,18 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('jwt')) || null);
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
     const [admin, setAdmin] = useState(JSON.parse(localStorage.getItem('auth')) || null)
 
     const contextValue = {
         user,
-        login(jwt) {
-            setUser(jwt)
+        login(user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('auth', JSON.stringify(1));
+            setUser(user)
         },
         logout() {
-            localStorage.removeItem('jwt');
+            localStorage.removeItem('user');
             localStorage.removeItem('auth');
             setAdmin(null);
             setUser(null);

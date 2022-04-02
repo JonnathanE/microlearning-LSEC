@@ -2,49 +2,52 @@ import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 // view components
-import LandingPage from '../layout/LandingPage';
-import Home from '../layout/Home';
-import Sigin from '../components/Signin';
-import Signup from '../components/Signup';
-import DashBoard from '../layout/DashBoard';
-import SigninAdmin from '../components/SigninAdmin';
-import NotFoundPage from '../layout/NotFoundPage';
-import PrivateRouteAdmin from './PrivateRouteAdmin';
-import PublicRouteAdmin from './PublicRouteAdmin';
-import ShowModules from '../components/ShowModules';
-import UpdateModule from '../components/UpdateModule';
-import AddModule from '../components/AddModule';
-import ShowLessons from '../components/ShowLessons';
-import Lesson from '../components/Lesson';
-import AddLesson from '../components/AddLesson';
-import UpdateLesson from '../components/UpdateLesson';
-import ShowMicrolearning from '../components/ShowMicrolearning';
-import Microlearning from '../components/Microlearning';
-import AddMicrolearning from '../components/AddMicrolearning';
-import UpdateMicrolearning from '../components/UpdateMicrolearning';
-import PublicRouteStudent from './PublicRouteStudent';
-import PrivateRouteStudent from './PrivateRouteStudent';
+import LandingPage from '../pages/LandingPage/LandingPage';
+import LoginUser from '../pages/LoginUser/LoginUser';
+import Signup from '../pages/SignUp/Signup';
+import LoginAdmin from '../pages/LoginAdmin/LoginAdmin';
+import DashBoard from '../pages/DashBoard/DashBoard';
+import ShowModules from '../pages/ShowModules/ShowModules';
+import UpdateModule from '../pages/UpdateModule/UpdateModule';
+import AddModule from '../pages/AddModules/AddModule';
+import ShowLessons from '../pages/ShowLessons/ShowLessons';
+import AddLesson from '../pages/AddLesson/AddLesson';
+import UpdateLesson from '../pages/UpdateLesson/UpdateLesson';
+import ViewLesson from '../pages/ViewLesson/ViewLesson';
+import ShowMicrolearning from '../pages/ShowMicrolearning/ShowMicrolearning';
+import AddMicrolearning from '../pages/AddMicrolearning/AddMicrolearning';
+import UpdateMicrolearning from '../pages/UpdateMicrolearning/UpdateMicrolearning';
+import ViewMicrolearning from '../pages/ViewMicrolearning/ViewMicrolearning';
+import ShowCards from '../pages/ShowCards/ShowCards';
+import AddCard from '../pages/AddCard/AddCard';
+import UpdateCard from '../pages/UpdateCard/UpdateCard';
+import ViewKnowledgeCard from '../pages/ViewKnowledgeCard/ViewKnowledgeCard';
+import ShowUsers from '../pages/ShowUsers/ShowUsers';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+
+import Home from '../pages/Home/Home';
 import LearningCapsule from '../components/LearningCapsule';
-import ShowCards from '../components/card/ShowCards';
-import AddCard from '../components/card/AddCard';
-import KnowledgeCard from '../components/card/KnowledgeCard';
-import UpdateCard from '../components/card/UpdateCard';
 import Practice from '../components/learn/Practice';
 import Progress from '../components/student/Progress';
+
+import PrivateRouteAdmin from './PrivateRouteAdmin';
+import PublicRouteAdmin from './PublicRouteAdmin';
+import PublicRouteStudent from './PublicRouteStudent';
+import PrivateRouteStudent from './PrivateRouteStudent';
 
 const Routes = () => {
     return (
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={LandingPage} />
-                <PublicRouteStudent path='/signin' exact component={Sigin} />
+                <PublicRouteStudent path='/signin' exact component={LoginUser} />
                 <PublicRouteStudent path='/signup' exact component={Signup} />
                 <PrivateRouteStudent path='/learn' exact component={Home} />
                 <PrivateRouteStudent path='/learn/practice/:lessonId' exact component={Practice} />
                 <PrivateRouteStudent path='/learn/progress' exact component={Progress} />
                 <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
 
-                <PublicRouteAdmin path='/admin/signin' exact component={SigninAdmin} />
+                <PublicRouteAdmin path='/admin/signin' exact component={LoginAdmin} />
                 <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
 
                 <PrivateRouteAdmin path='/admin/showmodules' exact component={ShowModules} />
@@ -54,17 +57,19 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/showlessons' exact component={ShowLessons} />
                 <PrivateRouteAdmin path='/admin/lesson/create' exact component={AddLesson} />
                 <PrivateRouteAdmin path='/admin/lesson/update/:lessonId' exact component={UpdateLesson} />
-                <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={Lesson} />
+                <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={ViewLesson} />
 
                 <PrivateRouteAdmin path='/admin/showmicrolearnings' exact component={ShowMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/create' exact component={AddMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/update/:microId' exact component={UpdateMicrolearning} />
-                <PrivateRouteAdmin path='/admin/micro/:microId' exact component={Microlearning} />
+                <PrivateRouteAdmin path='/admin/micro/:microId' exact component={ViewMicrolearning} />
                 
                 <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
                 <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
                 <PrivateRouteAdmin path='/admin/card/update/:cardId' exact component={UpdateCard} />
-                <PrivateRouteAdmin path='/admin/card/:cardId' exact component={KnowledgeCard} />
+                <PrivateRouteAdmin path='/admin/card/:cardId' exact component={ViewKnowledgeCard} />
+
+                <PrivateRouteAdmin path='/admin/showusers' exact component={ShowUsers} />
 
                 <Route path='/404'  component={NotFoundPage} />
                 <Route path='*'>
