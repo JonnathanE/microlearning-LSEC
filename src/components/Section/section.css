@@ -1,25 +1,25 @@
 .my-card {
-    border-radius: 30px !important;
-    background-color: #fff !important;
+	border-radius: 30px !important;
+	background-color: #fff !important;
 }
 
 .my-contend {
-    cursor: pointer;
-    border-radius: 80px !important;
-    background-color: #EEEEEE  !important;
+	cursor: pointer;
+	border-radius: 80px !important;
+	background-color: #eeeeee !important;
 }
 
 .my-contend-complete {
-    cursor: pointer;
-    border-radius: 80px !important;
-    background-color: #18a178  !important;
+	cursor: pointer;
+	border-radius: 80px !important;
+	background-color: #18a178 !important;
 }
 
 .title-lesson {
-    cursor: pointer;
-    font-family: 'Rubik', sans-serif;
+	cursor: pointer;
+	font-family: 'Rubik', sans-serif;
 }
 
 .my-icon {
-    max-width: 80px;
+	max-width: 80px;
 }

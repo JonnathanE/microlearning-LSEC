@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 // view components
@@ -36,48 +35,128 @@ import PublicRouteStudent from './PublicRouteStudent';
 import PrivateRouteStudent from './PrivateRouteStudent';
 
 const Routes = () => {
-    return (
-        <BrowserRouter>
-            <Switch>
-                <Route path='/' exact component={LandingPage} />
-                <PublicRouteStudent path='/signin' exact component={LoginUser} />
-                <PublicRouteStudent path='/signup' exact component={Signup} />
-                <PrivateRouteStudent path='/learn' exact component={Home} />
-                <PrivateRouteStudent path='/learn/practice/:lessonId' exact component={Practice} />
-                <PrivateRouteStudent path='/learn/progress' exact component={Progress} />
-                <PrivateRouteStudent path='/learn/:lessonId' exact component={LearningCapsule} />
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path='/' exact component={LandingPage} />
+				<PublicRouteStudent path='/signin' exact component={LoginUser} />
+				<PublicRouteStudent path='/signup' exact component={Signup} />
+				<PrivateRouteStudent path='/learn' exact component={Home} />
+				<PrivateRouteStudent
+					path='/learn/practice/:lessonId'
+					exact
+					component={Practice}
+				/>
+				<PrivateRouteStudent
+					path='/learn/progress'
+					exact
+					component={Progress}
+				/>
+				<PrivateRouteStudent
+					path='/learn/:lessonId'
+					exact
+					component={LearningCapsule}
+				/>
 
-                <PublicRouteAdmin path='/admin/signin' exact component={LoginAdmin} />
-                <PrivateRouteAdmin path='/admin/dashboard' exact component={DashBoard} />
+				<PublicRouteAdmin path='/admin/signin' exact component={LoginAdmin} />
+				<PrivateRouteAdmin
+					path='/admin/dashboard'
+					exact
+					component={DashBoard}
+				/>
 
-                <PrivateRouteAdmin path='/admin/showmodules' exact component={ShowModules} />
-                <PrivateRouteAdmin path='/admin/module/create' exact component={AddModule} />
-                <PrivateRouteAdmin path='/admin/module/update/:moduleId' exact component={UpdateModule} />
+				<PrivateRouteAdmin
+					path='/admin/showmodules'
+					exact
+					component={ShowModules}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/module/create'
+					exact
+					component={AddModule}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/module/update/:moduleId'
+					exact
+					component={UpdateModule}
+				/>
 
-                <PrivateRouteAdmin path='/admin/showlessons' exact component={ShowLessons} />
-                <PrivateRouteAdmin path='/admin/lesson/create' exact component={AddLesson} />
-                <PrivateRouteAdmin path='/admin/lesson/update/:lessonId' exact component={UpdateLesson} />
-                <PrivateRouteAdmin path='/admin/lesson/:lessonId' exact component={ViewLesson} />
+				<PrivateRouteAdmin
+					path='/admin/showlessons'
+					exact
+					component={ShowLessons}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/lesson/create'
+					exact
+					component={AddLesson}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/lesson/update/:lessonId'
+					exact
+					component={UpdateLesson}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/lesson/:lessonId'
+					exact
+					component={ViewLesson}
+				/>
 
-                <PrivateRouteAdmin path='/admin/showmicrolearnings' exact component={ShowMicrolearning} />
-                <PrivateRouteAdmin path='/admin/micro/create' exact component={AddMicrolearning} />
-                <PrivateRouteAdmin path='/admin/micro/update/:microId' exact component={UpdateMicrolearning} />
-                <PrivateRouteAdmin path='/admin/micro/:microId' exact component={ViewMicrolearning} />
-                
-                <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
-                <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
-                <PrivateRouteAdmin path='/admin/card/update/:cardId' exact component={UpdateCard} />
-                <PrivateRouteAdmin path='/admin/card/:cardId' exact component={ViewKnowledgeCard} />
+				<PrivateRouteAdmin
+					path='/admin/showmicrolearnings'
+					exact
+					component={ShowMicrolearning}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/micro/create'
+					exact
+					component={AddMicrolearning}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/micro/update/:microId'
+					exact
+					component={UpdateMicrolearning}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/micro/:microId'
+					exact
+					component={ViewMicrolearning}
+				/>
 
-                <PrivateRouteAdmin path='/admin/showusers' exact component={ShowUsers} />
+				<PrivateRouteAdmin
+					path='/admin/showcards'
+					exact
+					component={ShowCards}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/card/create'
+					exact
+					component={AddCard}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/card/update/:cardId'
+					exact
+					component={UpdateCard}
+				/>
+				<PrivateRouteAdmin
+					path='/admin/card/:cardId'
+					exact
+					component={ViewKnowledgeCard}
+				/>
 
-                <Route path='/404'  component={NotFoundPage} />
-                <Route path='*'>
-                    <Redirect to='/404' />
-                </Route>
-            </Switch>
-        </BrowserRouter>
-    )
-}
+				<PrivateRouteAdmin
+					path='/admin/showusers'
+					exact
+					component={ShowUsers}
+				/>
+
+				<Route path='/404' component={NotFoundPage} />
+				<Route path='*'>
+					<Redirect to='/404' />
+				</Route>
+			</Switch>
+		</BrowserRouter>
+	);
+};
 
 export default Routes;
