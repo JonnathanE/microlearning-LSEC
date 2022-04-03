@@ -9,96 +9,88 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 const UpdateImage = ({ content }) => {
-	const [formData, setFormData] = useState('');
-	const [loading, setLoading] = useState(false);
 
-	const MySwal = withReactContent(Swal);
+    const [formData, setFormData] = useState('');
+    const [loading, setLoading] = useState(false);
 
-	// yup schema to validate inputs
-	const schema = yup.object().shape({
-		image: yup.mixed().test('fileSize', 'La imágen debe ser 9MB', value => {
-			if (value.length === 0) return false;
-			return value[0].size <= 9000000;
-		}),
-	});
+    const MySwal = withReactContent(Swal)
 
-	// initialize the React Hook Form methods
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors },
-	} = useForm({
-		resolver: yupResolver(schema),
-	});
+    // yup schema to validate inputs
+    const schema = yup.object().shape({
+        image: yup.mixed().test("fileSize", "La imágen debe ser 9MB", (value) => {
+            if (value.length === 0) return false;
+            return value[0].size <= 9000000;
+        })
+    });
 
-	// submit icon method
-	const clickSubmitIcon = data => {
-		setFormData(new FormData());
-		formData.append('image', data.image[0]);
-		MySwal.fire({
-			title: <p>¿Quieres guardar los cambios?</p>,
-			showCancelButton: true,
-			confirmButtonText: `Guardar cambios`,
-		}).then(async result => {
-			if (result.isConfirmed) {
-				setLoading(true);
-				try {
-					await updateMicrolearningImage(content._id, formData);
-					setLoading(false);
-					MySwal.fire('¡La imágen se actualizó correctamente!', '', 'success');
-					reset({
-						icon: '',
-					});
-				} catch (error) {
-					setLoading(false);
-					MySwal.fire({
-						icon: 'error',
-						title: 'Oops...',
-						text: 'Hubo un error al actualizar la imágen. Intente de nuevo.',
-					});
-				}
-			}
-		});
-	};
+    // initialize the React Hook Form methods
+    const { register, handleSubmit, reset, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
 
-	useEffect(() => {
-		setFormData(new FormData());
-	}, []);
+    // submit icon method
+    const clickSubmitIcon = data => {
+        setFormData(new FormData());
+        formData.append('image', data.image[0]);
+        MySwal.fire({
+            title: <p>¿Quieres guardar los cambios?</p>,
+            showCancelButton: true,
+            confirmButtonText: `Guardar cambios`,
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                setLoading(true);
+                try {
+                    await updateMicrolearningImage(content._id, formData)
+                    setLoading(false);
+                    MySwal.fire('¡La imágen se actualizó correctamente!', '', 'success');
+                    reset({
+                        icon: ''
+                    });
+                } catch (error) {
+                    setLoading(false);
+                    MySwal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Hubo un error al actualizar la imágen. Intente de nuevo.'
+                    })
+                }
+            }
+        })
+    };
 
-	// shows the validation error of the inputs
-	const errorValidator = messageError => (
-		<p style={{ color: '#ff0000' }}>{messageError}</p>
-	);
+    useEffect(() => {
+        setFormData(new FormData());
+    }, [])
 
-	const imageForm = () => (
-		<form className='sign-box' onSubmit={handleSubmit(clickSubmitIcon)}>
-			<div className='form-group'>
-				<label className='form-label' htmlFor='imageFile'>
-					Imágen Representativa
-				</label>
-				<input
-					type='file'
-					accept='image/*'
-					{...register('image')}
-					id='imageFile'
-					className='form-control'
-				/>
-				{errors.image && errorValidator(errors.image.message)}
-			</div>
-			<input type='submit' className='btn btn-primary' />
-		</form>
-	);
+    // shows the validation error of the inputs
+    const errorValidator = (messageError) => (
+        <p style={{ color: '#ff0000' }}>{messageError}</p>
+    )
 
-	// shows loading when submit is executing
-	const showLoading = () => loading && <Spinner />;
+    const imageForm = () => (
+        <form className="sign-box" onSubmit={handleSubmit(clickSubmitIcon)}>
+            <div className='form-group'>
+                <label className='form-label' htmlFor="imageFile">Imágen Representativa
+                </label>
+                <input type='file' accept='image/*' {...register('image')} id='imageFile' className='form-control' />
+                {errors.image && errorValidator(errors.image.message)}
+            </div>
+            <input type='submit' className="btn btn-primary" />
+        </form>
+    )
 
-	return (
-		<>
-			{showLoading()}
-			{imageForm()}
-		</>
-	);
-};
+    // shows loading when submit is executing
+    const showLoading = () =>
+        loading && (
+            <Spinner />
+        )
+
+    return (
+        <>
+            {showLoading()}
+            {imageForm()}
+        </>
+    )
+}
 
 export default UpdateImage;

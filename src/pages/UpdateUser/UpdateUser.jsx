@@ -1,5 +1,10 @@
+
 const UpdateUser = () => {
-	return <div>User</div>;
-};
+    return (
+        <div>
+            User
+        </div>
+    );
+}
 
 export default UpdateUser;
