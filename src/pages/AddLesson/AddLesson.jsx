@@ -13,7 +13,6 @@ import withReactContent from 'sweetalert2-react-content'
 const AddLesson = () => {
 
     const [modules, setModules] = useState([]);
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
     const MySwal = withReactContent(Swal)
@@ -35,12 +34,13 @@ const AddLesson = () => {
 
     // submit method
     const clickSubmit = async data => {
+        let formData = new FormData();
         setLoading(true);
         formData.append('name', data.name);
         formData.append('module', data.module);
         formData.append('icon', data.icon[0]);
         try {
-            const res = await addLesson(formData);
+            await addLesson(formData);
             setLoading(false);
             MySwal.fire('¡Lección creado con éxito!', '', 'success');
             reset({
@@ -73,7 +73,6 @@ const AddLesson = () => {
 
     useEffect(() => {
         init();
-        setFormData(new FormData());
     }, [])
 
     // shows the validation error of the inputs

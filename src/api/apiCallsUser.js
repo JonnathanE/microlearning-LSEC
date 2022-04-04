@@ -1,10 +1,16 @@
 import axios from 'axios';
 import { API } from '../config';
-import { publicRequest, userRequest } from './requestMethods';
+import { publicRequest } from './requestMethods';
 
 // sigin user
 export const loginUser = async user => {
     const { data } = await publicRequest.post('/auth/signin', user);
+    return data
+}
+
+// signup user
+export const signupUser = async user => {
+    const { data } = await publicRequest.post('/auth/signup', user);
     return data
 }
 

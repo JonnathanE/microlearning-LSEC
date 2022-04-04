@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
-import { signup } from '../../core/apiCore'
+import { signupUser } from '../../api/apiCallsUser';
 
 import useAuth from '../../auth/useAuth';
 import Spinner from '../../components/Spinner/Spinner';
@@ -34,19 +34,17 @@ const Signup = () => {
     });
 
     // submit method
-    const clickSubmit = data => {
+    const clickSubmit = async data => {
         setError(false);
         setLoading(true);
-        signup(data)
-            .then(data => {
-                if (data.error) {
-                    setError(data.error);
-                    setLoading(false);
-                } else {
-                    auth.login(data);
-                    history.push(previusObjectUrl || '/learn')
-                }
-            });
+        try {
+            const res = await signupUser(data);
+            auth.login(res);
+            history.push(previusObjectUrl || '/learn')
+        } catch (error) {
+            setError(error.response?.data?.message);
+            setLoading(false);
+        }
     };
 
     // shows the validation error of the inputs

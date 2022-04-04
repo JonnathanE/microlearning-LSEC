@@ -4,9 +4,9 @@ import { useQuery, useQueryClient } from 'react-query';
 import { getCards } from '../../api/apiCallsUser';
 
 import { Progress } from 'reactstrap';
-import Spinner from '../Spinner/Spinner';
+import Backdrops from '../../components/Backdrops/Backdrops';
 import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
-import ShowImage from '../ShowImage/ShowImage';
+import ShowImage from '../../components/ShowImage/ShowImage';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
@@ -208,7 +208,8 @@ const Practice = () => {
 
     return (
         <>
-            {isFetching && <Spinner />}
+            {isFetching && <Backdrops />}
+            {isPreviousData && <Backdrops />}
             {data?.totalDocs === 0 && showMessageNoContent()}
             {error && showError()}
             <div className='container shadow-drop-center'>

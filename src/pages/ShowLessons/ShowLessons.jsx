@@ -3,7 +3,7 @@ import { getLessons, deleteLesson } from '../../api/apiCallsAdmin';
 import { NavLink } from 'react-router-dom';
 
 import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
-import Spinner from '../../components/Spinner/Spinner';
+import Backdrops from '../../components/Backdrops/Backdrops';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 
@@ -50,7 +50,7 @@ const ShowLessons = () => {
             <NavigationAdmin />
             <div className='container'>
 
-                {isFetching && <Spinner />}
+                {isFetching && <Backdrops />}
 
                 {error && <div class="alert alert-warning" role="alert">
                     Los datos no se han cargado. Intente de nuevo.

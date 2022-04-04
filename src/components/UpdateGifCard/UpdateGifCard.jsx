@@ -11,7 +11,6 @@ import withReactContent from 'sweetalert2-react-content';
 
 const UpdateGifCard = ({ content }) => {
 
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
     const MySwal = withReactContent(Swal)
@@ -31,7 +30,7 @@ const UpdateGifCard = ({ content }) => {
 
     // submit icon method
     const clickSubmitIcon = data => {
-        setFormData(new FormData());
+        let formData = new FormData();
         formData.append('gif', data.gif[0]);
         MySwal.fire({
             title: <p>¿Quieres guardar los cambios?</p>,
@@ -58,10 +57,6 @@ const UpdateGifCard = ({ content }) => {
             }
         })
     };
-
-    useEffect(() => {
-        setFormData(new FormData());
-    }, [])
 
     // shows the validation error of the inputs
     const errorValidator = (messageError) => (

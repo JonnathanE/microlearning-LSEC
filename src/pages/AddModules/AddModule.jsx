@@ -38,7 +38,7 @@ const AddModule = () => {
             if (result.isConfirmed) {
                 setLoading(true);
                 try {
-                    const res = await addModule(data);
+                    await addModule(data);
                     setLoading(false);
                     MySwal.fire('¡Módulo creado con éxito!', '', 'success');
                 } catch (error) {

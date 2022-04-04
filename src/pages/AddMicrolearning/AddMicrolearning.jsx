@@ -13,7 +13,6 @@ import withReactContent from 'sweetalert2-react-content'
 const AddMicrolearning = () => {
 
     const [lessons, setLessons] = useState([]);
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
     const MySwal = withReactContent(Swal)
@@ -40,6 +39,7 @@ const AddMicrolearning = () => {
     // submit method
     const clickSubmit = async data => {
         setLoading(true);
+        let formData = new FormData();
         formData.append('title', data.title);
         formData.append('lesson', data.lesson);
         formData.append('image', data.image[0]);
@@ -79,7 +79,6 @@ const AddMicrolearning = () => {
 
     useEffect(() => {
         init();
-        setFormData(new FormData());
     }, [])
 
     // shows the validation error of the inputs

@@ -10,7 +10,6 @@ import withReactContent from 'sweetalert2-react-content'
 
 const UpdateIcon = ({ lesson }) => {
 
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
     const MySwal = withReactContent(Swal)
@@ -30,7 +29,7 @@ const UpdateIcon = ({ lesson }) => {
 
     // submit icon method
     const clickSubmitIcon = data => {
-        setFormData(new FormData());
+        let formData = new FormData();
         formData.append('icon', data.icon[0]);
         MySwal.fire({
             title: <p>¿Quieres guardar los cambios?</p>,
@@ -57,10 +56,6 @@ const UpdateIcon = ({ lesson }) => {
             }
         })
     };
-
-    useEffect(() => {
-        setFormData(new FormData());
-    }, [])
 
     // shows the validation error of the inputs
     const errorValidator = (messageError) => (

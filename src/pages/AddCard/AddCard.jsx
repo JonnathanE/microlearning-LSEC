@@ -14,7 +14,6 @@ import withReactContent from 'sweetalert2-react-content';
 const AddCard = () => {
 
     const [lessons, setLessons] = useState([]);
-    const [formData, setFormData] = useState('');
     const [loading, setLoading] = useState(false);
 
 
@@ -40,6 +39,7 @@ const AddCard = () => {
     // submit method
     const clickSubmit = async data => {
         setLoading(true);
+        let formData = new FormData();
         formData.append('question', data.question);
         formData.append('lesson', data.lesson);
         formData.append('correctAnswer', data.correctAnswer);
@@ -81,7 +81,6 @@ const AddCard = () => {
 
     useEffect(() => {
         loadLessons();
-        setFormData(new FormData());
     }, [])
 
     // shows the validation error of the inputs

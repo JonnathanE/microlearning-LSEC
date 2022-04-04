@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from 'react-query';
 import { getLearnContent, addCompleteLearn } from '../../api/apiCallsUser';
 import useAuth from '../../auth/useAuth';
 
+import Backdrops from '../../components/Backdrops/Backdrops';
 import { Progress } from 'reactstrap';
 import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
 import ShowImage from '../../components/ShowImage/ShowImage';
@@ -171,6 +172,8 @@ const LearningCapsule = () => {
 
     return (
         <>
+            {isFetching && <Backdrops />}
+            {isPreviousData && <Backdrops />}
             {data?.totalDocs === 0 && showMessageNoContent()}
             {error && showError()}
             <div className='container shadow-drop-center mb-4'>
