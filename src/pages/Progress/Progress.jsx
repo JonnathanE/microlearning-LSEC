@@ -1,37 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import { getLessons, completeLearn } from '../../core/apiCore';
+import { useState, useEffect } from 'react';
+import { getLessons } from '../../api/apiCallsAdmin';
+import { getCompleteLearn } from '../../api/apiCallsUser';
 import useAuth from '../../auth/useAuth';
 
-import Navigation from '../../layout/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import { Doughnut } from 'react-chartjs-2';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const Progress = () => {
+
+    const auth = useAuth();
+    const MySwal = withReactContent(Swal);
 
     const [lessons, setLessons] = useState([]);
     const [completeLesson, setCopleteLesson] = useState([]);
 
-    const auth = useAuth();
-
-    const loadLessons = () => {
-        getLessons().then(data => {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                setLessons(data);
-                loadCompleteLearn();
-            }
-        });
+    const loadLessons = async () => {
+        try {
+            const res = await getLessons();
+            setLessons(res);
+            loadCompleteLearn();
+        } catch (error) {
+            console.log(error)
+        }
     }
 
-    const loadCompleteLearn = () => {
-        completeLearn(auth.user.user._id).then(data => {
-            if (data.error) {
-                console.log(data.error);
-            } else {
-                setCopleteLesson(data.lesson);
+    const loadCompleteLearn = async () => {
+        try {
+            const res = await getCompleteLearn(auth.user.token);
+            setCopleteLesson(res.lesson);
+        } catch (error) {
+            console.log(error)
+            if (error.response?.status === 401) {
+                MySwal.fire({
+                    title: 'Sesión Acabada',
+                    icon: 'info',
+                    showCloseButton: true,
+                    text: 'Usted puede seguir navegando en la página, pero su progreso no se guardarán. Le recomendamos iniciar sesión.',
+                    confirmButtonText: 'Iniciar Sesión'
+                }).then(response => {
+                    if (response.isConfirmed) {
+                        auth.logout();
+                    }
+                })
             }
-        });
+        }
     }
 
     useEffect(() => {

@@ -7,7 +7,7 @@ import useAuth from '../../auth/useAuth';
 import { loginUser } from '../../api/apiCallsUser';
 
 import Spinner from '../../components/Spinner/Spinner';
-import Navigation from '../../layout/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 import './loginUser.css';
 

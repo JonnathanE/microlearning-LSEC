@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react';
-
-import { getLessonsHome, getCompleteLearn } from '../../api/apiCallsUser';
+import { useHistory, useLocation } from 'react-router-dom';
+import { getLessonsHome } from '../../api/apiCallsUser';
 import { API } from '../../config';
 
-import { useHistory, useLocation } from 'react-router-dom';
+import './section.css';
 
-import './section.css'
-
-const Section = ({ moduleId }) => {
+const Section = ({ moduleId, completeLesson }) => {
 
     const [lessons, setLessons] = useState(null);
-    const [completeLesson, setCopleteLesson] = useState([]);
 
     const history = useHistory();
     const location = useLocation();
@@ -20,18 +17,8 @@ const Section = ({ moduleId }) => {
         try {
             const res = await getLessonsHome(moduleId);
             setLessons(res);
-            loadCompleteLearn();
         } catch (error) {
             console.log(error);
-        }
-    }
-
-    const loadCompleteLearn = async () => {
-        try {
-            const res = await getCompleteLearn();
-            setCopleteLesson(res.lesson);
-        } catch (error) {
-            console.log(error)
         }
     }
 
@@ -50,7 +37,6 @@ const Section = ({ moduleId }) => {
     return (
         <div className="card my-card shadow p-3 mb-4 bg-body rounded">
             <div className='row justify-content-center align-items-center'>
-
                 {lessons &&
                     lessons.map(lesson => (
                         <div key={lesson._id} className='col-6 col-md-2 m-md-5 text-center mb-4'>
@@ -78,7 +64,6 @@ const Section = ({ moduleId }) => {
                     ))
                 }
             </div>
-
         </div>
     );
 }

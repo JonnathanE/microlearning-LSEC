@@ -1,86 +1,67 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink, useParams, Redirect } from 'react-router-dom';
 import { useQuery, useQueryClient } from 'react-query';
-import { getCards } from '../../api/apiCallsUser';
+import { getLearnContent, addCompleteLearn } from '../../api/apiCallsUser';
+import useAuth from '../../auth/useAuth';
 
 import { Progress } from 'reactstrap';
-import Spinner from '../Spinner/Spinner';
 import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
-import ShowImage from '../ShowImage/ShowImage';
+import ShowImage from '../../components/ShowImage/ShowImage';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import './Practice.css';
+import './learningCapsule.css';
 
-const Practice = () => {
+const LearningCapsule = () => {
 
     const { lessonId } = useParams();
     const queryClient = useQueryClient();
+    const auth = useAuth();
     const MySwal = withReactContent(Swal);
 
     const [page, setPage] = useState(1);
-    const [selected, setSelected] = useState('');
-    const radiosWrapper = useRef();
-
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
-    const [aleatorio, setAleatorio] = useState(0);
+
 
     const { data, error, isFetching, isPreviousData } = useQuery(
-        ["card", lessonId, page],
-        () => getCards(lessonId, page),
+        ["learn", lessonId, page],
+        () => getLearnContent(lessonId, page),
         { keepPreviousData: true, staleTime: 5000 }
     );
 
-    const answers = data ? [data.docs[0]?.correctAnswer, data.docs[0]?.wrongAnswer] : [];
-
-    const onChangeValue = (event) => {
-        setSelected(event.target.value)
-    }
 
     const nextContent = () => {
-        if (selected === '') {
-            MySwal.fire('Seleccione una respuesta');
-        }
-        if (selected === data?.docs[0]?.correctAnswer) {
-            MySwal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Respuesta Correcta',
-                showConfirmButton: false,
-                timer: 1500
-            })
-            setSelected('')
-            if (data?.hasNextPage === false) {
-                MySwal.fire({
-                    title: 'Respuesta Correcta',
-                    text: "Felicidades, ha terminado toda la práctica para esta lección.",
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6',
-                    confirmButtonText: 'Seguir'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        setRedirectToReferrer(true);
-                    }
-                })
-            }
-            setPage(old => (data?.hasNextPage ? old + 1 : old))
-        }
-        if (selected !== data?.docs[0]?.correctAnswer) {
-            MySwal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No es la respuesta correcta. Intente de nuevo.',
-            })
-        }
+        setPage(old => (data?.hasNextPage ? old + 1 : old))
     }
 
     const backContent = () => {
-        setSelected('')
         setPage(old => Math.max(old - 1, 1))
     }
 
     const redirectLearn = () => {
         setRedirectToReferrer(true)
+    }
+
+    const redirectLearnFinal = async () => {
+        try {
+            await addCompleteLearn(lessonId, auth.user.token);
+            setRedirectToReferrer(true);
+        } catch (error) {
+            console.log(error)
+            if (error.response?.status === 401) {
+                MySwal.fire({
+                    title: 'Sesión Acabada',
+                    icon: 'info',
+                    showCloseButton: true,
+                    text: 'Usted puede seguir navegando en la página, pero su progreso no se guardarán. Le recomendamos iniciar sesión.',
+                    confirmButtonText: 'Iniciar Sesión'
+                }).then(response => {
+                    if (response.isConfirmed) {
+                        auth.logout();
+                    }
+                })
+            }
+        }
     }
 
     const redirectUser = () => {
@@ -89,27 +70,14 @@ const Practice = () => {
         }
     }
 
-    const numRandom = () => {
-        const max = 2;
-        const min = 0;
-        setAleatorio(Math.floor(Math.random() * (max - min)) + min);
-    }
-
     useEffect(() => {
         if (data?.hasNextPage) {
             queryClient.prefetchQuery(
-                ["card", lessonId, page + 1],
-                () => getCards(lessonId, page + 1)
+                ["learn", lessonId, page + 1],
+                () => getLearnContent(lessonId, page + 1)
             )
         }
-        if (data?.totalDocs > 0) {
-            const findCheckedInput = radiosWrapper.current.querySelector('input:checked');
-            if (findCheckedInput) {
-                findCheckedInput.checked = false;
-            }
-        }
-        numRandom();
-    }, [data, data?.hasNextPage, lessonId, page, queryClient])
+    }, [data?.hasNextPage, lessonId, page, queryClient])
 
     const progress = () => (
         <>
@@ -137,38 +105,33 @@ const Practice = () => {
         <>
             {data?.totalDocs > 0 &&
                 <>
-                    <div className='row justify-content-center text-cemter'>
-                        <h2>
-                            {data?.docs[0].question}
-                        </h2>
-                    </div>
-                    <div className='row d-flex'>
-                        <div className='content col-12 col-lg-6 mx-auto align-self-center'>
-                            <ShowImage styles='gif img-fluid' name={data?.docs[0].question} url={data?.docs[0].gif_url?.url} />
+                    <div className='row justify-content-center'>
+                        <div className='col-12'>
+                            <h2>
+                                {data?.docs[0].title}
+                            </h2>
                         </div>
                     </div>
-                    <div className='row justify-content-center mt-5 mb-5'>
-                        {aleatorio === 0 && <>
-                        </>}
-                        <div>
-                            <div className='answer-wrapper' ref={radiosWrapper}>
-                                {answers.map((answer, i) => (
-                                    <label key={i}>
-                                        <input type="radio" name='answer' value={answer} onChange={onChangeValue} />
-                                        {answer}
-                                    </label>
-                                ))}
+                    <div className='row'>
+                        <div className='col-12 col-lg-6 d-flex'>
+                            <div className='content mx-auto align-self-center'>
+                                <ShowImage styles='my-image img-fluid' name={data?.docs[0].title} url={data?.docs[0].image_url?.url} />
+                            </div>
+                        </div>
+                        <div className='col-12 col-lg-6 d-flex'>
+                            <div className='content-gif mx-auto align-self-center'>
+                                <ShowImage styles='img-fluid' name={data?.docs[0].title} url={data?.docs[0].gif_url?.url} />
                             </div>
                         </div>
                     </div>
-
-                    <div className='row justify-content-center align-items-center mt-2'>
+                    <div className='row justify-content-center align-items-center mt-5'>
                         <div className='col-6 text-center mb-4'>
                             {data?.hasPrevPage && <button className='btn btn-danger rounded-pill' onClick={() => backContent()}><FaAngleLeft /> Atrás</button>}
                             {!data?.hasPrevPage && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Lecciones</NavLink>}
                         </div>
                         <div className='col-6 text-center mb-4'>
-                            <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Comprobar <FaAngleRight /></button>
+                            {data?.hasNextPage && <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Siguiente <FaAngleRight /></button>}
+                            {!data?.hasNextPage && <button onClick={() => redirectLearnFinal()} className='btn btn-danger rounded-pill'><FaGraduationCap /> Terminar lección</button>}
                         </div>
                     </div>
                 </>
@@ -208,10 +171,9 @@ const Practice = () => {
 
     return (
         <>
-            {isFetching && <Spinner />}
             {data?.totalDocs === 0 && showMessageNoContent()}
             {error && showError()}
-            <div className='container shadow-drop-center'>
+            <div className='container shadow-drop-center mb-4'>
                 {progress()}
                 {capsule()}
                 {redirectUser()}
@@ -220,4 +182,4 @@ const Practice = () => {
     )
 }
 
-export default Practice;
+export default LearningCapsule;

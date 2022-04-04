@@ -11,7 +11,6 @@ const AuthProvider = ({ children }) => {
         user,
         login(user) {
             localStorage.setItem('user', JSON.stringify(user));
-            localStorage.setItem('auth', JSON.stringify(1));
             setUser(user)
         },
         logout() {
@@ -24,6 +23,7 @@ const AuthProvider = ({ children }) => {
             return !!user;
         },
         role(rol) {
+            localStorage.setItem('auth', JSON.stringify(rol));
             setAdmin(rol);
         },
         isAdmin() {

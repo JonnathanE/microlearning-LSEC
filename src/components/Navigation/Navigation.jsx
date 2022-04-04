@@ -1,12 +1,10 @@
-import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import useAuth from '../auth/useAuth';
+import useAuth from '../../auth/useAuth';
 
 import { VscAccount } from "react-icons/vsc";
 import { FaSignInAlt, FaUserAstronaut, FaSignOutAlt, FaGraduationCap, FaTrophy } from "react-icons/fa";
 
-import './Navigation.css'
 
 const Navigation = () => {
     const auth = useAuth();
@@ -31,7 +29,7 @@ const Navigation = () => {
                                 <NavLink to='/learn/progress' className='nav-link aling-self-center h5'><FaTrophy /> Progreso</NavLink>
                             </li>
                         </ul>
-                        
+
                         <ul className="navbar-nav">
 
                             {!auth.isLogged() && (
@@ -62,7 +60,7 @@ const Navigation = () => {
 
                                 </li>
                             )}
-                            
+
                         </ul>
 
                     </div>

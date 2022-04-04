@@ -1,6 +1,6 @@
 import { NavLink, Link } from 'react-router-dom';
 
-import Navigation from '../../layout/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 import './landingPage.css';
 import logoFenasec from '../../img/logo_fenasec.png';

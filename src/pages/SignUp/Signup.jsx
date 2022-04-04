@@ -7,7 +7,7 @@ import { signup } from '../../core/apiCore'
 
 import useAuth from '../../auth/useAuth';
 import Spinner from '../../components/Spinner/Spinner';
-import Navigation from '../../layout/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 import './signUp.css';
 

@@ -24,11 +24,11 @@ import UpdateCard from '../pages/UpdateCard/UpdateCard';
 import ViewKnowledgeCard from '../pages/ViewKnowledgeCard/ViewKnowledgeCard';
 import ShowUsers from '../pages/ShowUsers/ShowUsers';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
-
 import Home from '../pages/Home/Home';
-import LearningCapsule from '../components/LearningCapsule';
+import LearningCapsule from '../pages/LearningCapsule/LearningCapsule';
+
+import Progress from '../pages/Progress/Progress';
 import Practice from '../components/learn/Practice';
-import Progress from '../components/student/Progress';
 
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import PublicRouteAdmin from './PublicRouteAdmin';
@@ -63,7 +63,7 @@ const Routes = () => {
                 <PrivateRouteAdmin path='/admin/micro/create' exact component={AddMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/update/:microId' exact component={UpdateMicrolearning} />
                 <PrivateRouteAdmin path='/admin/micro/:microId' exact component={ViewMicrolearning} />
-                
+
                 <PrivateRouteAdmin path='/admin/showcards' exact component={ShowCards} />
                 <PrivateRouteAdmin path='/admin/card/create' exact component={AddCard} />
                 <PrivateRouteAdmin path='/admin/card/update/:cardId' exact component={UpdateCard} />
@@ -71,7 +71,7 @@ const Routes = () => {
 
                 <PrivateRouteAdmin path='/admin/showusers' exact component={ShowUsers} />
 
-                <Route path='/404'  component={NotFoundPage} />
+                <Route path='/404' component={NotFoundPage} />
                 <Route path='*'>
                     <Redirect to='/404' />
                 </Route>
