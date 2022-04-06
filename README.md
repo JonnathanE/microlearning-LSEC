@@ -1,6 +1,62 @@
-# Getting Started with Create React App
+# Microlearning LSEC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The following project is a web application dedicated to teaching Ecuadorian sign language through microlearning.
+
+The project is built in React. The API are below:
+
+- API: https://github.com/JonnathanE/api-microlearning-LSEC
+- DEMO: https://learn-lsec.herokuapp.com/
+
+## Screenshot
+
+![image](https://user-images.githubusercontent.com/33469147/161625727-aa1aa1f6-bf4d-4935-b10d-2eba05ff4e7e.png)
+
+![image](https://user-images.githubusercontent.com/33469147/161625229-0e731c33-b51c-4515-a691-e3b0e5cf20bf.png)
+
+![image](https://user-images.githubusercontent.com/33469147/161625112-8b5c74e3-43a3-40a5-92b7-5fa56faf0a31.png)
+
+
+## Tech Stack
+
+**Client:** React, Bootstrap 4
+
+**Server:** Node, Express, MongoDb
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_API_URL` = =(the backend server url: serverURL/api)
+    
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/JonnathanE/microlearning-LSEC.git
+```
+
+Go to the project directory
+
+```bash
+  cd microlearning-LSEC
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run start
+```
+  
+
 
 ## Available Scripts
 
@@ -38,33 +94,3 @@ If you aren’t satisfied with the build tool and configuration choices, you can
 Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
