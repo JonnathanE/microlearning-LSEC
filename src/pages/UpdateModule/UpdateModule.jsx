@@ -82,12 +82,12 @@ const UpdateModule = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group mb-4">
                 <label className="text-muted">Número de módulo</label>
-                <input type="number" {...register('number')} defaultValue={module.number} className='form-control' min={0} />
+                <input type="number" {...register('number')} defaultValue={module.number} className='form-control' min={0} data-testid='inputNumber' />
                 {errors.number && errorValidator(errors.number.message)}
             </div>
             <div className="form-group mb-4">
                 <label className="text-muted">Nombre</label>
-                <input type="text" {...register('name')} defaultValue={module.name} className='form-control' />
+                <input type="text" {...register('name')} defaultValue={module.name} className='form-control' data-testid='inputName' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
             <div className="row">

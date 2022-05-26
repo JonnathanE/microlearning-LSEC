@@ -57,11 +57,11 @@ const NavigationAdmin = () => {
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             <li className='nav-item dropdown'>
-                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">{auth.user.name} <FaUserCircle /></NavLink>
+                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">{auth?.user.name} <FaUserCircle /></NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><Link to=''
-                                        onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
+                                        onClick={auth?.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
                                 </ul>
                             </li>
                         </ul>

@@ -63,12 +63,12 @@ const AddModule = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group mb-4">
                 <label className="text-muted">Número de módulo</label>
-                <input type="number" {...register('number')} className='form-control' min={0} />
+                <input type="number" {...register('number')} className='form-control' min={0} aria-label='numero del modulo' />
                 {errors.number && errorValidator(errors.number.message)}
             </div>
             <div className="form-group mb-4">
                 <label className="text-muted">Nombre</label>
-                <input type="text" {...register('name')} className='form-control' />
+                <input type="text" {...register('name')} className='form-control' aria-label='nombre del modulo' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
             <NavLink to='/admin/dashboard'>

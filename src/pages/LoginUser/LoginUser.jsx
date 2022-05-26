@@ -57,17 +57,17 @@ const LoginUser = () => {
 
             <div className="form-group mb-3">
                 <label className="text-muted">Email</label>
-                <input type="email" {...register('email')} className='form-control' />
+                <input type="email" {...register('email')} className='form-control' aria-label='email' />
                 {errors.email && errorValidator(errors.email.message)}
             </div>
             <div className="form-group mb-3">
                 <label className="text-muted">Password</label>
-                <input type="password" {...register('password')} className='form-control' />
+                <input type="password" {...register('password')} className='form-control' aria-label='password' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
 
             <div className='text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión' />
+                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión' aria-label='iniciar sesion' />
             </div>
 
             <div className="login-or">
@@ -75,7 +75,7 @@ const LoginUser = () => {
                 <span className="span-or"> O </span>
             </div>
             <div className="form-group">
-                <p className="text-center">¿No tienes una cuenta? <NavLink to='/signup' id="signup">Regístrate</NavLink></p>
+                <p data-testid='linkRegister' className="text-center">¿No tienes una cuenta? <NavLink to='/signup' id="signup">Regístrate</NavLink></p>
             </div>
 
         </form>

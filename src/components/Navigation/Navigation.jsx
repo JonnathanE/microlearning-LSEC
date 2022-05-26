@@ -32,7 +32,7 @@ const Navigation = () => {
 
                         <ul className="navbar-nav">
 
-                            {!auth.isLogged() && (
+                            {!auth?.isLogged() && (
                                 <>
                                     <li className='nav-item me-1'>
                                         <NavLink to='/signin' className='btn btn-light'><FaSignInAlt /> Iniciar Sesión</NavLink>
@@ -43,10 +43,10 @@ const Navigation = () => {
                                 </>
                             )}
 
-                            {auth.isLogged() && (
+                            {auth?.isLogged() && (
                                 <li className='nav-item dropdown'>
 
-                                    <NavLink exact to='#' className='nav-link dropdown-toggle h5' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"> {auth.user.name} <FaUserAstronaut /></NavLink>
+                                    <NavLink exact to='#' className='nav-link dropdown-toggle h5' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"> {auth?.user.name} <FaUserAstronaut /></NavLink>
 
                                     <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                         {/** 
