@@ -67,7 +67,7 @@ const ViewKnowledgeCard = () => {
         <>
             <NavigationAdmin />
             <div className='container'>
-                <h2>Ver información de la Prueba</h2>
+                <h2>Ver información de la Tarjeta de Aprendizaje</h2>
                 {card && cardLayoud()}
             </div>
         </>
