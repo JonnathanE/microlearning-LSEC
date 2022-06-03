@@ -67,7 +67,7 @@ const LoginUser = () => {
             </div>
 
             <div className='text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión' aria-label='iniciar sesion' />
+                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión' aria-label='iniciar sesion' data-testid='form-login-button' />
             </div>
 
             <div className="login-or">

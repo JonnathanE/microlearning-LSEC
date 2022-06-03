@@ -17,21 +17,21 @@ const DashBoard = () => {
                     <div className='col-6'>
                         <ul>
                             <li className='fw-bold bg-info text-dark'>Gestión de Módulos</li>
-                            <ul className='list-group list-group-flush'>
+                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-module">
                                 <NavLink to='/admin/showmodules' className='list-group-item'><FaTable /> Listar módulos</NavLink>
                                 <NavLink to='/admin/module/create' className='list-group-item'><FaPlus /> Crear módulo</NavLink>
                             </ul>
                         </ul>
                         <ul>
                             <li className='fw-bold bg-info text-dark'>Gestión de Lecciones</li>
-                            <ul className='list-group list-group-flush'>
+                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-lesson">
                                 <NavLink to='/admin/showlessons' className='list-group-item'><FaListAlt /> Listar lecciones</NavLink>
                                 <NavLink to='/admin/lesson/create' className='list-group-item'><FaPlus /> Crear lecciones</NavLink>
                             </ul>
                         </ul>
                         <ul>
                             <li className='fw-bold bg-info text-dark'>Gestión de Microcontenido</li>
-                            <ul className='list-group list-group-flush'>
+                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-micro">
                                 <NavLink to='/admin/showmicrolearnings' className='list-group-item'><FaListUl /> Listar microcontenido</NavLink>
                                 <NavLink to='/admin/micro/create' className='list-group-item'><FaPlus /> Crear microcontenido</NavLink>
                             </ul>

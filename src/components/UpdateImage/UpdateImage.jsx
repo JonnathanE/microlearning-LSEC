@@ -70,7 +70,7 @@ const UpdateImage = ({ content }) => {
                 <input type='file' accept='image/*' {...register('image')} id='imageFile' className='form-control' />
                 {errors.image && errorValidator(errors.image.message)}
             </div>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Actualizar Imagen' />
         </form>
     )
 

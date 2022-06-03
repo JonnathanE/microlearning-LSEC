@@ -72,7 +72,7 @@ const LoginAdmin = () => {
                 <input type="password" {...register('password')} className='form-control' aria-label='password' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
-            <input type='submit' className="btn btn-primary" aria-label='iniciar sesion' />
+            <input type='submit' className="btn btn-primary" aria-label='iniciar sesion' data-testid='form-login-admin-button' />
         </form>
     )
 
