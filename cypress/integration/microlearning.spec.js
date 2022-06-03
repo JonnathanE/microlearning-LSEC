@@ -156,7 +156,7 @@ describe('Microlearning', () => {
         cy.contains('¡La imágen se actualizó correctamente!')
     });
 
-    it.only('CP39 delete lesson', () => {
+    it('CP39 delete lesson', () => {
         cy.createMicro({ titleMicro: "Micro 01" })
         cy.contains('PANEL ADMIN')
         // go to list all lessons

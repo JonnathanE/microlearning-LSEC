@@ -21,10 +21,10 @@ const AddCard = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        question: yup.string().required('El nombre de la lección es requerido'),
-        lesson: yup.string().ensure().required('Debe de elegir un módulo'),
-        correctAnswer: yup.string().ensure().required('La respuesta correcta es requerido'),
-        wrongAnswer: yup.string().ensure().required('La respuesta incorrecta es requerido'),
+        question: yup.string().required('Necesita ingrear una pregunta de la tarjeta'),
+        lesson: yup.string().ensure().required('Debe de elegir la lección a la que pertenece'),
+        correctAnswer: yup.string().ensure().required('Debe de ingresar la respuesta correcta a evaluar'),
+        wrongAnswer: yup.string().ensure().required('Debe de ingresar una respuesta incorrecta o alterantiva'),
         gif: yup.mixed().test("fileSize", "El gif debe ser 9 MB", (value) => {
             if (value.length === 0) return false;
             return value[0].size <= 9000000;
@@ -48,7 +48,7 @@ const AddCard = () => {
         try {
             await addCard(formData);
             setLoading(false);
-            MySwal.fire('¡Prueba creado con éxito!', '', 'success');
+            MySwal.fire('¡Tarjeta creada con éxito!', '', 'success');
             reset({
                 question: '',
                 lesson: 'Selecciona una lección',

@@ -1,4 +1,4 @@
-describe('LSEC App', () => {
+describe('Auth', () => {
 
     beforeEach(() => {
         cy.visit('http://localhost:3000/')

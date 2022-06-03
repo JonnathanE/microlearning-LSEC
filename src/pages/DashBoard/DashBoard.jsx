@@ -38,7 +38,7 @@ const DashBoard = () => {
                         </ul>
                         <ul>
                             <li className='fw-bold bg-info text-dark'>Gestión de Pruebas</li>
-                            <ul className='list-group list-group-flush'>
+                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-card">
                                 <NavLink to='/admin/showcards' className='list-group-item'><FaList /> Listar pruebas</NavLink>
                                 <NavLink to='/admin/card/create' className='list-group-item'><FaPlus /> Crear pruebas</NavLink>
                             </ul>

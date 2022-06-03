@@ -26,10 +26,10 @@ const UpdateCard = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        question: yup.string().required('El nombre de la lección es requerido'),
+        question: yup.string().required('Requiere ingresar una pregunta'),
         lesson: yup.string().ensure().required('Debe de elegir una lección'),
-        correctAnswer: yup.string().ensure().required('La respuesta correcta es requerido'),
-        wrongAnswer: yup.string().ensure().required('La respuesta incorrecta es requerido'),
+        correctAnswer: yup.string().ensure().required('Requiere ingresar la respuesta correcta a evaluar'),
+        wrongAnswer: yup.string().ensure().required('Requiere ingresar la respuesta incorrecta a evaluar'),
     });
 
     // initialize the React Hook Form methods
@@ -49,7 +49,7 @@ const UpdateCard = () => {
                 try {
                     await updateCard(card._id, data);
                     setLoading(false);
-                    MySwal.fire('¡El Microcontenido se actualizó correctamente!', '', 'success');
+                    MySwal.fire('¡La tarjeta se actualizó correctamente!', '', 'success');
                 } catch (error) {
                     setLoading(false);
                     MySwal.fire({

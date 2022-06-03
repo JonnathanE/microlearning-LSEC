@@ -54,12 +54,20 @@ const Section = ({ moduleId, completeLesson }) => {
                                 />
                                 <p className='title-lesson fw-bold mt-3'>{lesson.name}</p>
                             </div>
-                            <button className='rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark'
-                                onClick={(e) => clicKLesson(lesson._id, e)}>Aprender</button>
-                            <button className={completeLesson.find(element => element === lesson._id)
-                                ? `rounded-pill p-2 mb-3 mb-lg-1 my-contend-complete text-white`
-                                : `rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark`}
-                                onClick={(e) => clicKPractice(lesson._id, e)}>Practicar</button>
+                            <button
+                                className='rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark'
+                                onClick={(e) => clicKLesson(lesson._id, e)}
+                                data-testid='btn-user-learn'>
+                                Aprender
+                            </button>
+                            <button
+                                className={completeLesson.find(element => element === lesson._id)
+                                    ? `rounded-pill p-2 mb-3 mb-lg-1 my-contend-complete text-white`
+                                    : `rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark`}
+                                onClick={(e) => clicKPractice(lesson._id, e)}
+                                data-testid='btn-user-practice'>
+                                Practicar
+                            </button>
                         </div>
                     ))
                 }
