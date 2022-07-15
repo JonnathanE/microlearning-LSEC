@@ -127,3 +127,32 @@ describe('Login Admin', () => {
 
 });
 
+describe('Cerrar sesión', () => {
+    beforeEach(() => {
+        cy.request('POST', 'http://localhost:5000/api/testing/reset')
+
+        const admin = {
+            name: 'jonnathan',
+            email: 'jonnathan@gmail.com',
+            password: '1234',
+            roles: [
+                'student',
+                'admin'
+            ]
+        }
+
+        cy.request('POST', 'http://localhost:5000/api/auth/signup', admin)
+
+        cy.loginAdmin({ email: admin.email, password: admin.password })
+
+        cy.visit('http://localhost:3000/learn')
+    })
+
+    it('CP55 cerrar sesion', () => {
+        cy.contains('jonnathan')
+        cy.get('ul').eq(1).click()
+        cy.get('a[data-testid="navbar-user-cerrar-sesion"]').click()
+        cy.contains('Iniciar Sesión')
+    });
+
+});

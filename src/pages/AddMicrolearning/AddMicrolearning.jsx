@@ -90,7 +90,7 @@ const AddMicrolearning = () => {
     const signInForm = () => (
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
-                <label className="text-muted">Título del Microcontenido</label>
+                <label className="text-muted">Título de la Cápsulas de Aprendizaje</label>
                 <input type="text" {...register('title')} className='form-control' data-testid='inputTitle' />
                 {errors.title && errorValidator(errors.title.message)}
             </div>
@@ -134,7 +134,7 @@ const AddMicrolearning = () => {
             <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
-                    <h2 className='text-center mt-2'>Crear nuevo Microcontenido</h2>
+                    <h2 className='text-center mt-2'>Crear Cápsulas de Aprendizaje</h2>
                 </div>
                 <div className='row'>
                     {showLoading()}

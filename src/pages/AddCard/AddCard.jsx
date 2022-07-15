@@ -144,7 +144,7 @@ const AddCard = () => {
                         <div className='myform form shadow p-3 mb-5 bg-body rounded'>
                             <div className="logo mb-3">
                                 <div className="col-md-12 text-center">
-                                    <h1>Crear Tarjeta de Aprendizaje</h1>
+                                    <h1>Crear Tarjetas de Aprendizaje</h1>
                                 </div>
                             </div>
                             {showLoading()}

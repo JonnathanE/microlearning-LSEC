@@ -1,4 +1,4 @@
-describe('Card', () => {
+describe('Learn', () => {
     beforeEach(() => {
         cy.createContent({ nameLesson: 'Frutas' })
         cy.visit('http://localhost:3000/learn')

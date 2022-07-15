@@ -54,7 +54,7 @@ const Navigation = () => {
                                         <li><hr className="dropdown-divider" /></li>
                                         */}
                                         <li><Link to=''
-                                            onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link>
+                                            onClick={auth.logout} className="dropdown-item" data-testid='navbar-user-cerrar-sesion'><FaSignOutAlt /> Cerrar Sesión</Link>
                                         </li>
                                     </ul>
 

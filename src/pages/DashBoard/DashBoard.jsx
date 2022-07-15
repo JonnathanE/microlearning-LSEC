@@ -30,17 +30,17 @@ const DashBoard = () => {
                             </ul>
                         </ul>
                         <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Microcontenido</li>
+                            <li className='fw-bold bg-info text-dark'>Gestión de Cápsulas de Aprendizaje</li>
                             <ul className='list-group list-group-flush' data-testid="nav-admin-list-micro">
-                                <NavLink to='/admin/showmicrolearnings' className='list-group-item'><FaListUl /> Listar microcontenido</NavLink>
-                                <NavLink to='/admin/micro/create' className='list-group-item'><FaPlus /> Crear microcontenido</NavLink>
+                                <NavLink to='/admin/showmicrolearnings' className='list-group-item'><FaListUl /> Listar Cápsulas de Aprendizaje</NavLink>
+                                <NavLink to='/admin/micro/create' className='list-group-item'><FaPlus /> Crear Cápsulas de Aprendizaje</NavLink>
                             </ul>
                         </ul>
                         <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Pruebas</li>
+                            <li className='fw-bold bg-info text-dark'>Gestión de Tarjetas de Aprendizaje</li>
                             <ul className='list-group list-group-flush' data-testid="nav-admin-list-card">
-                                <NavLink to='/admin/showcards' className='list-group-item'><FaList /> Listar pruebas</NavLink>
-                                <NavLink to='/admin/card/create' className='list-group-item'><FaPlus /> Crear pruebas</NavLink>
+                                <NavLink to='/admin/showcards' className='list-group-item'><FaList /> Listar Tarjetas de Aprendizaje</NavLink>
+                                <NavLink to='/admin/card/create' className='list-group-item'><FaPlus /> Crear Tarjetsa de Aprendizaje</NavLink>
                             </ul>
                         </ul>
                         <ul>
