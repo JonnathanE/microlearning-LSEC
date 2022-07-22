@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -70,7 +70,7 @@ const UpdateImage = ({ content }) => {
                 <input type='file' accept='image/*' {...register('image')} id='imageFile' className='form-control' />
                 {errors.image && errorValidator(errors.image.message)}
             </div>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Actualizar Imagen' />
         </form>
     )
 

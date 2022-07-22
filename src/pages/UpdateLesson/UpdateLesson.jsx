@@ -101,7 +101,7 @@ const UpdateLesson = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
                 <label className="text-muted">Nombre de la lección</label>
-                <input type="text" {...register('name')} defaultValue={lesson.name} className='form-control' />
+                <input type="text" {...register('name')} defaultValue={lesson.name} className='form-control' data-testid='inputName' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
             <div className='form-group'>
@@ -119,7 +119,7 @@ const UpdateLesson = () => {
             <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
             </NavLink>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value="Actualizar" />
         </form>
     )
 

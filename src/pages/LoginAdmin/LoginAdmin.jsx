@@ -64,15 +64,15 @@ const LoginAdmin = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
                 <label className="text-muted">Email</label>
-                <input type="email" {...register('email')} className='form-control' />
+                <input type="email" {...register('email')} className='form-control' aria-label='email' />
                 {errors.email && errorValidator(errors.email.message)}
             </div>
             <div className="form-group mb-3">
                 <label className="text-muted">Password</label>
-                <input type="password" {...register('password')} className='form-control' />
+                <input type="password" {...register('password')} className='form-control' aria-label='password' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" aria-label='iniciar sesion' data-testid='form-login-admin-button' />
         </form>
     )
 

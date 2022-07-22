@@ -71,7 +71,7 @@ const UpdateGifCard = ({ content }) => {
                 <input type='file' accept='image/*' {...register('gif')} id='gifFile' className='form-control' />
                 {errors.gif && errorValidator(errors.gif.message)}
             </div>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Actualizar Gif' />
         </form>
     )
 

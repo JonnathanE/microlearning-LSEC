@@ -21,10 +21,10 @@ const AddCard = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        question: yup.string().required('El nombre de la lección es requerido'),
-        lesson: yup.string().ensure().required('Debe de elegir un módulo'),
-        correctAnswer: yup.string().ensure().required('La respuesta correcta es requerido'),
-        wrongAnswer: yup.string().ensure().required('La respuesta incorrecta es requerido'),
+        question: yup.string().required('Necesita ingrear una pregunta de la tarjeta'),
+        lesson: yup.string().ensure().required('Debe de elegir la lección a la que pertenece'),
+        correctAnswer: yup.string().ensure().required('Debe de ingresar la respuesta correcta a evaluar'),
+        wrongAnswer: yup.string().ensure().required('Debe de ingresar una respuesta incorrecta o alterantiva'),
         gif: yup.mixed().test("fileSize", "El gif debe ser 9 MB", (value) => {
             if (value.length === 0) return false;
             return value[0].size <= 9000000;
@@ -48,7 +48,7 @@ const AddCard = () => {
         try {
             await addCard(formData);
             setLoading(false);
-            MySwal.fire('¡Prueba creado con éxito!', '', 'success');
+            MySwal.fire('¡Tarjeta creada con éxito!', '', 'success');
             reset({
                 question: '',
                 lesson: 'Selecciona una lección',
@@ -93,7 +93,7 @@ const AddCard = () => {
         <form onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
                 <label className="text-muted">Pregunta</label>
-                <input type="text" {...register('question')} className='form-control' />
+                <input type="text" {...register('question')} className='form-control' data-testid='inputQuestion' />
                 {errors.question && errorValidator(errors.question.message)}
             </div>
             <div className='form-group'>
@@ -108,12 +108,12 @@ const AddCard = () => {
             </div>
             <div className="form-group">
                 <label className="text-muted">Restpuesta correcta</label>
-                <input type="text" {...register('correctAnswer')} className='form-control' />
+                <input type="text" {...register('correctAnswer')} className='form-control' data-testid='inputCorrectAnswer' />
                 {errors.correctAnswer && errorValidator(errors.correctAnswer.message)}
             </div>
             <div className="form-group">
                 <label className="text-muted">Respuesta incorrecta</label>
-                <input type="text" {...register('wrongAnswer')} className='form-control' />
+                <input type="text" {...register('wrongAnswer')} className='form-control' data-testid='inputWrongAnswer' />
                 {errors.wrongAnswer && errorValidator(errors.wrongAnswer.message)}
             </div>
             <div className='form-group mb-3'>
@@ -125,7 +125,7 @@ const AddCard = () => {
             <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
             </NavLink>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Crear' />
         </form>
     )
 
@@ -144,7 +144,7 @@ const AddCard = () => {
                         <div className='myform form shadow p-3 mb-5 bg-body rounded'>
                             <div className="logo mb-3">
                                 <div className="col-md-12 text-center">
-                                    <h1>Crear Prueba</h1>
+                                    <h1>Crear Tarjetas de Aprendizaje</h1>
                                 </div>
                             </div>
                             {showLoading()}

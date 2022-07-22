@@ -103,7 +103,7 @@ const UpdateMicrolearning = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
                 <label className="text-muted">Título del Microcontenio</label>
-                <input type="text" {...register('title')} defaultValue={microlearning.title} className='form-control' />
+                <input type="text" {...register('title')} defaultValue={microlearning.title} className='form-control' data-testid='inputTitle' />
                 {errors.title && errorValidator(errors.title.message)}
             </div>
             <div className='form-group'>
@@ -121,7 +121,7 @@ const UpdateMicrolearning = () => {
             <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
             </NavLink>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Actualizar' />
         </form>
     )
 

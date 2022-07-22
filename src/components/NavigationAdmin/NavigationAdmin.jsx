@@ -39,29 +39,29 @@ const NavigationAdmin = () => {
                                 </ul>
                             </li>
                             <li className='nav-item dropdown'>
-                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaSignLanguage /> Microcontenido</NavLink>
+                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaSignLanguage /> Cápsulas de Aprendizaje</NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
-                                    <li><NavLink to='/admin/micro/create' className="dropdown-item"><FaPlus /> Crear Microcontenido</NavLink></li>
+                                    <li><NavLink to='/admin/micro/create' className="dropdown-item"><FaPlus /> Crear Cápsulas de Aprendizaje</NavLink></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><NavLink to='/admin/showmicrolearnings' className="dropdown-item"><FaList /> Listar todos los Microcontenidos</NavLink></li>
+                                    <li><NavLink to='/admin/showmicrolearnings' className="dropdown-item"><FaList /> Listar Cápsulas de Aprendizaje</NavLink></li>
                                 </ul>
                             </li>
                             <li className='nav-item dropdown'>
-                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaAmericanSignLanguageInterpreting /> Pruebas</NavLink>
+                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false"><FaAmericanSignLanguageInterpreting /> Tarjeta de Aprendizaje</NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
-                                    <li><NavLink to='/admin/card/create' className="dropdown-item"><FaPlus /> Crear Prueba</NavLink></li>
+                                    <li><NavLink to='/admin/card/create' className="dropdown-item"><FaPlus /> Crear Tarjetas de Aprendizaje</NavLink></li>
                                     <li><hr className="dropdown-divider" /></li>
-                                    <li><NavLink to='/admin/showcards' className="dropdown-item"><FaList /> Listar todas las pruebas</NavLink></li>
+                                    <li><NavLink to='/admin/showcards' className="dropdown-item"><FaList /> Listar Tarjetas de Aprendizaje</NavLink></li>
                                 </ul>
                             </li>
                         </ul>
                         <ul className='nav navbar-nav navbar-right'>
                             <li className='nav-item dropdown'>
-                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">{auth.user.name} <FaUserCircle /></NavLink>
+                                <NavLink exact to='' className='nav-link dropdown-toggle' id="dropdownModulos" data-bs-toggle="dropdown" aria-expanded="false">{auth?.user.name} <FaUserCircle /></NavLink>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownModulos">
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><Link to=''
-                                        onClick={auth.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
+                                        onClick={auth?.logout} className="dropdown-item"><FaSignOutAlt /> Cerrar Sesión</Link></li>
                                 </ul>
                             </li>
                         </ul>

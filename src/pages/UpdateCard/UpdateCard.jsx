@@ -26,10 +26,10 @@ const UpdateCard = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        question: yup.string().required('El nombre de la lección es requerido'),
+        question: yup.string().required('Requiere ingresar una pregunta'),
         lesson: yup.string().ensure().required('Debe de elegir una lección'),
-        correctAnswer: yup.string().ensure().required('La respuesta correcta es requerido'),
-        wrongAnswer: yup.string().ensure().required('La respuesta incorrecta es requerido'),
+        correctAnswer: yup.string().ensure().required('Requiere ingresar la respuesta correcta a evaluar'),
+        wrongAnswer: yup.string().ensure().required('Requiere ingresar la respuesta incorrecta a evaluar'),
     });
 
     // initialize the React Hook Form methods
@@ -49,7 +49,7 @@ const UpdateCard = () => {
                 try {
                     await updateCard(card._id, data);
                     setLoading(false);
-                    MySwal.fire('¡El Microcontenido se actualizó correctamente!', '', 'success');
+                    MySwal.fire('¡La tarjeta se actualizó correctamente!', '', 'success');
                 } catch (error) {
                     setLoading(false);
                     MySwal.fire({
@@ -104,7 +104,7 @@ const UpdateCard = () => {
         <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
             <div className="form-group">
                 <label className="text-muted">Pregunta</label>
-                <input type="text" {...register('question')} defaultValue={card.question} className='form-control' />
+                <input type="text" {...register('question')} defaultValue={card.question} className='form-control' data-testid='inputQuestion' />
                 {errors.question && errorValidator(errors.question.message)}
             </div>
             <div className='form-group'>
@@ -119,12 +119,12 @@ const UpdateCard = () => {
             </div>
             <div className="form-group">
                 <label className="text-muted">Restpuesta correcta</label>
-                <input type="text" {...register('correctAnswer')} defaultValue={card.correctAnswer} className='form-control' />
+                <input type="text" {...register('correctAnswer')} defaultValue={card.correctAnswer} className='form-control' data-testid='inputCorrectAnswer' />
                 {errors.correctAnswer && errorValidator(errors.correctAnswer.message)}
             </div>
             <div className="form-group">
                 <label className="text-muted">Respuesta incorrecta</label>
-                <input type="text" {...register('wrongAnswer')} defaultValue={card.wrongAnswer} className='form-control' />
+                <input type="text" {...register('wrongAnswer')} defaultValue={card.wrongAnswer} className='form-control' data-testid='inputWrongAnswer' />
                 {errors.wrongAnswer && errorValidator(errors.wrongAnswer.message)}
             </div>
             <div className="form-group mb-3">
@@ -132,7 +132,7 @@ const UpdateCard = () => {
             <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
             </NavLink>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value='Actualizar' />
         </form>
     )
 
@@ -147,7 +147,7 @@ const UpdateCard = () => {
             <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
-                    <h2 className='text-center mt-2'>Actualizar Prueba</h2>
+                    <h2 className='text-center mt-2'>Actualizar Tarjeta de Aprendizaje</h2>
                 </div>
                 <div className='row'>
                     {showLoading()}

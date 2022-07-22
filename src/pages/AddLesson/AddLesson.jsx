@@ -86,12 +86,12 @@ const AddLesson = () => {
             <div className='form-group'>
                 <label className='form-label' htmlFor="iconFile">Icono
                 </label>
-                <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='form-control' />
+                <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='form-control' data-testid='inputFileIcon' />
                 {errors.icon && errorValidator(errors.icon.message)}
             </div>
             <div className="form-group">
                 <label className="text-muted">Nombre de la lección</label>
-                <input type="text" {...register('name')} className='form-control' />
+                <input type="text" {...register('name')} className='form-control' data-testid='inputName' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
             <div className='form-group'>
@@ -110,7 +110,7 @@ const AddLesson = () => {
             <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
             </NavLink>
-            <input type='submit' className="btn btn-primary" />
+            <input type='submit' className="btn btn-primary" value="Crear" />
         </form>
     )
 

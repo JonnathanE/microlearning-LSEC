@@ -58,22 +58,22 @@ const Signup = () => {
 
             <div className="form-group mb-3">
                 <label className="text-muted">Nombre</label>
-                <input type="text" {...register('name')} className='form-control' />
+                <input type="text" {...register('name')} className='form-control' data-testid='name' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
             <div className="form-group mb-3">
                 <label className="text-muted">Email</label>
-                <input type="email" {...register('email')} className='form-control' />
+                <input type="email" {...register('email')} className='form-control' data-testid='email' />
                 {errors.email && errorValidator(errors.email.message)}
             </div>
             <div className="form-group mb-3">
                 <label className="text-muted">Password</label>
-                <input type="password" {...register('password')} className='form-control' />
+                <input type="password" {...register('password')} className='form-control' data-testid='password' />
                 {errors.password && errorValidator(errors.password.message)}
             </div>
 
             <div className='text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Registrate' />
+                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Registrate' data-testid='btnSubmit' />
             </div>
 
             <div className="login-or">
@@ -81,7 +81,7 @@ const Signup = () => {
                 <span className="span-or"> O </span>
             </div>
             <div className="form-group">
-                <p className="text-center">¿Tienes una cuenta? <NavLink to='/signin' id="signup">Inicia sesión</NavLink></p>
+                <p data-testid='linkLogin' className="text-center">¿Tienes una cuenta? <NavLink to='/signin' id="signup">Inicia sesión</NavLink></p>
             </div>
 
         </form>
