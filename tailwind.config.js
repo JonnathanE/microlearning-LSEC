@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -25,7 +26,8 @@ module.exports = {
         '13': '3.25rem',
       },
       boxShadow: {
-        primary: '0px 9.9px 21.6px rgba(39, 245, 226, 0.41)'
+        primary: '0px 9.9px 21.6px rgba(39, 245, 226, 0.41)',
+        secondary: '0px 9.9px 21.6px rgba(255, 255, 255, 0.41)'
       }
     },
   },

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
+import ToggleDarkMode from '../../components/ToggleDarkMode/ToggleDarkMode';
 
 import logoFenasec from '../../img/logo_fenasec.png';
 import logoAscLoja from '../../img/asociacion-sordos-loja.jpg';
@@ -10,7 +11,7 @@ import starIcon from '../../img/star.svg';
 
 const Content = styled.div`
     ${tw`
-            w-full min-h-screen font-sans text-gray-900 
+            w-full min-h-screen font-sans text-gray-900 dark:bg-gray-800
         `
     }
     ${({ active }) => active ? tw`overflow-hidden h-screen` : tw``}
@@ -56,13 +57,13 @@ const LandingPage = () => {
         <Content active={sidebarOpen}>
 
             <nav className='flex justify-between items-center py-8 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24'>
-                <NavLink exact to='/learn' className='text-3xl md:text-4xl font-bold tracking-wide'>
+                <NavLink exact to='/learn' className='text-3xl md:text-4xl font-bold tracking-wide dark:text-white'>
                     LS<span className='text-bookmark-cyan-500'>EC</span>
                 </NavLink>
-                <NavMenu active={sidebarOpen} className='bg-withe/70 backdrop-blur-xl'>
-                    <ul className='flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8'>
+                <NavMenu active={sidebarOpen} className='bg-withe/70 backdrop-blur-xl dark:bg-gray-800/90'>
+                    <ul className='flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8 dark:text-white'>
                         {itemsMenu.map((item, index) => (
-                            <NavItem key={index} active={activeMenu === item} className='group'>
+                            <NavItem key={index} active={activeMenu === item.label} className='group'>
                                 <NavLink to={item.link}>{item.label}</NavLink>
                                 <div className='h-0.5 bg-bookmark-cyan-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out'></div>
                             </NavItem>
@@ -71,9 +72,10 @@ const LandingPage = () => {
                     <NavLink to='/signin' className='flex justify-center items-center h-13 px-7 font-medium text-white bg-bookmark-cyan-500 rounded-xl hover:shadow-primary transition-shadow duration-300 whitespace-nowrap'>
                         Iniciar sesión
                     </NavLink>
+                    <ToggleDarkMode />
                 </NavMenu>
                 <button onClick={() => setSidebarOpen(!sidebarOpen)} className="block md:hidden relative z-30">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 fill-current text-gray-900">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 fill-current text-gray-900 dark:text-white">
                         <rect x="4" y="6" width="7" height="2" rx="1" />
                         <rect x="13" y="16" width="7" height="2" rx="1" />
                         <rect x="4" y="11" width="16" height="2" rx="1" />
@@ -85,11 +87,11 @@ const LandingPage = () => {
 
                 <div className='relative z-10 md:w-1/2 w-full'>
                     <span className='font-medium px-1 text-xl text-bookmark-cyan-500'>Ahora de aprender algo nuevo</span>
-                    <h1 className='pt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight whitespace-nowrap'>
+                    <h1 className='pt-4 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tighter leading-tight whitespace-nowrap dark:text-white'>
                         Aprende <br />Lengua de Señas <br />Ecuatoriana
                         {/* <span className='whitespace-nowrap text-bookmark-cyan-500'> Lengua de Señas <br />Ecuatoriana<br /></span> */}
                     </h1>
-                    <p className='pt-8 sm:text-lg max-w-md font-normal text-gray-600 leading-relaxed'>
+                    <p className='pt-8 sm:text-lg max-w-md font-normal text-gray-600 dark:text-gray-400 leading-relaxed'>
                         Aprende vocavulario básico de lengua de señas mediante cápsulas de aprendizaje
                     </p>
                     <div className="flex pt-8 space-x-4 sm:space-x-6">
@@ -99,7 +101,7 @@ const LandingPage = () => {
                             Iniciar sesión
                         </NavLink>
                         <NavLink to='/signup'
-                            className="flex justify-center items-center w-full sm:w-auto h-13 px-8 font-medium text-gray-900 border border-gray-900 rounded-xl whitespace-nowrap hover:shadow-xl transition-shadow duration-300"
+                            className="flex justify-center items-center w-full sm:w-auto h-13 px-8 font-medium text-gray-900 dark:text-white border border-gray-900 dark:border-white rounded-xl whitespace-nowrap hover:shadow-xl dark:hover:shadow-secondary transition-shadow duration-300"
                         >
                             Crear cuenta
                         </NavLink>
@@ -107,15 +109,15 @@ const LandingPage = () => {
                     <div className="flex pt-20">
                         {/* <img className="w-24" src="/img/chef.png" alt="" /> */}
                         <div className="pt-5 pl-3">
-                            <div className="text-xl font-bold leading-relaxed">Vocavulario y frases</div>
-                            <div className="inline-flex text-gray-600 leading-relaxed">
+                            <div className="text-xl font-bold leading-relaxed dark:text-white">Vocavulario y frases</div>
+                            <div className="inline-flex text-gray-600 dark:text-gray-400 leading-relaxed">
                                 A la gente le gusta aprender algo nuevo
                             </div>
                             <div className="font-bold text-bookmark-cyan-500 leading-relaxed">80+ palabras</div>
                         </div>
                     </div>
                     <div>
-                        <div className="flex md:hidden pt-8 justify-end space-x-1 font-bold">
+                        <div className="flex md:hidden pt-8 justify-end space-x-1 font-bold dark:text-white">
                             <span>Creado por JEDE</span>
                         </div>
                     </div>
@@ -152,7 +154,7 @@ const LandingPage = () => {
                         </div>
                     </div>
 
-                    <div className="hidden md:flex justify-end space-x-1 font-bold">
+                    <div className="hidden md:flex justify-end space-x-1 font-bold dark:text-white">
                         <span>Creado por JEDE</span>
                     </div>
 
