@@ -24,6 +24,7 @@ module.exports = {
       },
       spacing: {
         '13': '3.25rem',
+        '4.5': '1.125rem'
       },
       boxShadow: {
         primary: '0px 9.9px 21.6px rgba(39, 245, 226, 0.41)',
@@ -31,5 +32,7 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }
