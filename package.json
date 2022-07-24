@@ -26,6 +26,7 @@
     "reactstrap": "^8.9.0",
     "sweetalert2": "^11.0.19",
     "sweetalert2-react-content": "^4.1.0",
+    "twin.macro": "^2.8.2",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
