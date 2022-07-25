@@ -9,7 +9,9 @@ import useAuth from '../../auth/useAuth';
 import Loader from '../../components/Loader/Loader';
 import Modal from '../../components/Modal/Modal';
 import Alert from '../../components/Alert/Alert';
-import ToggleDarkMode from '../../components/ToggleDarkMode/ToggleDarkMode';
+import { useLottie } from "lottie-react";
+import animationBg from '../../animation/107800-login-leady.json';
+// import ToggleDarkMode from '../../components/ToggleDarkMode/ToggleDarkMode';
 
 import { AiOutlineUser } from 'react-icons/ai';
 import backgroundLsec from '../../img/logo_lsec.png';
@@ -40,6 +42,13 @@ const Signup = () => {
     const history = useHistory();
     const location = useLocation();
     const previusObjectUrl = location.state?.from;
+
+    // lottie configuration
+    const options = {
+        animationData: animationBg,
+        loop: true
+    };
+    const { View } = useLottie(options);
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
@@ -124,16 +133,18 @@ const Signup = () => {
 
             {showLoading()}
 
-            <div className='hidden relative w-1/2 bg-center bg-no-repeat lg:block' style={{ backgroundImage: `url(${backgroundLsec})` }}></div>
+            <div className='hidden relative w-1/2 bg-center bg-no-repeat lg:flex text-center' style={{ backgroundImage: `url(${backgroundLsec})` }}>
+                {View}
+            </div>
 
             <div className='flex-1 mx-auto max-w-2xl'>
                 <div className='flex flex-col px-8 pt-10 lg:px-14 xl:px-24'>
                     <NavLink exact to='/' className='text-3xl md:text-4xl font-bold tracking-wide dark:text-white self-center md:self-end'>
                         LS<span className='text-bookmark-cyan-500'>EC</span>
                     </NavLink>
-                    <div className='pt-5 self-center md:self-end'>
+                    {/* <div className='pt-5 self-center md:self-end'>
                         <ToggleDarkMode />
-                    </div>
+                    </div> */}
                     <div className='pt-20 pb-6'>
                         <h1 className="text-3xl font-bold tracking-wide leading-loose whitespace-nowrap">
                             A registrarnos!

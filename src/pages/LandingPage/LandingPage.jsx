@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import tw, { styled } from 'twin.macro';
-import ToggleDarkMode from '../../components/ToggleDarkMode/ToggleDarkMode';
+import Navbar from '../../components/Navbar/Navbar';
 
 import logoFenasec from '../../img/logo_fenasec.png';
 import logoAscLoja from '../../img/asociacion-sordos-loja.jpg';
@@ -17,71 +16,16 @@ const Content = styled.div`
     ${({ active }) => active ? tw`overflow-hidden h-screen` : tw``}
 `;
 
-const NavMenu = styled.div`
-    ${tw`
-            inset-0 transition-all z-20 md:static md:bg-transparent md:flex items-center justify-center space-y-8 md:space-y-0 md:space-x-8 flex-col md:flex-row lg:space-x-14
-        `
-    }
-    ${({ active }) => active ? tw`fixed flex` : tw`hidden`}
-`;
-
-const NavItem = styled.li`
-    ${tw`
-            text-lg md:text-base lg:text-lg font-medium
-        `
-    }
-    ${({ active }) => active && tw`text-bookmark-cyan-500`}
-`;
-
 const ImagesCardContainer = tw.div`
     w-13 h-13 rounded-full border-4 border-white object-cover overflow-hidden
 `;
 
 const LandingPage = () => {
 
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
-    const activeMenu = "Home";
-    const itemsMenu = [
-        {
-            label: "Home",
-            link: "/"
-        },
-        {
-            label: "Crear cuenta",
-            link: "/signup"
-        }
-    ];
-
     return (
-        <Content active={sidebarOpen}>
+        <Content active={false}>
 
-            <nav className='flex justify-between items-center py-8 px-6 mx-auto max-w-screen-xl md:px-12 lg:px-16 xl:px-24'>
-                <NavLink exact to='/learn' className='text-3xl md:text-4xl font-bold tracking-wide dark:text-white'>
-                    LS<span className='text-bookmark-cyan-500'>EC</span>
-                </NavLink>
-                <NavMenu active={sidebarOpen} className='bg-withe/70 backdrop-blur-xl dark:bg-gray-800/90'>
-                    <ul className='flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8 dark:text-white'>
-                        {itemsMenu.map((item, index) => (
-                            <NavItem key={index} active={activeMenu === item.label} className='group'>
-                                <NavLink to={item.link}>{item.label}</NavLink>
-                                <div className='h-0.5 bg-bookmark-cyan-500 scale-x-0 group-hover:scale-100 transition-transform origin-left rounded-full duration-300 ease-out'></div>
-                            </NavItem>
-                        ))}
-                    </ul>
-                    <NavLink to='/signin' className='flex justify-center items-center h-13 px-7 font-medium text-white bg-bookmark-cyan-500 rounded-xl hover:shadow-primary transition-shadow duration-300 whitespace-nowrap'>
-                        Iniciar sesión
-                    </NavLink>
-                    <ToggleDarkMode />
-                </NavMenu>
-                <button onClick={() => setSidebarOpen(!sidebarOpen)} className="block md:hidden relative z-30">
-                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-8 fill-current text-gray-900 dark:text-white">
-                        <rect x="4" y="6" width="7" height="2" rx="1" />
-                        <rect x="13" y="16" width="7" height="2" rx="1" />
-                        <rect x="4" y="11" width="16" height="2" rx="1" />
-                    </svg>
-                </button>
-            </nav>
+            <Navbar activeMenu="Home" />
 
             <div className='flex flex-wrap-reverse gap-y-24 justify-between py-12 px-6 mx-auto max-w-screen-xl sm:px-8 md:px-12 lg:px-16 xl:px-24'>
 
@@ -157,12 +101,9 @@ const LandingPage = () => {
                     <div className="hidden md:flex justify-end space-x-1 font-bold dark:text-white">
                         <span>Creado por JEDE</span>
                     </div>
-
                 </div>
-
             </div>
         </Content>
-
     )
 }
 
