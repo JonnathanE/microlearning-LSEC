@@ -1,17 +1,25 @@
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import Navigation from '../../components/Navigation/Navigation';
+import tw, { styled } from 'twin.macro';
 import { getModulesHome, getCompleteLearn } from '../../api/apiCallsUser';
 import useAuth from '../../auth/useAuth';
+import Navbar from '../../components/Navbar/Navbar';
 
 import { FaGraduationCap } from "react-icons/fa";
+import starIcon from '../../img/star.svg';
 import Backdrops from '../../components/Backdrops/Backdrops';
 import Section from '../../components/Section/Section';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
-import './home.css';
+const Content = styled.div`
+    ${tw`
+            w-full min-h-screen font-sans text-gray-900 dark:bg-gray-800
+        `
+    }
+    ${({ active }) => active ? tw`overflow-hidden h-screen` : tw``}
+`;
 
 const Home = () => {
 
@@ -66,28 +74,33 @@ const Home = () => {
     )
 
     return (
-        <>
-            <Navigation />
+        <Content active={false}>
+            <Navbar />
             {isFetching && <Backdrops />}
             {error && showError()}
-            <div className='container'>
-                {data &&
-                    data.map(module => (
-                        <div key={module._id}>
-                            <div className='row justify-content-center'>
-                                <div className='col-2 col-sm-2 mt-3'>
-                                    <p className='display-4 number-module rounded-circle text-center'>{module.number}</p>
+
+            <div className='flex flex-wrap-reverse gap-y-24 justify-between py-12 px-6 mx-auto max-w-screen-xl sm:px-8 md:px-12 lg:px-16 xl:px-24'>
+
+                <div className='relative z-10 w-full md:w-3/4'>
+
+                    {data &&
+                        data.map(module => (
+                            <div key={module._id} className='flex flex-col items-center mb-8'>
+                                <div className='relative w-[90px] h-[90px]  rounded-full flex justify-center items-center'>
+                                    <img src={starIcon} alt="" className='absolute' />
+                                    <p className='text-xl font-bold z-10'>{module.number}</p>
                                 </div>
-                            </div>
-                            <div className='row'>
-                                <div className='col-sm-12'>
+                                <div className='w-full lg:max-w-full mt-3 mb-6 px-3 py-6 overflow-hidden  dark:bg-gray-700 border rounded-lg shadow-lg border-gray-300'>
                                     <Section moduleId={module._id} completeLesson={completeLearn} />
                                 </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                </div>
+                <div className='hidden relative w-full md:w-1/4 md:flex flex-col justify-between'>
+                    Caed
+                </div>
             </div>
-        </>
+        </Content>
     )
 }
 
