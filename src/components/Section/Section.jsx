@@ -52,7 +52,7 @@ const Section = ({ moduleId, completeLesson }) => {
         <div className='flex flex-row flex-wrap justify-around'>
             {lessons &&
                 lessons.map(lesson => (
-                    <div key={lesson._id} className='w-32 mb-3 flex flex-col items-center gap-1'>
+                    <div key={lesson._id} className='w-32 mb-10 flex flex-col items-center gap-1'>
                         <LessonWrapper
                             onClick={(e) => clicKLesson(lesson._id, e)}
                         >

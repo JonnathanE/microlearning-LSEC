@@ -107,11 +107,11 @@ const Navbar = ({ activeMenu = "Home" }) => {
                 </ul>
             </NavMenu>
             <div className='hidden md:flex md:flex-row items-center md:space-y-0 md:space-x-1'>
-                <ToggleDarkMode />
                 {auth?.isLogged()
                     ? <UserDropdown />
                     :
                     <>
+                        <ToggleDarkMode />
                         <NavLink to='/signin'
                             className="flex justify-center items-center w-full sm:w-auto h-13 px-3 font-medium text-bookmark-cyan-500 dark:text-white  whitespace-nowrap "
                         >

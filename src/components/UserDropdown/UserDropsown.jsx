@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import useAuth from '../../auth/useAuth';
+import ToggleDarkMode from '../ToggleDarkMode/ToggleDarkMode';
 
 import avatar from '../../img/user-avatar.png';
+import { FaSignOutAlt } from "react-icons/fa";
+import { BsGear } from "react-icons/bs";
+
 
 const UserDropsown = () => {
 
@@ -40,10 +44,13 @@ const UserDropsown = () => {
                                     <NavLink to='/' className="text-bookmark-cyan-500">Ver perfil</NavLink>
                                 </div>
                             </div>
-                            <NavLink to='/' class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50" role="menuitem" tabindex="-1" id="menu-item-0">Configuración</NavLink>
+                            <div className='px-4 py-2'>
+                                <ToggleDarkMode/>
+                            </div>
+                            <NavLink to='/' class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-0"><BsGear/> Configuración</NavLink>
                         </div>
                         <div class="py-1" role="none">
-                            <Link to='' onClick={auth.logout} class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50" role="menuitem" tabindex="-1" id="menu-item-1">Cerrar sesión</Link>
+                            <Link to='' onClick={auth.logout} class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-1"><FaSignOutAlt/> Cerrar sesión</Link>
                         </div>
                     </div>
                 }
