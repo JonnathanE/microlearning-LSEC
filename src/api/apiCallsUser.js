@@ -42,6 +42,12 @@ export const getLearnContent = async (lessonId, page) => {
     return data;
 }
 
+// get learn Content
+export const getAllLearnContent = async (lessonId) => {
+    const { data } = await publicRequest.get(`/home/learn/${lessonId}`);
+    return data;
+}
+
 // add complete learn
 export const addCompleteLearn = async (lessonId, token) => {
     const { data } = await axios({

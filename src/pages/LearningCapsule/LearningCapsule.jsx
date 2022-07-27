@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { NavLink, useParams, Redirect } from 'react-router-dom';
 import { useQuery, useQueryClient } from 'react-query';
 import { getLearnContent, addCompleteLearn } from '../../api/apiCallsUser';
@@ -7,11 +7,12 @@ import Alert from '../../components/Alert/Alert';
 import Backdrops from '../../components/Backdrops/BackdropTW';
 import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import ShowImage from '../../components/ShowImage/ShowImage';
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
 import { styled } from '@mui/material/styles';
+const ShowImage = lazy(() => import('../../components/ShowImage/ShowImage'));
 
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
     height: 10,
@@ -39,7 +40,7 @@ const LearningCapsule = () => {
     const { data, error, isFetching, isPreviousData } = useQuery(
         ["learn", lessonId, page],
         () => getLearnContent(lessonId, page),
-        { keepPreviousData: true, staleTime: 5000 }
+        { keepPreviousData: true, staleTime: 5000, refetchOnWindowFocus: false }
     );
 
 
@@ -119,8 +120,12 @@ const LearningCapsule = () => {
                         {data?.docs[0].title}
                     </h2>
                     <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-around gap-2'>
-                        <ShowImage styles='w-32 h-32 sm:w-72 sm:h-72 rounded-lg' name={data?.docs[0].title} url={data?.docs[0].image_url?.url} />
-                        <ShowImage styles='w-72 h-72 sm:w-96 sm:h-96' name={data?.docs[0].title} url={data?.docs[0].gif_url?.url} />
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ShowImage styles='w-32 h-32 sm:w-72 sm:h-72 rounded-lg' name={data?.docs[0].title} url={data?.docs[0].image_url?.url} />
+                        </Suspense>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ShowImage styles='w-72 h-72 sm:w-96 sm:h-96' name={data?.docs[0].title} url={data?.docs[0].gif_url?.url} />
+                        </Suspense>
                     </div>
                 </>
             }
