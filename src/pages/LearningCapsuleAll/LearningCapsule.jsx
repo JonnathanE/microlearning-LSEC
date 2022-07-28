@@ -35,7 +35,6 @@ const LearningCapsule = () => {
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0)
 
-
     const { data, error, isFetching } = useQuery(
         ["learnAll", lessonId],
         () => getAllLearnContent(lessonId),
@@ -59,7 +58,6 @@ const LearningCapsule = () => {
             await addCompleteLearn(lessonId, auth.user.token);
             setRedirectToReferrer(true);
         } catch (error) {
-            console.log(error)
             if (error.response?.status === 401) {
                 MySwal.fire({
                     title: 'Sesión Acabada',
