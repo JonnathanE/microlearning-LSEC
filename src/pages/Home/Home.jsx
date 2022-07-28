@@ -96,7 +96,7 @@ const Home = () => {
                 </div>
                 <div className='hidden relative w-full md:w-1/4 md:flex flex-col justify-between'>
                     <div className='w-full px-3 py-3 border border-gray-200 rounded-lg drop-shadow-lg'>
-                        <h2 className='font-bold text-start dark:text-white'>Titulo</h2>
+                        <h2 className='font-bold text-start dark:text-white'>"El éxito requiere de persistencia, la habilidad de no rendirse en la cara del fracaso. Creo que el estilo optimista es la llave a la persistencia" (Martin Seligman)</h2>
                     </div>
                 </div>
             </div>

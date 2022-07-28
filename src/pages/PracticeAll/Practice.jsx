@@ -18,7 +18,7 @@ const ShowImage = lazy(() => import('../../components/ShowImage/ShowImage'));
 
 const ButtonCheck = stylesTW.button`
     ${tw`
-    flex justify-center items-center gap-3 w-full sm:w-44 h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300 cursor-pointer
+    flex justify-center items-center gap-3 w-full sm:w-44 h-13 px-8 bg-green-700 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300 cursor-pointer
         `
     }
     ${({ active }) => active ? tw`` : tw`bg-gray-500 cursor-not-allowed`}
@@ -26,7 +26,7 @@ const ButtonCheck = stylesTW.button`
 
 const ContentBottom = stylesTW.div`
     ${tw`
-            bottom-0 fixed w-screen flex flex-col sm:flex-row py-3 px-6 mx-auto max-w-screen-xl sm:px-8 md:px-12 lg:px-16 xl:px-24 border-t-2 dark:border-gray-700 bg-white dark:bg-gray-800
+            bottom-0 fixed w-screen flex flex-col sm:flex-row py-3 px-6 mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-24 border-t-2 dark:border-gray-700 bg-white dark:bg-gray-800
         `
     }
     ${({ severity }) => severity === 'bad' ? tw`text-red-700 bg-red-100 dark:bg-red-200 dark:text-red-800` : tw``}
@@ -103,8 +103,8 @@ const Practice = () => {
                 <>
                     <p className='text-center'>{currentSlide + 1} de {data?.length}</p>
                     <div className='flex items-center'>
-                        <button type="button" className="w-5 h-5 mr-2 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300" aria-label="Close" onClick={() => redirectLearn()}>
-                            <AiOutlineClose />
+                        <button type="button" className="w-6 h-6 mr-2 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300" aria-label="Close" onClick={() => redirectLearn()}>
+                            <AiOutlineClose className='w-6 h-6' />
                         </button>
                         <div className='w-full'>
                             {/* <Progress value={page} max={data?.totalDocs} /> */}
@@ -132,7 +132,7 @@ const Practice = () => {
             </div>
             <ContentBottom>
                 <div className='w-full h-full flex flex-col sm:flex-row gap-2 items-center justify-end'>
-                    <NavLink className="flex justify-center items-center gap-3 w-full sm:w-44 h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300 cursor-pointer" to='/learn'>
+                    <NavLink className="flex justify-center items-center gap-3 w-full sm:w-44 h-13 px-8 bg-green-700 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300 cursor-pointer" to='/learn'>
                         CONTINUAR
                     </NavLink>
                 </div>
@@ -196,11 +196,11 @@ const Practice = () => {
                                                         <div className='w w-full flex flex-col sm:flex-row items-center justify-around gap-1 flex-wrap'>
 
                                                             <label className='flex justify-center items-center gap-2 w-full sm:w-72 h-13 px-8 cursor-pointer bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'>
-                                                                <input type="radio" name='answer' value={d.correctAnswer} onChange={onChangeValue} />
+                                                                <input type="radio" name='answer' value={d.correctAnswer} onChange={onChangeValue} class="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
                                                                 {d.correctAnswer}
                                                             </label>
                                                             <label className='flex justify-center items-center gap-2 w-full sm:w-72 h-13 px-8 cursor-pointer bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'>
-                                                                <input type="radio" name='answer' value={d.wrongAnswer} onChange={onChangeValue} />
+                                                                <input type="radio" name='answer' value={d.wrongAnswer} onChange={onChangeValue} class="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
                                                                 {d.wrongAnswer}
                                                             </label>
 

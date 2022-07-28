@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import useAuth from '../../auth/useAuth';
 import tw, { styled } from 'twin.macro';
 import Navbar from '../../components/Navbar/Navbar';
 
@@ -22,6 +23,8 @@ const ImagesCardContainer = tw.div`
 
 const LandingPage = () => {
 
+    const auth = useAuth();
+
     return (
         <Content active={false}>
 
@@ -39,16 +42,18 @@ const LandingPage = () => {
                         Aprende vocavulario básico de lengua de señas mediante cápsulas de aprendizaje
                     </p>
                     <div className="flex pt-8 space-x-4 sm:space-x-6">
-                        <NavLink to='/signin'
-                            className="flex justify-center items-center w-full sm:w-auto h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300"
-                        >
-                            Iniciar sesión
-                        </NavLink>
-                        <NavLink to='/signup'
-                            className="flex justify-center items-center w-full sm:w-auto h-13 px-8 font-medium text-gray-900 dark:text-white border border-gray-900 dark:border-white rounded-xl whitespace-nowrap hover:shadow-xl dark:hover:shadow-secondary transition-shadow duration-300"
-                        >
-                            Crear cuenta
-                        </NavLink>
+                        {!auth?.isLogged() && <>
+                            <NavLink to='/signin'
+                                className="flex justify-center items-center w-full sm:w-auto h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300"
+                            >
+                                Iniciar sesión
+                            </NavLink>
+                            <NavLink to='/signup'
+                                className="flex justify-center items-center w-full sm:w-auto h-13 px-8 font-medium text-gray-900 dark:text-white border border-gray-900 dark:border-white rounded-xl whitespace-nowrap hover:shadow-xl dark:hover:shadow-secondary transition-shadow duration-300"
+                            >
+                                Crear cuenta
+                            </NavLink>
+                        </>}
                     </div>
                     <div className="flex pt-20">
                         {/* <img className="w-24" src="/img/chef.png" alt="" /> */}

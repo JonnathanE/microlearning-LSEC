@@ -86,8 +86,8 @@ const LearningCapsule = () => {
                 <>
                     <p className='text-center'>{currentSlide + 1} de {data?.length}</p>
                     <div className='flex items-center'>
-                        <button type="button" className="w-5 h-5 mr-2 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300" aria-label="Close" onClick={() => redirectLearn()}>
-                            <AiOutlineClose />
+                        <button type="button" className="w-6 h-6 mr-2 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300" aria-label="Close" onClick={() => redirectLearn()}>
+                            <AiOutlineClose className='w-6 h-6' />
                         </button>
                         <div className='w-full'>
                             {/* <Progress value={page} max={data?.totalDocs} /> */}
