@@ -28,7 +28,7 @@ import Home from '../pages/Home/Home';
 import LearningCapsule from '../pages/LearningCapsuleAll/LearningCapsule';
 
 import Progress from '../pages/Progress/Progress';
-import Practice from '../pages/Practice/Practice';
+import Practice from '../pages/PracticeAll/Practice';
 
 import PrivateRouteAdmin from './PrivateRouteAdmin';
 import PublicRouteAdmin from './PublicRouteAdmin';

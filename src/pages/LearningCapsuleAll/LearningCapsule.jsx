@@ -143,8 +143,8 @@ const LearningCapsule = () => {
 
                     {data?.length > 0 &&
                         <>
-                            {data.map((d) => (
-                                <div id='container' className='w-[100vw] flex items-center justify-center'>
+                            {data.map((d, i) => (
+                                <div key={i} className='w-[100vw] flex items-center justify-center'>
                                     <div id='item' className='w-[100vw] h-full flex flex-col items-center'>
                                         <h2 className='text-center font-bold text-3xl'>
                                             {d.title}

@@ -19,7 +19,7 @@ ReactDOM.render(
     <React.StrictMode>
       <AuthProvider>
         <Routes />
-        {/* <ReactQueryDevtools /> */}
+        <ReactQueryDevtools />
       </AuthProvider>
     </React.StrictMode>
   </QueryClientProvider>,

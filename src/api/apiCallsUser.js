@@ -63,3 +63,9 @@ export const getCards = async (lessonId, page) => {
     const { data } = await publicRequest.get(`/home/card/${lessonId}?page=${page}`);
     return data;
 }
+
+// get knoweled card
+export const getAllCards = async (lessonId) => {
+    const { data } = await publicRequest.get(`/home/card/${lessonId}`);
+    return data;
+}
