@@ -1,8 +1,7 @@
 import { useQuery, useQueryClient } from 'react-query';
 import { NavLink } from 'react-router-dom';
 import { getModules, deleteModule } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Backdrops from '../../components/Backdrops/Backdrops';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
@@ -11,7 +10,7 @@ const ShowModules = () => {
 
     const queryClient = useQueryClient();
 
-    const { data, error, isFetching } = useQuery(["modules"], getModules,);
+    const { data, error, isFetching } = useQuery(["modules"], getModules, { refetchOnWindowFocus: false });
 
     const MySwal = withReactContent(Swal);
 
@@ -47,8 +46,7 @@ const ShowModules = () => {
     }
 
     return (
-        <>
-            <NavigationAdmin />
+        <LayoutAdmin>
             <div className='container'>
 
                 {isFetching && <Backdrops />}
@@ -84,7 +82,7 @@ const ShowModules = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+        </LayoutAdmin>
     )
 }
 

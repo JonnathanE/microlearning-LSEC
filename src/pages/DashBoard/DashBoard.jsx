@@ -1,14 +1,14 @@
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
 import useAuth from '../../auth/useAuth';
 import { NavLink } from 'react-router-dom';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 
 import { FaTable, FaListAlt, FaListUl, FaList, FaPlus } from "react-icons/fa";
 
 const DashBoard = () => {
     const auth = useAuth();
-    return (
+
+    const original = () => (
         <>
-            <NavigationAdmin />
             <div className='container'>
                 <div className='row'>
                     <div className='col-12 mt-4 mb-4 text-center'><h3>Bienvenido {auth?.user.name} </h3></div>
@@ -53,6 +53,14 @@ const DashBoard = () => {
                 </div>
             </div>
         </>
+    )
+
+    return (
+        <LayoutAdmin>
+            <div className='px-10'>
+                {original()}
+            </div>
+        </LayoutAdmin>
     )
 }
 
