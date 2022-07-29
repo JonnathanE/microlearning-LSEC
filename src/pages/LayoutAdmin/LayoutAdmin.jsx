@@ -5,7 +5,7 @@ const LayoutAdmin = ({ children }) => {
     return (
         <div className='flex w-full font-sans text-gray-900'>
             <Sidebar />
-            <div className='flex-[6]'>
+            <div className='flex-[6] dark:bg-gray-800'>
                 <NavbarAdmin />
                 {children}
             </div>
