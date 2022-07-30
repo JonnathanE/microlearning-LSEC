@@ -3,8 +3,9 @@ import { NavLink } from 'react-router-dom';
 import { getModules, deleteModule } from '../../api/apiCallsAdmin';
 import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Backdrops from '../../components/Backdrops/Backdrops';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import Alert from '../../components/Alert/Alert';
 
 const ShowModules = () => {
 
@@ -49,9 +50,9 @@ const ShowModules = () => {
         <LayoutAdmin>
             <div className='px-10 py-10 flex flex-col'>
                 {isFetching && <Backdrops />}
-                {error && <div class="alert alert-warning" role="alert">
-                    Los datos no se han cargado. Intente de nuevo.
-                </div>}
+                {error &&
+                    <Alert severity='error'>Los datos no se han cargado. Intente de nuevo.</Alert>
+                }
                 <div className='overflow-x-auto relative shadow-md sm:rounded-lg'>
                     <table className='w-full text-sm text-left text-gray-500 dark:text-gray-400'>
                         <caption className='p-5 text-lg text-center font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-800'>Lista de Módulos</caption>
