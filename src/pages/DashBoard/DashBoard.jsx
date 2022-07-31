@@ -1,63 +1,107 @@
 import useAuth from '../../auth/useAuth';
 import { NavLink } from 'react-router-dom';
 import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
+import tw from 'twin.macro';
+import { MdPersonOutline } from 'react-icons/md';
+import { FaTable, FaList, FaPlus } from "react-icons/fa";
 
-import { FaTable, FaListAlt, FaListUl, FaList, FaPlus } from "react-icons/fa";
+const TitleList = tw.p`
+    text-sm font-bold text-gray-400 mt-[15px] mb-[5px]
+`;
+
+const ItemList = tw.li`
+    flex items-center p-[5px] cursor-pointer hover:bg-bookmark-cyan-100 dark:hover:bg-gray-600
+`;
+
+const ItemTitle = tw.li`
+    text-sm font-semibold text-gray-500 ml-[10px] dark:text-white
+`;
 
 const DashBoard = () => {
+
     const auth = useAuth();
 
     const original = () => (
-        <>
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-12 mt-4 mb-4 text-center'><h3>Bienvenido {auth?.user.name} </h3></div>
-                </div>
-                <div className='row'>
-                    <div className='col-6'>
-                        <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Módulos</li>
-                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-module">
-                                <NavLink to='/admin/showmodules' className='list-group-item'><FaTable /> Listar módulos</NavLink>
-                                <NavLink to='/admin/module/create' className='list-group-item'><FaPlus /> Crear módulo</NavLink>
-                            </ul>
-                        </ul>
-                        <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Lecciones</li>
-                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-lesson">
-                                <NavLink to='/admin/showlessons' className='list-group-item'><FaListAlt /> Listar lecciones</NavLink>
-                                <NavLink to='/admin/lesson/create' className='list-group-item'><FaPlus /> Crear lecciones</NavLink>
-                            </ul>
-                        </ul>
-                        <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Cápsulas de Aprendizaje</li>
-                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-micro">
-                                <NavLink to='/admin/showmicrolearnings' className='list-group-item'><FaListUl /> Listar Cápsulas de Aprendizaje</NavLink>
-                                <NavLink to='/admin/micro/create' className='list-group-item'><FaPlus /> Crear Cápsulas de Aprendizaje</NavLink>
-                            </ul>
-                        </ul>
-                        <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Tarjetas de Aprendizaje</li>
-                            <ul className='list-group list-group-flush' data-testid="nav-admin-list-card">
-                                <NavLink to='/admin/showcards' className='list-group-item'><FaList /> Listar Tarjetas de Aprendizaje</NavLink>
-                                <NavLink to='/admin/card/create' className='list-group-item'><FaPlus /> Crear Tarjetsa de Aprendizaje</NavLink>
-                            </ul>
-                        </ul>
-                        <ul>
-                            <li className='fw-bold bg-info text-dark'>Gestión de Usuarios</li>
-                            <ul className='list-group list-group-flush'>
-                                <NavLink to='/admin/showusers' className='list-group-item'><FaList /> Listar Usuarios</NavLink>
-                            </ul>
-                        </ul>
-                    </div>
-                </div>
+        <div className='flex flex-col'>
+            <h1 className='mb-3 text-center font-bold text-bookmark-cyan-500 text-xl'>
+                Panel Administrativo
+            </h1>
+            <h2 className='mb-3 font-bold'>
+                Bienvenido <span className='text-bookmark-cyan-400'>{auth?.user.name}</span>
+            </h2>
+            <div className='flex flex-col'>
+                <ul>
+                    <TitleList>Gestión de Módulos</TitleList>
+                    <NavLink to='/admin/showmodules' className='list-group-item'>
+                        <ItemList>
+                            <FaTable />
+                            <ItemTitle>Listar módulos</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+                    <NavLink to='/admin/module/create' className='list-group-item'>
+                        <ItemList>
+                            <FaPlus />
+                            <ItemTitle>Crear módulo</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+
+                    <TitleList>LECCIONES</TitleList>
+                    <NavLink to='/admin/showlessons'>
+                        <ItemList>
+                            <FaList />
+                            <ItemTitle>Listar lecciones</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+                    <NavLink to='/admin/lesson/create'>
+                        <ItemList>
+                            <FaPlus />
+                            <ItemTitle>Crear lección</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+
+                    <TitleList>CÁPSULAS</TitleList>
+                    <NavLink to='/admin/showmicrolearnings' >
+                        <ItemList>
+                            <FaList />
+                            <ItemTitle>Listar cápsulas</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+                    <NavLink to='/admin/micro/create'>
+                        <ItemList>
+                            <FaPlus />
+                            <ItemTitle>Crear cápsula</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+
+                    <TitleList >TARJETAS</TitleList>
+                    <NavLink to='/admin/showcards'>
+                        <ItemList>
+                            <FaList />
+                            <ItemTitle>Listar tarjetas</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+                    <NavLink to='/admin/card/create'>
+                        <ItemList>
+                            <FaPlus />
+                            <ItemTitle>Crear tarjeta</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+
+                    <TitleList >LISTS</TitleList>
+                    <NavLink to='/admin/showusers'>
+                        <ItemList>
+                            <MdPersonOutline />
+                            <ItemTitle>Usuarios</ItemTitle>
+                        </ItemList>
+                    </NavLink>
+                </ul>
             </div>
-        </>
+        </div>
     )
 
     return (
         <LayoutAdmin>
-            <div className='px-10'>
+            <div className='p-10 dark:text-white'>
                 {original()}
             </div>
         </LayoutAdmin>

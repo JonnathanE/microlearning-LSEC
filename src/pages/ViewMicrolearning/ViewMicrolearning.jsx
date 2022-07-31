@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { getMicrolearningById } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
 import ShowImage from '../../components/ShowImage/ShowImage';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import tw from 'twin.macro';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 
-import './viewMicrolearning.css';
+const Container = tw.div`
+    p-5 flex flex-col items-center gap-5
+`;
+
+const Title = tw.h2`
+    font-bold text-xl text-gray-600 dark:text-gray-400
+`;
 
 const ViewMicrolearning = () => {
 
@@ -38,38 +44,43 @@ const ViewMicrolearning = () => {
     }, [])
 
     const card = () => (
-        <div className="card m-10 card-cont">
-            <div className="row g-0">
-                <div className="content col-md-4">
-                    <p className="card-text fw-bold">Gif de la lengua de seña:</p>
-                    <ShowImage styles='img-fluid' name={microlearning.title} url={microlearning.gif_url?.url} />
+        <div className="w-full flex flex-col lg:flex-row justify-around">
+            <div className="w-4/12 flex flex-col gap-5">
+                <div className='flex flex-col justify-center items-center'>
+                    <p className="font-bold">Gif de la lengua de seña:</p>
+                    <ShowImage styles='w-64 h-64' name={microlearning.title} url={microlearning.gif_url?.url} />
                 </div>
-                <div className="col-md-8">
-                    <div className="card-body">
-                        <h5 className="card-title mb-2 text-center">{microlearning.title}</h5>
-                        <p className="card-text fw-bold">Nombre de la lección:</p>
-                        <p className="card-text">{lesson ? lesson.name : 'No asignado'}</p>
-                        <NavLink to={`/admin/micro/update/${microlearning._id}`}>
-                            <button className='btn btn-success'>Modificar Microcontenido</button>
-                        </NavLink>
+                <div className="flex flex-col justify-center items-center">
+                    <p className="font-bold mb-2">Imágen representativa:</p>
+                    <ShowImage styles='w-56 h-56' name={microlearning.title} url={microlearning.image_url?.url} />
+                </div>
+            </div>
+            <div className="w-3/5">
+                <div className="p-5 border rounded-xl flex flex-col gap-3">
+                    <h3 className="font-bold text-bookmark-cyan-500 text-center">{microlearning.title}</h3>
+                    <div>
+                        <p className="font-bold">Nombre de la lección:</p>
+                        <p>{lesson ? lesson.name : 'No asignado'}</p>
                     </div>
-                </div>
-                <div className="content col-md-4">
-                    <p className="card-text fw-bold">Imágen representativa:</p>
-                    <ShowImage styles='img-fluid' name={microlearning.title} url={microlearning.image_url?.url} />
+                    <NavLink to={`/admin/micro/update/${microlearning._id}`}>
+                        <button className='w-52 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer'>Modificar Cápsula</button>
+                    </NavLink>
                 </div>
             </div>
         </div>
     )
 
     return (
-        <>
-            <NavigationAdmin />
-            <div className='container'>
-                <h2>Ver información del Microcontenido</h2>
-                {microlearning && card()}
-            </div>
-        </>
+        <LayoutAdmin>
+            <Container>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg'>
+                    <Title className='text-start'>Ver información del Microcontenido</Title>
+                </div>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg dark:text-white flex flex-col sm:flex-row gap-2'>
+                    {microlearning && card()}
+                </div>
+            </Container>
+        </LayoutAdmin>
     )
 }
 

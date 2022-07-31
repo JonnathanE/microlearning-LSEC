@@ -76,7 +76,7 @@ const UpdateImage = ({ content }) => {
             <FormGroup>
                 <label htmlFor="gifFile">Gif de la lengua de señas
                 </label>
-                <input type='file' accept='image/*' {...register('gif')} id='gifFile' className='form-control' />
+                <input type='file' accept='image/*' {...register('gif')} id='gifFile' />
                 {errors.gif && errorValidator(errors.gif.message)}
             </FormGroup>
             <input type='submit' className="w-40 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Actualizar Gif" />
