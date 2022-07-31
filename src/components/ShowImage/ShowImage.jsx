@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LoaderImage from '../../components/LoaderImage/LoaderImage';
 
-const ShowImage = ({ name, url, styles, url_buffer, alternative = 'Cargando recurso...' }) => {
+const ShowImage = ({ name, url, styles, url_buffer, alternative = 'Cargando recurso...' }, styleLazy = 'not') => {
 
     const [loaded, setLoaded] = useState(false);
 
@@ -19,7 +19,7 @@ const ShowImage = ({ name, url, styles, url_buffer, alternative = 'Cargando recu
                 onLoad={onLoad}
             />
             {!loaded &&
-                <div className='w-32 h-32 sm:w-72 sm:h-72 bg-gray-300 flex flex-col items-center justify-center'>
+                <div className={styleLazy === 'not' ? 'w-32 h-32 sm:w-72 sm:h-72 bg-gray-300 flex flex-col items-center justify-center' : styleLazy}>
                     <div>
                         <span className='text-white font-bold mb-6 text-center'>{alternative}</span>
                         <LoaderImage />

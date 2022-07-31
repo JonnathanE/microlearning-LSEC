@@ -3,10 +3,19 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { updateMicrolearningGif } from '../../api/apiCallsAdmin';
-
 import Spinner from '../Spinner/Spinner';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import tw from 'twin.macro';
+import ShowImage from '../ShowImage/ShowImage';
+
+const Form = tw.form`
+    flex flex-col gap-6 justify-center items-center mb-4
+`;
+
+const FormGroup = tw.div`
+    w-full flex flex-col
+`;
 
 const UpdateImage = ({ content }) => {
 
@@ -63,15 +72,15 @@ const UpdateImage = ({ content }) => {
     )
 
     const imageForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmitIcon)}>
-            <div className='form-group'>
-                <label className='form-label' htmlFor="gifFile">Gif de la lengua de señas
+        <Form onSubmit={handleSubmit(clickSubmitIcon)}>
+            <FormGroup>
+                <label htmlFor="gifFile">Gif de la lengua de señas
                 </label>
                 <input type='file' accept='image/*' {...register('gif')} id='gifFile' className='form-control' />
                 {errors.gif && errorValidator(errors.gif.message)}
-            </div>
-            <input type='submit' className="btn btn-primary" value="Actualizar Gif" />
-        </form>
+            </FormGroup>
+            <input type='submit' className="w-40 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Actualizar Gif" />
+        </Form>
     )
 
     // shows loading when submit is executing
@@ -81,10 +90,13 @@ const UpdateImage = ({ content }) => {
         )
 
     return (
-        <>
+        <div className='w-full flex flex-col items-center border p-3'>
             {showLoading()}
+            <div className='w-[250px] h-[250px] flex items-center justify-center overflow-hidden object-cover bg-slate-400'>
+                <ShowImage url={content?.gif_url?.url} styles='w-[250px] h-[250px]' name='capsula gif' />
+            </div>
             {imageForm()}
-        </>
+        </div>
     )
 }
 

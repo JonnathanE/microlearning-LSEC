@@ -3,9 +3,11 @@ import { getLessons, deleteLesson } from '../../api/apiCallsAdmin';
 import { NavLink } from 'react-router-dom';
 import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Backdrops from '../../components/Backdrops/Backdrops';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import Alert from '../../components/Alert/Alert';
+import { API } from '../../config';
+import ShowImage from '../../components/ShowImage/ShowImage';
 
 const ShowLessons = () => {
 
@@ -59,15 +61,27 @@ const ShowLessons = () => {
                             <tr>
                                 <th className='py-3 px-6'># Modulo</th>
                                 <th className='py-3 px-6'>Nombre</th>
+                                <th className='py-3 px-6'>Id</th>
                                 <th className='py-3 px-6'>Opciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {data && data.map((lesson, i) => (
                                 <tr key={i} className='bg-white border-b dark:bg-gray-800 dark:border-gray-700'>
-                                    <th className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'>{lesson.module ? lesson.module.number : 'No asignado'}</th>
-                                    <td className='py-4 px-6'>{lesson.name}</td>
-                                    <td className='py-4 px-6 flex flex-row gap-2'>
+                                    <th className='py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white'>
+                                        {lesson.module ? lesson.module.number : 'No asignado'}
+                                    </th>
+                                    <td className='flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white'>
+                                        <ShowImage styles="w-10 h-10 rounded-full" url={`${API}/lesson/icon/${lesson._id}`} name="Lesson icon" />
+                                        <div className="pl-3">
+                                            <div className="text-base font-semibold">{lesson.name}</div>
+                                            <div className="font-normal text-gray-500">{lesson.module.name}</div>
+                                        </div>
+                                    </td>
+                                    <td className='py-4 px-6'>
+                                        {lesson._id}
+                                    </td>
+                                    <td className='py-4 px-6 flex items-center gap-2 whitespace-nowrap'>
                                         <button onClick={(e) => btndeleteLesson(lesson._id, e)} className='px-2 py-2 text-red-700 bg-red-100 dark:bg-red-200 hover:bg-red-200 dark:hover:bg-red-300 dark:text-red-800 dark:hover:text-red-900 rounded-lg cursor-pointer'>
                                             Eliminar
                                         </button>

@@ -1,12 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { updateLessonIcon } from '../../api/apiCallsAdmin';
-
+import ShowImage from '../ShowImage/ShowImage';
+import { API } from '../../config';
 import Spinner from '../Spinner/Spinner';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import tw from 'twin.macro';
+
+const Form = tw.form`
+    flex flex-col gap-6 justify-center items-center mb-4
+`;
+
+const FormGroup = tw.div`
+    w-full flex flex-col
+`;
 
 const UpdateIcon = ({ lesson }) => {
 
@@ -63,15 +73,15 @@ const UpdateIcon = ({ lesson }) => {
     )
 
     const iconForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmitIcon)}>
-            <div className='form-group'>
-                <label className='form-label' htmlFor="iconFile">Icono
+        <Form onSubmit={handleSubmit(clickSubmitIcon)}>
+            <FormGroup>
+                <label htmlFor="iconFile">Actualizar icono
                 </label>
                 <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='form-control' />
                 {errors.icon && errorValidator(errors.icon.message)}
-            </div>
-            <input type='submit' className="btn btn-primary" />
-        </form>
+            </FormGroup>
+            <input type='submit' className="w-40 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Actualizar Icono" />
+        </Form>
     )
 
     // shows loading when submit is executing
@@ -81,10 +91,13 @@ const UpdateIcon = ({ lesson }) => {
         )
 
     return (
-        <>
+        <div className='w-full flex flex-col items-center'>
             {showLoading()}
+            <div className='w-[72px] h-[72px] flex items-center justify-center rounded-full overflow-hidden object-cover bg-slate-400'>
+                <ShowImage url_buffer={`${API}/lesson/icon/${lesson._id}`} styles='w-[55px] h-[55px]' name='lesson icon' />
+            </div>
             {iconForm()}
-        </>
+        </div>
     )
 }
 
