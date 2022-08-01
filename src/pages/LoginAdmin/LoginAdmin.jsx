@@ -4,11 +4,25 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginAdmin } from '../../api/apiCallsAdmin.js';
-
+import tw from 'twin.macro';
 import useAuth from '../../auth/useAuth';
-import Spinner from '../../components/Spinner/Spinner';
+import Loader from '../../components/Loader/Loader';
+import Modal from '../../components/Modal/Modal';
+import Alert from '../../components/Alert/Alert';
+import lockIcon from '../../img/lock.svg';
+import emailIcon from '../../img/email.svg';
 
-import './loginAdmin.css';
+const FormGroup = tw.div`
+    pt-6
+`;
+
+const InputWrapper = tw.div`
+    flex overflow-hidden items-center mt-2 w-full rounded-lg border border-gray-400 transition-all focus-within:shadow-lg focus-within:border-bookmark-cyan-500
+`;
+
+const IconWrapper = tw.div`
+    flex justify-center items-center pl-6
+`;
 
 const LoginAdmin = () => {
     // state
@@ -22,8 +36,8 @@ const LoginAdmin = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        email: yup.string().email().required(),
-        password: yup.string().required(),
+        email: yup.string().email().required("El correo electrónico es requerido"),
+        password: yup.string().required("La contraseña es un campo requerido"),
     });
 
     // initialize the React Hook Form methods
@@ -61,44 +75,52 @@ const LoginAdmin = () => {
 
     // form structure
     const signInForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group">
-                <label className="text-muted">Email</label>
-                <input type="email" {...register('email')} className='form-control' aria-label='email' />
+        <form onSubmit={handleSubmit(clickSubmit)}>
+            <div>
+                <label className="font-light text-gray-800 dark:text-white">Correo electrótrico</label>
+                <InputWrapper>
+                    <IconWrapper>
+                        <img src={emailIcon} alt='correo icono' className='w-6 h-6 pointer-events-none' />
+                    </IconWrapper>
+                    <input type="email" {...register('email')} className='px-4 py-4.5 w-full focus:outline-none font-light border-0 focus:ring-0 dark:bg-gray-800' aria-label='email' />
+                </InputWrapper>
                 {errors.email && errorValidator(errors.email.message)}
             </div>
-            <div className="form-group mb-3">
-                <label className="text-muted">Password</label>
-                <input type="password" {...register('password')} className='form-control' aria-label='password' />
+            <FormGroup>
+                <label className="font-light text-gray-800 dark:text-white">Contraseña</label>
+                <InputWrapper>
+                    <IconWrapper>
+                        <img src={lockIcon} alt='contraseña icono' className='w-6 h-6 pointer-events-none' />
+                    </IconWrapper>
+                    <input type="password" {...register('password')} className='px-4 py-4.5 w-full focus:outline-none font-light border-0 focus:ring-0 dark:bg-gray-800' aria-label='password' />
+                </InputWrapper>
                 {errors.password && errorValidator(errors.password.message)}
+            </FormGroup>
+            <div className='pt-8'>
+                <input type='submit' className="py-4 px-8 w-full text-white bg-bookmark-cyan-500 rounded-lg shadow-lg hover:bg-bookmark-cyan-400 focus:ring-4 focus:ring-cyan-100 focus:outline-none" value='Iniciar sesión' aria-label='iniciar sesion' data-testid='form-login-admin-button' />
             </div>
-            <input type='submit' className="btn btn-primary" aria-label='iniciar sesion' data-testid='form-login-admin-button' />
         </form>
-    )
-
-    // show backend error alert
-    const showError = () => (
-        <div className='alert alert-danger align-middle' role="alert" style={{ display: error ? '' : 'none' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-            </svg>
-            {error}
-        </div>
     )
 
     // shows loading when submit is executing
     const showLoading = () =>
         loading && (
-            <Spinner />
+            <Modal>
+                <Loader />
+            </Modal>
         )
 
     return (
         <>
-            <div className="mt-5">
-                <h4 className="text-center mb-5">Log In</h4>
-                {showError()}
-                {showLoading()}
-                {signInForm()}
+            <div className="w-full min-h-screen font-sans text-gray-900 dark:bg-gray-800">
+                <div className='flex flex-col items-center py-5 px-6 mx-auto max-w-screen-xl sm:px-8 md:px-12 lg:px-16 xl:px-24'>
+                    <h1 className="my-5 font-bold text-xl text-center dark:text-white">Inicio de sesión para administrador</h1>
+                    {error && <div className='pt-1'><Alert severity='error'>{error}</Alert></div>}
+                    {showLoading()}
+                    <div className='w-80 border border-gray-400 rounded-lg px-3 py-8'>
+                        {signInForm()}
+                    </div>
+                </div>
             </div>
 
         </>

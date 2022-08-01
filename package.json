@@ -8,6 +8,7 @@
     "@hookform/resolvers": "^2.6.1",
     "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.5.3",
+    "@tailwindcss/forms": "^0.5.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -15,6 +16,7 @@
     "chart.js": "^3.5.0",
     "css-what": "^5.0.1",
     "dotenv": "^10.0.0",
+    "lottie-react": "^2.3.1",
     "react": "^17.0.2",
     "react-chartjs-2": "^3.0.4",
     "react-dom": "^17.0.2",
@@ -22,10 +24,11 @@
     "react-icons": "^4.2.0",
     "react-query": "^3.34.19",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "reactstrap": "^8.9.0",
     "sweetalert2": "^11.0.19",
     "sweetalert2-react-content": "^4.1.0",
+    "twin.macro": "^2.8.2",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.9"
   },
@@ -61,8 +64,11 @@
     ]
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.7",
     "cypress": "^9.7.0",
     "cypress-file-upload": "^5.0.8",
-    "eslint-plugin-cypress": "^2.12.1"
+    "eslint-plugin-cypress": "^2.12.1",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.6"
   }
 }
