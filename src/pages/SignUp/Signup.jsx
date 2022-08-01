@@ -157,21 +157,21 @@ const Signup = () => {
 
 
                         {signInForm()}
-                        <div class="pt-4">
-                            <div class="font-light text-center text-gray-500 dark:text-gray-400">
+                        <div className="pt-4">
+                            <div className="font-light text-center text-gray-500 dark:text-gray-400">
                                 ¿Tienes una cuenta?
-                                <NavLink to='/signin' class="font-normal text-teal-500 hover:text-teal-600">
+                                <NavLink to='/signin' className="font-normal text-teal-500 hover:text-teal-600">
                                     Inicia sesión
                                 </NavLink>
                             </div>
                             <div
-                                class="flex flex-wrap gap-y-2 justify-between items-center pt-14 text-center whitespace-nowrap"
+                                className="flex flex-wrap gap-y-2 justify-between items-center pt-14 text-center whitespace-nowrap"
                             >
-                                <span class="flex-1 text-gray-500 dark:text-gray-400">© 2021 JEDE. All rights reserved.</span>
-                                {/* <span class="flex flex-1 justify-center items-center space-x-1">
-                                    <a href="#" class="text-gray-500 hover:text-gray-600">Terms of Service</a>
-                                    <span class="text-gray-500">&#183;</span>
-                                    <a href="#" class="text-gray-500 hover:text-gray-600">Privacy Policy</a>
+                                <span className="flex-1 text-gray-500 dark:text-gray-400">© 2021 JEDE. All rights reserved.</span>
+                                {/* <span className="flex flex-1 justify-center items-center space-x-1">
+                                    <a href="#" className="text-gray-500 hover:text-gray-600">Terms of Service</a>
+                                    <span className="text-gray-500">&#183;</span>
+                                    <a href="#" className="text-gray-500 hover:text-gray-600">Privacy Policy</a>
                                 </span> */}
                             </div>
                         </div>

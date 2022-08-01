@@ -196,11 +196,11 @@ const Practice = () => {
                                                         <div className='w w-full flex flex-col sm:flex-row items-center justify-around gap-1 flex-wrap'>
 
                                                             <label className='flex justify-center items-center gap-2 w-full sm:w-72 h-13 px-8 cursor-pointer bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'>
-                                                                <input type="radio" name='answer' value={d.correctAnswer} onChange={onChangeValue} class="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
+                                                                <input type="radio" name='answer' value={d.correctAnswer} onChange={onChangeValue} className="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
                                                                 {d.correctAnswer}
                                                             </label>
                                                             <label className='flex justify-center items-center gap-2 w-full sm:w-72 h-13 px-8 cursor-pointer bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'>
-                                                                <input type="radio" name='answer' value={d.wrongAnswer} onChange={onChangeValue} class="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
+                                                                <input type="radio" name='answer' value={d.wrongAnswer} onChange={onChangeValue} className="w-5 h-5 text-orange-500 bg-white rounded border border-gray-400 focus:outline-none focus:ring-orange-500" />
                                                                 {d.wrongAnswer}
                                                             </label>
 

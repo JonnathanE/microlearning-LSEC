@@ -105,9 +105,9 @@ const ShowMicrolearning = () => {
                                                 name="Cápsula de aprendizaje"
                                                 styleLazy='w-10 h-10 bg-gray-300 flex flex-col items-center justify-center object-cover'
                                             />
-                                            <div class="pl-3">
-                                                <div class="text-base font-semibold">{micro.title}</div>
-                                                <div class="font-normal text-gray-500">{micro.lesson ? micro.lesson.name : 'No asignado'}</div>
+                                            <div className="pl-3">
+                                                <div className="text-base font-semibold">{micro.title}</div>
+                                                <div className="font-normal text-gray-500">{micro.lesson ? micro.lesson.name : 'No asignado'}</div>
                                             </div>
                                         </TdImage>
                                         <Td>

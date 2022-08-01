@@ -1,12 +1,11 @@
 import { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 import useAuth from '../../auth/useAuth';
 import ToggleDarkMode from '../ToggleDarkMode/ToggleDarkMode';
-
 import avatar from '../../img/user-avatar.png';
 import { FaSignOutAlt } from "react-icons/fa";
-import { BsGear } from "react-icons/bs";
+// import { BsGear } from "react-icons/bs";
 
 
 const UserDropsown = () => {
@@ -40,17 +39,23 @@ const UserDropsown = () => {
                             <div className="flex gap-3 items-center px-4 py-2">
                                 <img className="w-10 h-10 rounded-full object-cover" src={avatar} alt="Extra small avatar" />
                                 <div className="flex flex-col truncate">
-                                    <span className="font-bold text-ellipsis overflow-hidden ...">{auth?.user.name}</span>
-                                    <NavLink to='/' className="text-bookmark-cyan-500">Ver perfil</NavLink>
+                                    <span className="font-bold text-ellipsis overflow-hidden ...">
+                                        {auth?.user.name}
+                                    </span>
+                                    {/* <NavLink to='/' className="text-bookmark-cyan-500">
+                                        Ver perfil
+                                    </NavLink> */}
                                 </div>
                             </div>
                             <div className='px-4 py-2'>
-                                <ToggleDarkMode/>
+                                <ToggleDarkMode />
                             </div>
-                            <NavLink to='/' class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-0"><BsGear/> Configuración</NavLink>
+                            {/* <NavLink to='/' className="text-gray-700 px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-0"><BsGear /> Configuración</NavLink> */}
                         </div>
-                        <div class="py-1" role="none">
-                            <Link to='' onClick={auth.logout} class="text-gray-700 block px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-1"><FaSignOutAlt/> Cerrar sesión</Link>
+                        <div className="py-1" role="none">
+                            <Link to='' onClick={auth.logout} className="text-gray-700 px-4 py-2 text-sm hover:bg-cyan-50 flex items-center gap-x-2" role="menuitem" tabindex="-1" id="menu-item-1">
+                                <FaSignOutAlt /> Cerrar sesión
+                            </Link>
                         </div>
                     </div>
                 }

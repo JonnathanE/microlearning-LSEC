@@ -6,7 +6,7 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 
 import AuthProvider from './auth/AuthProvider';
 
@@ -19,7 +19,7 @@ ReactDOM.render(
     <React.StrictMode>
       <AuthProvider>
         <Routes />
-        <ReactQueryDevtools />
+        {/* <ReactQueryDevtools /> */}
       </AuthProvider>
     </React.StrictMode>
   </QueryClientProvider>,

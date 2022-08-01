@@ -49,10 +49,10 @@ const Showusers = () => {
                                             {user._id}
                                         </th>
                                         <td className='flex items-center py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white'>
-                                            <img class="w-10 h-10 rounded-full" src={avatar} alt="Avatar" />
-                                            <div class="pl-3">
-                                                <div class="text-base font-semibold">{user.name}</div>
-                                                <div class="font-normal text-gray-500">{user.email}</div>
+                                            <img className="w-10 h-10 rounded-full" src={avatar} alt="Avatar" />
+                                            <div className="pl-3">
+                                                <div className="text-base font-semibold">{user.name}</div>
+                                                <div className="font-normal text-gray-500">{user.email}</div>
                                             </div>
                                         </td>
                                         <td className='py-4 px-6'>

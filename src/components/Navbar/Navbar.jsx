@@ -52,13 +52,22 @@ const Navbar = ({ activeMenu = "Home" }) => {
                 <ul className='flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6 lg:md:-x-8 dark:text-white'>
 
                     {auth?.isLogged() &&
-                        <div className="flex gap-3 items-center px-4 py-2 sm:hidden">
-                            <img className="w-10 h-10 rounded-full object-cover" src={avatar} alt="Extra small avatar" />
-                            <div className="flex flex-col truncate">
-                                <span className="font-bold text-ellipsis overflow-hidden ...">{auth?.user.name}</span>
-                                <NavLink to='/' className="text-bookmark-cyan-500">Ver perfil</NavLink>
+                        <>
+                            <div className="flex gap-3 items-center px-4 py-2 sm:hidden">
+                                <img className="w-10 h-10 rounded-full object-cover" src={avatar} alt="Extra small avatar" />
+                                <div className="flex flex-col truncate">
+                                    <span className="font-bold text-ellipsis overflow-hidden ...">
+                                        {auth?.user.name}
+                                    </span>
+                                    {/* <NavLink to='/' className="text-bookmark-cyan-500">
+                                    Ver perfil
+                                </NavLink> */}
+                                </div>
                             </div>
-                        </div>
+                            <div className='sm:hidden'>
+                                <ToggleDarkMode />
+                            </div>
+                        </>
                     }
 
                     <NavItem active={activeMenu === 'Home'} className='group'>
