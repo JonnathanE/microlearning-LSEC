@@ -2,13 +2,29 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
+import tw from 'twin.macro';
+// import { NavLink } from 'react-router-dom';
 import { addLesson, getModules } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Spinner from '../../components/Spinner/Spinner';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const Container = tw.div`
+    p-5 flex flex-col items-center gap-5
+`;
+
+const Title = tw.h2`
+    font-bold text-xl text-gray-400
+`;
+
+const Form = tw.form`
+    flex flex-col gap-13 justify-center items-center mb-4
+`;
+
+const FormGroup = tw.div`
+    w-full sm:w-2/5 flex flex-col
+`;
 
 const AddLesson = () => {
 
@@ -82,36 +98,33 @@ const AddLesson = () => {
 
     // form structure
     const signInForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
-            <div className='form-group'>
-                <label className='form-label' htmlFor="iconFile">Icono
+        <Form onSubmit={handleSubmit(clickSubmit)}>
+            <FormGroup>
+                <label htmlFor="iconFile">Icono
                 </label>
-                <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='form-control' />
+                <input type='file' accept='image/*' {...register('icon')} id='iconFile' className='' data-testid='inputFileIcon' />
                 {errors.icon && errorValidator(errors.icon.message)}
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Nombre de la lección</label>
-                <input type="text" {...register('name')} className='form-control' />
+            </FormGroup>
+            <FormGroup>
+                <label>Nombre de la lección</label>
+                <input type="text" {...register('name')} className='dark:bg-gray-800' data-testid='inputName' />
                 {errors.name && errorValidator(errors.name.message)}
-            </div>
-            <div className='form-group'>
-                <label className='text-muted'>Módulo</label>
-                <select type='text' {...register('module')} className='form-select' >
+            </FormGroup>
+            <FormGroup>
+                <label>Módulo</label>
+                <select type='text' {...register('module')} className='dark:bg-gray-800' >
                     <option value=''>Selecciona Módulo</option>
                     {modules && modules.map((c, i) => (
                         <option key={i} value={c._id}>{c.name}</option>
                     ))}
                 </select>
                 {errors.module && errorValidator(errors.module.message)}
-            </div>
-            <div className="form-group mb-3">
-
-            </div>
-            <NavLink to='/admin/dashboard'>
+            </FormGroup>
+            {/* <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
-            </NavLink>
-            <input type='submit' className="btn btn-primary" />
-        </form>
+            </NavLink> */}
+            <input type='submit' className="w-36 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Crear" />
+        </Form>
     )
 
     // shows loading when submit is executing
@@ -121,18 +134,17 @@ const AddLesson = () => {
         )
 
     return (
-        <>
-            <NavigationAdmin />
-            <div className='container'>
-                <div className='row'>
-                    <h2 className='text-center mt-2'>Crear nueva Lección</h2>
+        <LayoutAdmin>
+            <Container>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg'>
+                    <Title className='text-start'>Crear nueva Lección</Title>
                 </div>
-                <div className='row'>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg dark:text-white'>
                     {showLoading()}
                     {signInForm()}
                 </div>
-            </div>
-        </>
+            </Container>
+        </LayoutAdmin>
     )
 }
 

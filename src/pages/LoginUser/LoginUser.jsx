@@ -5,11 +5,31 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useHistory, useLocation, NavLink } from 'react-router-dom';
 import useAuth from '../../auth/useAuth';
 import { loginUser } from '../../api/apiCallsUser';
+import tw from 'twin.macro';
+import { useLottie } from "lottie-react";
+import animationBg from '../../animation/85795-man-and-woman-say-hi.json';
 
-import Spinner from '../../components/Spinner/Spinner';
-import Navigation from '../../components/Navigation/Navigation';
+import Loader from '../../components/Loader/Loader';
+import Modal from '../../components/Modal/Modal';
+import Alert from '../../components/Alert/Alert';
+// import ToggleDarkMode from '../../components/ToggleDarkMode/ToggleDarkMode';
 
-import './loginUser.css';
+import lockIcon from '../../img/lock.svg';
+import emailIcon from '../../img/email.svg';
+// import googleIcon from '../../img/google.svg';
+// import facebookIcon from '../../img/facebook.svg';
+
+const FormGroup = tw.div`
+    pt-6
+`;
+
+const InputWrapper = tw.div`
+    flex overflow-hidden items-center mt-2 w-full rounded-lg border border-gray-400 transition-all focus-within:shadow-lg focus-within:border-bookmark-cyan-500
+`;
+
+const IconWrapper = tw.div`
+    flex justify-center items-center pl-6
+`;
 
 const LoginUser = () => {
     // state
@@ -20,6 +40,13 @@ const LoginUser = () => {
     const history = useHistory();
     const location = useLocation();
     const previusObjectUrl = location.state?.from;
+
+    // lottie configuration
+    const options = {
+        animationData: animationBg,
+        loop: true
+    };
+    const { View } = useLottie(options);
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
@@ -54,69 +81,91 @@ const LoginUser = () => {
     // form structure
     const signInForm = () => (
         <form onSubmit={handleSubmit(clickSubmit)}>
-
-            <div className="form-group mb-3">
-                <label className="text-muted">Email</label>
-                <input type="email" {...register('email')} className='form-control' />
+            <FormGroup>
+                <label className="font-light text-gray-800 dark:text-white">Correo electrónico</label>
+                <InputWrapper>
+                    <IconWrapper>
+                        <img src={emailIcon} alt='correo icono' className='w-6 h-6 pointer-events-none' />
+                    </IconWrapper>
+                    <input type="email" {...register('email')} className='px-4 py-4.5 w-full focus:outline-none font-light border-0 focus:ring-0 dark:bg-gray-800' aria-label='email' />
+                </InputWrapper>
                 {errors.email && errorValidator(errors.email.message)}
-            </div>
-            <div className="form-group mb-3">
-                <label className="text-muted">Password</label>
-                <input type="password" {...register('password')} className='form-control' />
+            </FormGroup>
+            <FormGroup>
+                <label className="font-light text-gray-800 dark:text-white">Contraseña</label>
+                <InputWrapper>
+                    <IconWrapper>
+                        <img src={lockIcon} alt='contraseña icono' className='w-6 h-6 pointer-events-none' />
+                    </IconWrapper>
+                    <input type="password" {...register('password')} className='px-4 py-4.5 w-full focus:outline-none font-light border-0 focus:ring-0 dark:bg-gray-800' aria-label='password' />
+                </InputWrapper>
                 {errors.password && errorValidator(errors.password.message)}
-            </div>
+            </FormGroup>
 
-            <div className='text-center'>
-                <input type='submit' className="btn btn-block mybtn btn-primary tx-tfm" value='Iniciar sesión' />
+            <div className='pt-8'>
+                <input type='submit' className="py-4 px-8 w-full text-white bg-bookmark-cyan-500 rounded-lg shadow-lg hover:bg-bookmark-cyan-400 focus:ring-4 focus:ring-cyan-100 focus:outline-none" value='Iniciar sesión' aria-label='iniciar sesion' data-testid='form-login-button' />
             </div>
-
-            <div className="login-or">
-                <hr className="hr-or" />
-                <span className="span-or"> O </span>
-            </div>
-            <div className="form-group">
-                <p className="text-center">¿No tienes una cuenta? <NavLink to='/signup' id="signup">Regístrate</NavLink></p>
-            </div>
-
         </form>
-    )
-
-    // show backend error alert
-    const showError = () => (
-        <div className='alert alert-danger align-middle' role="alert" style={{ display: error ? '' : 'none' }}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-            </svg>
-            {error}
-        </div>
     )
 
     // shows loading when submit is executing
     const showLoading = () =>
         loading && (
-            <Spinner />
+            <Modal>
+                <Loader />
+            </Modal>
         )
 
     return (
-        <>
-            <Navigation />
-            <div className='container'>
-                <div className='row'>
-                    <div className='col-md-6 col-lg-5 mx-auto mt-5'>
+        <div className='flex justify-between min-h-screen font-sans text-gray-900 dark:text-white dark:bg-gray-800'>
 
-                        <div className='card my-card'>
-                            <div className="card-body">
-                                <h3 className='card-title text-center mb-3'>Iniciar Sesión</h3>
-                                {showError()}
-                                {showLoading()}
-                                {signInForm()}
+            {showLoading()}
+
+            <div className='hidden relative w-1/2 lg:flex text-center'>
+                {View}
+            </div>
+
+            <div className='flex-1 mx-auto max-w-2xl'>
+                <div className='flex flex-col px-8 pt-10 lg:px-14 xl:px-24'>
+                    <NavLink exact to='/' className='text-3xl md:text-4xl font-bold tracking-wide dark:text-white self-center md:self-end'>
+                        LS<span className='text-bookmark-cyan-500'>EC</span>
+                    </NavLink>
+                    {/* <div className='pt-5 self-center md:self-end'>
+                        <ToggleDarkMode />
+                    </div> */}
+                    <div className='pt-20 pb-6'>
+                        <h1 className="text-3xl font-bold tracking-wide leading-loose whitespace-nowrap">
+                            Hola 👋
+                        </h1>
+                        <span className="font-light text-gray-500 dark:text-gray-400">
+                            Bienvenid@ de nuevo.
+                        </span>
+
+                        {error && <div className='pt-5'><Alert severity='error'>{error}</Alert></div>}
+
+                        {signInForm()}
+
+                        <div className="pt-4">
+                            <div className="font-light text-center text-gray-500 dark:text-gray-400">
+                                ¿No tienes una cuenta? <NavLink to='/signup' className="font-normal text-teal-500 hover:text-teal-600">
+                                    Regístrate
+                                </NavLink>
+                            </div>
+                            <div
+                                className="flex flex-wrap gap-y-2 justify-between items-center pt-14 text-center whitespace-nowrap"
+                            >
+                                <span className="flex-1 text-gray-500 dark:text-gray-400">© 2021 JEDE. All rights reserved.</span>
+                                {/* <span className="flex flex-1 justify-center items-center space-x-1">
+                                    <a href="#" className="text-gray-500 hover:text-gray-600">Terms of Service</a>
+                                    <span className="text-gray-500">&#183;</span>
+                                    <a href="#" className="text-gray-500 hover:text-gray-600">Privacy Policy</a>
+                                </span> */}
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

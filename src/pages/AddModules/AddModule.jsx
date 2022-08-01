@@ -2,13 +2,12 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { addModule } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Spinner from '../../components/Spinner/Spinner';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const AddModule = () => {
 
@@ -43,11 +42,19 @@ const AddModule = () => {
                     MySwal.fire('¡Módulo creado con éxito!', '', 'success');
                 } catch (error) {
                     setLoading(false);
-                    MySwal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'El módulo ya está creado'
-                    })
+                    if (error.response?.status === 400) {
+                        MySwal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'El módulo ya existe. Revise que el número o el nombre no sea repetido.'
+                        })
+                    } else {
+                        MySwal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Hubo un error al crear el módulo. Intente de nuevo.'
+                        })
+                    }
                 }
             }
         })
@@ -60,21 +67,21 @@ const AddModule = () => {
 
     // form structure
     const signInForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group mb-4">
-                <label className="text-muted">Número de módulo</label>
-                <input type="number" {...register('number')} className='form-control' min={0} />
+        <form className="flex flex-col gap-13 justify-center items-center mb-4" onSubmit={handleSubmit(clickSubmit)}>
+            <div className="w-full sm:w-2/5 flex flex-col">
+                <label className="">Número de módulo</label>
+                <input type="number" {...register('number')} className='w-full border-t-0 border-r-0 border-l-0 border-b-2 border-b-gray-400 dark:bg-gray-800' min={0} aria-label='numero del modulo' />
                 {errors.number && errorValidator(errors.number.message)}
             </div>
-            <div className="form-group mb-4">
-                <label className="text-muted">Nombre</label>
-                <input type="text" {...register('name')} className='form-control' />
+            <div className="w-full sm:w-2/5 flex flex-col">
+                <label className="">Nombre</label>
+                <input type="text" {...register('name')} className='w-full border-t-0 border-r-0 border-l-0 border-b-2 border-b-gray-400 dark:bg-gray-800' aria-label='nombre del modulo' />
                 {errors.name && errorValidator(errors.name.message)}
             </div>
-            <NavLink to='/admin/dashboard'>
+            {/* <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
-            </NavLink>
-            <input type='submit' className="btn btn-primary" value="Crear" />
+            </NavLink> */}
+            <input type='submit' className="w-36 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Crear" />
         </form>
     )
 
@@ -85,18 +92,17 @@ const AddModule = () => {
         )
 
     return (
-        <>
-            <NavigationAdmin />
-            <div className='container'>
-                <div className='row'>
-                    <h2 className='text-center mt-2'>Crear nuevo módulo</h2>
+        <LayoutAdmin>
+            <div className='p-5 flex flex-col items-center gap-5'>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg'>
+                    <h2 className='font-bold text-xl text-start text-gray-400'>Crear nuevo módulo</h2>
                 </div>
-                <div className='row'>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg dark:text-white'>
                     {showLoading()}
                     {signInForm()}
                 </div>
             </div>
-        </>
+        </LayoutAdmin>
     )
 }
 

@@ -2,13 +2,29 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { updateModule, getModuleById } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
+import tw from 'twin.macro';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 import Spinner from '../../components/Spinner/Spinner';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const Container = tw.div`
+    p-5 flex flex-col items-center gap-5
+`;
+
+const Title = tw.h2`
+    font-bold text-xl text-gray-600 dark:text-gray-400
+`;
+
+const Form = tw.form`
+    flex flex-col gap-6 justify-center items-center mb-4
+`;
+
+const FormGroup = tw.div`
+    w-full sm:w-2/5 flex flex-col
+`;
 
 const UpdateModule = () => {
 
@@ -60,7 +76,7 @@ const UpdateModule = () => {
             if (result.isConfirmed) {
                 setLoading(true);
                 try {
-                    const res = await updateModule(module._id, data)
+                    await updateModule(module._id, data)
                     setLoading(false);
                     MySwal.fire('¡Módulo actualizado con éxito!', '', 'success');
                 } catch (error) {
@@ -79,28 +95,22 @@ const UpdateModule = () => {
 
     // form structure
     const signInForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group mb-4">
-                <label className="text-muted">Número de módulo</label>
-                <input type="number" {...register('number')} defaultValue={module.number} className='form-control' min={0} />
+        <Form onSubmit={handleSubmit(clickSubmit)}>
+            <FormGroup>
+                <label>Número de módulo</label>
+                <input type="number" {...register('number')} defaultValue={module.number} className='dark:bg-gray-800' min={0} data-testid='inputNumber' />
                 {errors.number && errorValidator(errors.number.message)}
-            </div>
-            <div className="form-group mb-4">
-                <label className="text-muted">Nombre</label>
-                <input type="text" {...register('name')} defaultValue={module.name} className='form-control' />
+            </FormGroup>
+            <FormGroup>
+                <label>Nombre</label>
+                <input type="text" {...register('name')} defaultValue={module.name} className='dark:bg-gray-800' data-testid='inputName' />
                 {errors.name && errorValidator(errors.name.message)}
-            </div>
-            <div className="row">
-                <div className='col-6 col-md-6'>
-                    <NavLink to='/admin/showmodules'>
+            </FormGroup>
+            {/* <NavLink to='/admin/showmodules'>
                         <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
-                    </NavLink>
-                </div>
-                <div className='col-6 col-md-6'>
-                    <input type='submit' className="btn btn-primary" value="Actualizar" />
-                </div>
-            </div>
-        </form>
+                    </NavLink> */}
+            <input type='submit' className="w-36 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value="Actualizar" />
+        </Form>
     )
 
     // shows loading when submit is executing
@@ -110,18 +120,17 @@ const UpdateModule = () => {
         )
 
     return (
-        <>
-            <NavigationAdmin />
-            <div className='container'>
-                <div className='row'>
-                    <h2 className='text-center mt-2'>Modificar el módulo {module.name}</h2>
+        <LayoutAdmin>
+            <Container>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg'>
+                    <Title className='text-start'>Modificar el módulo {module.name}</Title>
                 </div>
-                <div className='row'>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg dark:text-white'>
                     {showLoading()}
                     {signInForm()}
                 </div>
-            </div>
-        </>
+            </Container>
+        </LayoutAdmin>
     )
 }
 

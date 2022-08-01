@@ -1,17 +1,30 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense, lazy } from 'react';
 import { NavLink, useParams, Redirect } from 'react-router-dom';
 import { useQuery, useQueryClient } from 'react-query';
 import { getLearnContent, addCompleteLearn } from '../../api/apiCallsUser';
 import useAuth from '../../auth/useAuth';
-
-import Backdrops from '../../components/Backdrops/Backdrops';
-import { Progress } from 'reactstrap';
+import Alert from '../../components/Alert/Alert';
+import Backdrops from '../../components/Backdrops/BackdropTW';
 import { FaAngleRight, FaAngleLeft, FaGraduationCap } from "react-icons/fa";
-import ShowImage from '../../components/ShowImage/ShowImage';
+import { AiOutlineClose } from "react-icons/ai";
+
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
+import { styled } from '@mui/material/styles';
+const ShowImage = lazy(() => import('../../components/ShowImage/ShowImage'));
 
-import './learningCapsule.css';
+const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {
+        backgroundColor: theme.palette.grey[theme.palette.mode === 'light' ? 200 : 800],
+    },
+    [`& .${linearProgressClasses.bar}`]: {
+        borderRadius: 5,
+        backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8',
+    },
+}));
 
 const LearningCapsule = () => {
 
@@ -27,7 +40,7 @@ const LearningCapsule = () => {
     const { data, error, isFetching, isPreviousData } = useQuery(
         ["learn", lessonId, page],
         () => getLearnContent(lessonId, page),
-        { keepPreviousData: true, staleTime: 5000 }
+        { keepPreviousData: true, staleTime: 5000, refetchOnWindowFocus: false }
     );
 
 
@@ -81,105 +94,111 @@ const LearningCapsule = () => {
     }, [data?.hasNextPage, lessonId, page, queryClient])
 
     const progress = () => (
-        <>
+        <div className='flex flex-col'>
             {data?.totalDocs > 0 &&
                 <>
-                    <div className='row mt-4 justify-content-center'>
-                        <div className="col-6">
-                            <p className='text-center fw-bold mt-2'>{page} de {data?.totalDocs}</p>
-                        </div>
-                    </div>
-                    <div className='row justify-content-center'>
-                        <div className='col-1 me-4 bounce-top ps-4'>
-                            <button type="button" className="btn-close" aria-label="Close" onClick={() => redirectLearn()}></button>
-                        </div>
-                        <div className='col-8 col-md-10 pt-1'>
-                            <Progress value={page} max={data?.totalDocs} />
+                    <p className='text-center'>{page} de {data?.totalDocs}</p>
+                    <div className='flex items-center'>
+                        <button type="button" className="w-5 h-5 mr-2 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300" aria-label="Close" onClick={() => redirectLearn()}>
+                            <AiOutlineClose />
+                        </button>
+                        <div className='w-full'>
+                            {/* <Progress value={page} max={data?.totalDocs} /> */}
+                            <BorderLinearProgress variant="determinate" value={(page * 100) / data?.totalDocs} />
                         </div>
                     </div>
                 </>
             }
-        </>
+        </div>
     )
 
     const capsule = () => (
-        <>
+        <div className='flex flex-col gap-2 sm:gap-5'>
             {data?.totalDocs > 0 &&
                 <>
-                    <div className='row justify-content-center'>
-                        <div className='col-12'>
-                            <h2>
-                                {data?.docs[0].title}
-                            </h2>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-12 col-lg-6 d-flex'>
-                            <div className='content mx-auto align-self-center'>
-                                <ShowImage styles='my-image img-fluid' name={data?.docs[0].title} url={data?.docs[0].image_url?.url} />
-                            </div>
-                        </div>
-                        <div className='col-12 col-lg-6 d-flex'>
-                            <div className='content-gif mx-auto align-self-center'>
-                                <ShowImage styles='img-fluid' name={data?.docs[0].title} url={data?.docs[0].gif_url?.url} />
-                            </div>
-                        </div>
-                    </div>
-                    <div className='row justify-content-center align-items-center mt-5'>
-                        <div className='col-6 text-center mb-4'>
-                            {data?.hasPrevPage && <button className='btn btn-danger rounded-pill' onClick={() => backContent()}><FaAngleLeft /> Atrás</button>}
-                            {!data?.hasPrevPage && <NavLink to='/learn' className='btn btn-danger rounded-pill'><FaGraduationCap /> Lecciones</NavLink>}
-                        </div>
-                        <div className='col-6 text-center mb-4'>
-                            {data?.hasNextPage && <button className='btn btn-success rounded-pill' onClick={() => nextContent()}>Siguiente <FaAngleRight /></button>}
-                            {!data?.hasNextPage && <button onClick={() => redirectLearnFinal()} className='btn btn-danger rounded-pill'><FaGraduationCap /> Terminar lección</button>}
-                        </div>
+                    <h2 className='text-center font-bold text-3xl'>
+                        {data?.docs[0].title}
+                    </h2>
+                    <div className='flex flex-col sm:flex-row items-center justify-center sm:justify-around gap-2'>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ShowImage styles='w-32 h-32 sm:w-72 sm:h-72 rounded-lg' name={data?.docs[0].title} url={data?.docs[0].image_url?.url} />
+                        </Suspense>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <ShowImage styles='w-72 h-72 sm:w-96 sm:h-96' name={data?.docs[0].title} url={data?.docs[0].gif_url?.url} />
+                        </Suspense>
                     </div>
                 </>
             }
-        </>
+        </div>
     )
 
     // show backend error alert
     const showError = () => (
-        <div className='container'>
-            <div class="alert alert-danger align-middle mt-5" role="alert">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
-                    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                </svg>
-                <div className='row'>
-                    <span>
-                        Hubo un error al cargar los datos. Intente de nuevo.
-                    </span>
-                </div>
-                <NavLink to='/learn' className='btn btn-info rounded-pill'><FaGraduationCap /> Ir a Lecciones</NavLink>
+        <Alert severity='error'>
+            <div className='flex flex-col gap-2'>
+                <span>
+                    Hubo un error al cargar los datos. Intente de nuevo.
+                </span>
+                <NavLink to='/learn' className='flex justify-center items-center gap-2 w-full sm:w-48 h-11 px-8 font-medium border border-red-700 rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'><FaGraduationCap /> Ir a Lecciones</NavLink>
             </div>
-        </div>
+        </Alert>
+
     )
 
     const showMessageNoContent = () => (
-        <div className='container'>
-            <div class="alert alert-info align-middle mt-5" role="alert">
-                <div className='row'>
-                    <span>
-                        Lo sentimos, todavía no hay contenido para esta lección.
-                    </span>
-                </div>
-                <NavLink to='/learn' className='btn btn-info rounded-pill'><FaGraduationCap /> Ir a Lecciones</NavLink>
+        <Alert severity='info'>
+            <div className='flex flex-col gap-2'>
+                <span>
+                    Lo sentimos, todavía no hay contenido para esta lección.
+                </span>
+                <NavLink to='/learn' className='flex justify-center items-center gap-2 w-full sm:w-48 h-11 px-8 font-medium border border-blue-700 rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'><FaGraduationCap /> Ir a Lecciones</NavLink>
             </div>
-        </div>
+        </Alert>
+
     )
 
     return (
         <>
             {isFetching && <Backdrops />}
             {isPreviousData && <Backdrops />}
-            {data?.totalDocs === 0 && showMessageNoContent()}
-            {error && showError()}
-            <div className='container shadow-drop-center mb-4'>
-                {progress()}
-                {capsule()}
-                {redirectUser()}
+            {redirectUser()}
+
+            <div className='w-full h-screen font-sans text-gray-900 dark:bg-gray-800 dark:text-white'>
+
+                <div className='flex flex-col sm:gap-8 py-3 px-6 mx-auto max-w-screen-xl sm:px-8 md:px-12 lg:px-16 xl:px-24'>
+                    {error && showError()}
+                    {data?.totalDocs === 0 && showMessageNoContent()}
+                    {!error && progress()}
+                    {capsule()}
+                </div>
+
+                <div className='fixed bottom-0 w-full max-w-screen-xl h-28 border-t-2 dark:border-gray-700 bg-white dark:bg-gray-800 py-1 px-6 mx-auto sm:px-8 md:px-12 lg:px-16 xl:px-24'>
+                    <div className='w-full h-full relative flex flex-col sm:flex-row gap-2 items-center justify-between'>
+
+                        {data?.hasPrevPage &&
+                            <button className='flex justify-center items-center gap-2 w-full sm:w-44 h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300' onClick={() => backContent()}>
+                                <FaAngleLeft /> Atrás
+                            </button>}
+
+                        {!data?.hasPrevPage &&
+                            <NavLink to='/learn' className='flex justify-center items-center gap-2 w-full sm:w-56 h-13 px-8 bg-red-700 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-xl transition-shadow duration-300'>
+                                <FaGraduationCap /> Ir a Lecciones
+                            </NavLink>}
+
+                        {data?.hasNextPage &&
+                            <button className='flex justify-center items-center gap-2 w-full sm:w-44 h-13 px-8 bg-bookmark-cyan-500 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300' onClick={() => nextContent()}>
+                                Siguiente <FaAngleRight />
+                            </button>}
+                        {data?.totalDocs !== 0 &&
+                            <>
+                                {!data?.hasNextPage &&
+                                    <button onClick={() => redirectLearnFinal()} className='flex justify-center items-center gap-2 w-full sm:w-56 h-13 px-8 bg-green-600 font-medium text-white rounded-xl whitespace-nowrap hover:shadow-primary transition-shadow duration-300'>
+                                        <FaGraduationCap /> Terminar lección
+                                    </button>}
+                            </>
+                        }
+                    </div>
+                </div>
             </div>
         </>
     )

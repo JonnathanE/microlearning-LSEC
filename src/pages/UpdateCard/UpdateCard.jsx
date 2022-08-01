@@ -2,15 +2,30 @@ import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { updateCard, getLessons, getCardById } from '../../api/apiCallsAdmin';
-
-import NavigationAdmin from '../../components/NavigationAdmin/NavigationAdmin';
 import Spinner from '../../components/Spinner/Spinner';
 import UpdateGifCard from '../../components/UpdateGifCard/UpdateGifCard';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import tw from 'twin.macro';
+import LayoutAdmin from '../LayoutAdmin/LayoutAdmin';
 
+const Container = tw.div`
+    p-5 flex flex-col items-center gap-5
+`;
+
+const Title = tw.h2`
+    font-bold text-xl text-gray-600 dark:text-gray-400
+`;
+
+const Form = tw.form`
+    flex flex-col gap-6 justify-center items-center mb-4 sm:px-9
+`;
+
+const FormGroup = tw.div`
+    w-full lg:w-5/6 flex flex-col
+`;
 
 const UpdateCard = () => {
 
@@ -26,10 +41,10 @@ const UpdateCard = () => {
 
     // yup schema to validate inputs
     const schema = yup.object().shape({
-        question: yup.string().required('El nombre de la lección es requerido'),
+        question: yup.string().required('Requiere ingresar una pregunta'),
         lesson: yup.string().ensure().required('Debe de elegir una lección'),
-        correctAnswer: yup.string().ensure().required('La respuesta correcta es requerido'),
-        wrongAnswer: yup.string().ensure().required('La respuesta incorrecta es requerido'),
+        correctAnswer: yup.string().ensure().required('Requiere ingresar la respuesta correcta a evaluar'),
+        wrongAnswer: yup.string().ensure().required('Requiere ingresar la respuesta incorrecta a evaluar'),
     });
 
     // initialize the React Hook Form methods
@@ -49,7 +64,7 @@ const UpdateCard = () => {
                 try {
                     await updateCard(card._id, data);
                     setLoading(false);
-                    MySwal.fire('¡El Microcontenido se actualizó correctamente!', '', 'success');
+                    MySwal.fire('¡La tarjeta se actualizó correctamente!', '', 'success');
                 } catch (error) {
                     setLoading(false);
                     MySwal.fire({
@@ -101,39 +116,37 @@ const UpdateCard = () => {
 
     // form structure
     const cardForm = () => (
-        <form className="sign-box" onSubmit={handleSubmit(clickSubmit)}>
-            <div className="form-group">
-                <label className="text-muted">Pregunta</label>
-                <input type="text" {...register('question')} defaultValue={card.question} className='form-control' />
+        <Form onSubmit={handleSubmit(clickSubmit)}>
+            <FormGroup>
+                <label>Pregunta</label>
+                <input type="text" {...register('question')} defaultValue={card.question} className='dark:bg-gray-800' data-testid='inputQuestion' />
                 {errors.question && errorValidator(errors.question.message)}
-            </div>
-            <div className='form-group'>
-                <label className='text-muted'>Lección</label>
-                <select type='text' {...register('lesson')} className='form-select' >
+            </FormGroup>
+            <FormGroup>
+                <label>Lección</label>
+                <select type='text' {...register('lesson')} className='dark:bg-gray-800' >
                     <option value={singleLesson ? singleLesson._id : ''}>{singleLesson ? singleLesson.name : 'Seleccione un módulo'}</option>
                     {lessons && lessons.map((c, i) => (
                         <option key={i} value={c._id}>{c.name}</option>
                     ))}
                 </select>
                 {errors.lesson && errorValidator(errors.lesson.message)}
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Restpuesta correcta</label>
-                <input type="text" {...register('correctAnswer')} defaultValue={card.correctAnswer} className='form-control' />
+            </FormGroup>
+            <FormGroup>
+                <label>Restpuesta correcta</label>
+                <input type="text" {...register('correctAnswer')} defaultValue={card.correctAnswer} className='dark:bg-gray-800' data-testid='inputCorrectAnswer' />
                 {errors.correctAnswer && errorValidator(errors.correctAnswer.message)}
-            </div>
-            <div className="form-group">
-                <label className="text-muted">Respuesta incorrecta</label>
-                <input type="text" {...register('wrongAnswer')} defaultValue={card.wrongAnswer} className='form-control' />
+            </FormGroup>
+            <FormGroup>
+                <label>Respuesta incorrecta</label>
+                <input type="text" {...register('wrongAnswer')} defaultValue={card.wrongAnswer} className='dark:bg-gray-800' data-testid='inputWrongAnswer' />
                 {errors.wrongAnswer && errorValidator(errors.wrongAnswer.message)}
-            </div>
-            <div className="form-group mb-3">
-            </div>
-            <NavLink to='/admin/dashboard'>
+            </FormGroup>
+            {/* <NavLink to='/admin/dashboard'>
                 <button type='button' className="btn btn-danger ms-4 me-4">Regresar</button>
-            </NavLink>
-            <input type='submit' className="btn btn-primary" />
-        </form>
+            </NavLink> */}
+            <input type='submit' className="w-36 p-3 rounded-xl bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400 text-white font-bold cursor-pointer" value='Actualizar' />
+        </Form>
     )
 
     // shows loading when submit is executing
@@ -143,19 +156,22 @@ const UpdateCard = () => {
         )
 
     return (
-        <>
-            <NavigationAdmin />
-            <div className='container'>
-                <div className='row'>
-                    <h2 className='text-center mt-2'>Actualizar Prueba</h2>
+        <LayoutAdmin>
+            <Container>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg'>
+                    <Title className='text-start'>Actualizar Tarjeta de Aprendizaje</Title>
                 </div>
-                <div className='row'>
+                <div className='w-full p-3 bg-white dark:bg-gray-800 drop-shadow-lg dark:text-white flex flex-col sm:flex-row gap-2'>
                     {showLoading()}
-                    <UpdateGifCard content={card} />
-                    {cardForm()}
+                    <div className='flex-1 flex-col'>
+                        <UpdateGifCard content={card} />
+                    </div>
+                    <div className='flex-[1] border p-2'>
+                        {cardForm()}
+                    </div>
                 </div>
-            </div>
-        </>
+            </Container>
+        </LayoutAdmin>
     )
 }
 

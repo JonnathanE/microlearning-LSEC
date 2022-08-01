@@ -2,8 +2,22 @@ import { useState, useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getLessonsHome } from '../../api/apiCallsUser';
 import { API } from '../../config';
+import tw, { styled } from 'twin.macro';
 
-import './section.css';
+const LessonWrapper = styled.div`
+    ${tw`
+            w-28 h-32 flex flex-col items-center justify-center
+        `
+    }
+`;
+
+const ImageWrapper = styled.div`
+    ${tw`
+            w-[72px] h-[72px] flex items-center justify-center rounded-full overflow-hidden object-cover
+        `
+    }
+    ${({ complete }) => complete ? tw`bg-green-600` : tw`bg-gray-400`}
+`;
 
 const Section = ({ moduleId, completeLesson }) => {
 
@@ -35,36 +49,41 @@ const Section = ({ moduleId, completeLesson }) => {
     }, [])
 
     return (
-        <div className="card my-card shadow p-3 mb-4 bg-body rounded">
-            <div className='row justify-content-center align-items-center'>
-                {lessons &&
-                    lessons.map(lesson => (
-                        <div key={lesson._id} className='col-6 col-md-2 m-md-5 text-center mb-4'>
-                            <div
-                                className={
-                                    completeLesson.find(element => element === lesson._id)
-                                        ? 'my-contend-complete'
-                                        : 'my-contend'}
-                                onClick={(e) => clicKLesson(lesson._id, e)}
-                            >
+        <div className='flex flex-row flex-wrap justify-around'>
+            {lessons &&
+                lessons.map(lesson => (
+                    <div key={lesson._id} className='w-32 mb-10 flex flex-col items-center gap-1'>
+                        <LessonWrapper
+                            onClick={(e) => clicKLesson(lesson._id, e)}
+                        >
+                            <ImageWrapper complete={completeLesson.find(e => e === lesson._id)}>
                                 <img
                                     src={`${API}/lesson/icon/${lesson._id}`}
                                     alt={lesson.name}
-                                    className="my-icon mx-auto d-block"
+                                    className="w-[55px] h-[55px] object-cover"
                                 />
-                                <p className='title-lesson fw-bold mt-3'>{lesson.name}</p>
-                            </div>
-                            <button className='rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark'
-                                onClick={(e) => clicKLesson(lesson._id, e)}>Aprender</button>
-                            <button className={completeLesson.find(element => element === lesson._id)
-                                ? `rounded-pill p-2 mb-3 mb-lg-1 my-contend-complete text-white`
-                                : `rounded-pill p-2 mb-3 mb-lg-1 mt-1 bg-info text-dark`}
-                                onClick={(e) => clicKPractice(lesson._id, e)}>Practicar</button>
-                        </div>
-                    ))
-                }
-            </div>
+                            </ImageWrapper>
+                            <p className='break-words font-bold text-center dark:text-white'>{lesson.name}</p>
+                        </LessonWrapper>
+                        <button
+                            className='px-2 py-1 rounded-2xl text-white font-bold bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400'
+                            onClick={(e) => clicKLesson(lesson._id, e)}
+                            data-testid='btn-user-learn'>
+                            Aprender
+                        </button>
+                        <button
+                            className={completeLesson.find(element => element === lesson._id)
+                                ? `px-2 py-1 rounded-2xl text-white font-bold bg-green-600 hover:bg-green-500`
+                                : `px-2 py-1 rounded-2xl text-white font-bold bg-bookmark-cyan-500 hover:bg-bookmark-cyan-400`}
+                            onClick={(e) => clicKPractice(lesson._id, e)}
+                            data-testid='btn-user-practice'>
+                            Practicar
+                        </button>
+                    </div>
+                ))
+            }
         </div>
+
     );
 }
 

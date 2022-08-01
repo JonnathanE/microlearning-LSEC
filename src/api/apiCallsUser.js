@@ -42,6 +42,12 @@ export const getLearnContent = async (lessonId, page) => {
     return data;
 }
 
+// get learn Content
+export const getAllLearnContent = async (lessonId) => {
+    const { data } = await publicRequest.get(`/home/learn/${lessonId}`);
+    return data;
+}
+
 // add complete learn
 export const addCompleteLearn = async (lessonId, token) => {
     const { data } = await axios({
@@ -55,5 +61,11 @@ export const addCompleteLearn = async (lessonId, token) => {
 // get knoweled card
 export const getCards = async (lessonId, page) => {
     const { data } = await publicRequest.get(`/home/card/${lessonId}?page=${page}`);
+    return data;
+}
+
+// get knoweled card
+export const getAllCards = async (lessonId) => {
+    const { data } = await publicRequest.get(`/home/card/${lessonId}`);
     return data;
 }
