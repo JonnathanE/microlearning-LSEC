@@ -9,25 +9,26 @@ The project is built in React. The API are below:
 
 ## Screenshot
 
-![image](https://user-images.githubusercontent.com/33469147/161625727-aa1aa1f6-bf4d-4935-b10d-2eba05ff4e7e.png)
+![FireShot Capture 016 - LSEC App - react-web-jede herokuapp com](https://user-images.githubusercontent.com/33469147/184988559-4c83d403-7fc6-4ccb-974b-2333bca5ff79.png)
 
-![image](https://user-images.githubusercontent.com/33469147/161625229-0e731c33-b51c-4515-a691-e3b0e5cf20bf.png)
+![image](https://user-images.githubusercontent.com/33469147/184989020-80b9cb5c-4f47-4453-a26f-dbb858644e79.png)
 
-![image](https://user-images.githubusercontent.com/33469147/161625112-8b5c74e3-43a3-40a5-92b7-5fa56faf0a31.png)
+![image](https://user-images.githubusercontent.com/33469147/184989122-dff64906-d2dc-45f7-8409-163aac31c627.png)
+
 
 
 ## Tech Stack
 
-**Client:** React, Bootstrap 4
+**Client:** React, Tailwind
 
-**Server:** Node, Express, MongoDb
+**Server:** Node, Express, MongoDB
 
 
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`REACT_APP_API_URL` = =(the backend server url: serverURL/api)
+`REACT_APP_API_URL` = (the backend server url: serverURL/api)
     
 
 ## Run Locally
@@ -62,7 +63,7 @@ Start the server
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -84,6 +85,11 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm cypress:open`
+
+Open Cypress to perform e2e testing. to do this you must execute `npm run start`.
+
 
 ### `npm run eject`
 
