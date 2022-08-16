@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import LoaderImage from '../../components/LoaderImage/LoaderImage';
 
-const ShowImage = ({ name, url, styles, url_buffer, alternative = 'Cargando recurso...' }, styleLazy = 'not') => {
+const ShowImage = ({ name, url, styles, url_buffer, alternative = 'Cargando recurso...', styleLazy = 'not' }) => {
 
     const [loaded, setLoaded] = useState(false);
 
