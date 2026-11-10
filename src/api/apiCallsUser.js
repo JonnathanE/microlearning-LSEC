@@ -37,12 +37,6 @@ export const getCompleteLearn = async token => {
 }
 
 // get learn Content
-export const getLearnContent = async (lessonId, page) => {
-    const { data } = await publicRequest.get(`/home/learn/${lessonId}?page=${page}`);
-    return data;
-}
-
-// get learn Content
 export const getAllLearnContent = async (lessonId) => {
     const { data } = await publicRequest.get(`/home/learn/${lessonId}`);
     return data;
@@ -55,12 +49,6 @@ export const addCompleteLearn = async (lessonId, token) => {
         url: `${API}/home/complete/lesson/${lessonId}`,
         headers: { Authorization: `Bearer ${token}` }
     });
-    return data;
-}
-
-// get knoweled card
-export const getCards = async (lessonId, page) => {
-    const { data } = await publicRequest.get(`/home/card/${lessonId}?page=${page}`);
     return data;
 }
 

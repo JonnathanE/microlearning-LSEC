@@ -17,8 +17,6 @@ import { AiOutlineUser } from 'react-icons/ai';
 import backgroundLsec from '../../img/logo_lsec.png';
 import lockIcon from '../../img/lock.svg';
 import emailIcon from '../../img/email.svg';
-// import googleIcon from '../../img/google.svg';
-// import facebookIcon from '../../img/facebook.svg';
 
 
 const FormGroup = tw.div`
