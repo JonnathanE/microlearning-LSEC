@@ -2,7 +2,7 @@
   "name": "microlearning_lsec",
   "version": "3.1.4",
   "engines": {
-    "node": ">=13.x"
+    "node": ">=26"
   },
   "private": true,
   "dependencies": {
@@ -11,7 +11,6 @@
     "@hookform/resolvers": "^2.6.1",
     "@mui/material": "^5.5.3",
     "@tailwindcss/forms": "^0.5.2",
-    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
@@ -24,50 +23,35 @@
     "react-icons": "^4.2.0",
     "react-query": "^3.34.19",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.1",
     "sweetalert2": "^11.0.19",
     "sweetalert2-react-content": "^4.1.0",
     "twin.macro": "^2.8.2",
     "yup": "^0.32.9"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "cypress:open": "cypress open"
-  },
-  "eslintConfig": {
-    "env": {
-      "cypress/globals": true
-    },
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "plugins": [
-      "cypress"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "start": "vite",
+    "build": "vite build",
+    "test": "vitest",
+    "cypress:open": "cypress open",
+    "dev": "vite",
+    "preview": "vite preview",
+    "test:run": "vitest run"
   },
   "devDependencies": {
+    "@babel/core": "^7.29.13",
+    "@rolldown/plugin-babel": "^0.3.1",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@vitejs/plugin-react": "^6.3.0",
     "autoprefixer": "^10.4.7",
+    "babel-plugin-macros": "^3.1.0",
     "cypress": "^9.7.0",
     "cypress-file-upload": "^5.0.8",
-    "eslint-plugin-cypress": "^2.12.1",
+    "jsdom": "^31.0.0",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.6"
+    "tailwindcss": "^3.1.6",
+    "vite": "^8.3.6",
+    "vitest": "^5.1.0"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.15.0",
+  "type": "module"
 }

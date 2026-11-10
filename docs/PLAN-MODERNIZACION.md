@@ -100,18 +100,29 @@ El orden cambia un poco respecto a la lista de objetivos, porque cada fase neces
 
 Node 26 en `engines` y `.nvmrc`, igual que la API.
 
-- [ ] Instalar `vite` y `@vitejs/plugin-react`, y crear `vite.config.ts`.
-- [ ] Mover `public/index.html` a la raíz y quitar `%PUBLIC_URL%`.
-- [ ] Renombrar a `.jsx` todos los `.js` que contengan JSX. Vite no los procesa de otra forma.
-- [ ] `REACT_APP_API_URL` → `VITE_API_URL` y `process.env` → `import.meta.env`. Solo se usa en `src/config.js`. Crear `.env.example`.
-- [ ] Mantener el puerto 3000, que es el que esperan Cypress y `CORS_ORIGINS` de la API.
-- [ ] `build/` → `dist/` en `.gitignore`.
-- [ ] Mantener `twin.macro` temporalmente con `babel-plugin-macros` en el plugin de React, hasta eliminarlo en la fase 5.
-- [ ] Migrar los tests a **Vitest** con `jsdom`: `jest.*` → `vi.*`, `setupTests.js` y `@testing-library/jest-dom/vitest`.
-- [ ] Quitar `react-scripts` y `eslintConfig`.
-- [ ] Metadatos heredados de la plantilla: `manifest.json` ("Create React App Sample") y la descripción de `index.html`.
+- [x] Instalar `vite` y `@vitejs/plugin-react`, y crear `vite.config.ts`.
+- [x] Mover `public/index.html` a la raíz y quitar `%PUBLIC_URL%`.
+- [x] Renombrar a `.jsx` todos los `.js` que contengan JSX. Vite no los procesa de otra forma.
+- [x] `REACT_APP_API_URL` → `VITE_API_URL` y `process.env` → `import.meta.env`. Solo se usa en `src/config.js`. Crear `.env.example`.
+- [x] Mantener el puerto 3000, que es el que esperan Cypress y `CORS_ORIGINS` de la API.
+- [x] `build/` → `dist/` en `.gitignore`.
+- [x] Mantener `twin.macro` temporalmente con `babel-plugin-macros` en el plugin de React, hasta eliminarlo en la fase 5.
+- [x] Migrar los tests a **Vitest** con `jsdom`: `jest.*` → `vi.*`, `setupTests.js` y `@testing-library/jest-dom/vitest`.
+- [x] Quitar `react-scripts` y `eslintConfig`.
+- [x] Metadatos heredados de la plantilla: `manifest.json` ("Create React App Sample") y la descripción de `index.html`.
 
 **Criterio de cierre:** `pnpm dev` y `pnpm build` funcionan, y los tests pasan igual que en la línea base.
+
+### Resultado
+- Vite 8, `@vitejs/plugin-react` 6 y Vitest 5 con `jsdom`. Vitest pasa los mismos tests que Jest: 15 de 28 suites, con los mismos 19 tests fallando.
+- `@vitejs/plugin-react` 6 ya no incluye Babel: `twin.macro` funciona con `@rolldown/plugin-babel`, Babel 7 y `babel-plugin-macros`, y lee `tailwind.config.cjs`.
+- El paquete pasa a ESM (`"type": "module"`), así que las configuraciones CommonJS se renombran a `.cjs`, incluido el plugin de Cypress.
+- No hizo falta cambiar `jest.*` por `vi.*`: los tests no los usan. Vitest corre con `globals: true`.
+- El `@import` de la fuente DM Sans estaba después de las directivas de Tailwind y no se aplicaba; ahora va primero.
+- Se eliminan los íconos de la plantilla de CRA (`favicon.ico`, `logo192.png`, `logo512.png`); el `apple-touch-icon` usa `logo_lsec192.png`.
+- El bundle pesa 1,4 MB (366 kB comprimido). La carga diferida de rutas está en la fase 7.
+
+
 
 ## Fase 3 — Docker
 
