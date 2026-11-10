@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "LSEC",
+  "name": "Microlearning LSEC",
   "icons": [
     {
       "src": "logo_lsec.ico",
@@ -18,8 +18,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#00ADB5",
+  "background_color": "#ffffff",
+  "description": "Aprende Lengua de Señas Ecuatoriana con microlearning",
+  "lang": "es"
 }
