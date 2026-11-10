@@ -16,8 +16,6 @@ import Alert from '../../components/Alert/Alert';
 
 import lockIcon from '../../img/lock.svg';
 import emailIcon from '../../img/email.svg';
-// import googleIcon from '../../img/google.svg';
-// import facebookIcon from '../../img/facebook.svg';
 
 const FormGroup = tw.div`
     pt-6
