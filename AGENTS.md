@@ -7,7 +7,7 @@ Web application to teach Ecuadorian Sign Language (LSEC) through microlearning. 
 
 ## Current state (update as phases complete)
 
-- JavaScript, React 17, Create React App, npm, React Router 5, React Query 3, Tailwind 3 + twin.macro, Jest + Testing Library, Cypress 9.
+- Phases 0 and 1 done. JavaScript, React 17, Create React App, pnpm, React Router 5, React Query 3, Tailwind 3 + twin.macro, Jest + Testing Library, Cypress 9.
 - **It does not work yet against API `v3.0.0`**: phase 4 of the plan adapts it.
 - Target: Node 26, pnpm, Vite, Docker, React 19, TanStack Query, Tailwind 4 without MUI or twin.macro, zod, Vitest, Biome, TypeScript (strict).
 - Phase order: 0 baseline → 1 pnpm + cleanup → 2 Vite + Vitest → 3 Docker → 4 API 3.0 → 5 libraries → 6 TypeScript → 7 quality + release. Do not jump ahead.
@@ -16,13 +16,16 @@ Web application to teach Ecuadorian Sign Language (LSEC) through microlearning. 
 ## Commands
 
 ```bash
-npm start              # Create React App dev server (port 3000)
-npm run build          # production build into ./build
-npm test               # Jest
-npm run cypress:open   # E2E tests; they need the API on localhost:5000 with NODE_ENV=test
+pnpm install           # set CYPRESS_INSTALL_BINARY=0 to skip the Cypress binary
+pnpm start             # Create React App dev server (port 3000)
+pnpm build             # production build into ./build
+CI=true pnpm exec react-scripts test --watchAll=false   # Jest, single run
+pnpm cypress:open      # E2E tests; they need the API on localhost:5000 with NODE_ENV=test
 ```
 
-Update this section when phases 1 and 2 land (`pnpm`, `vite`, `vitest`).
+Update this section when phase 2 lands (`vite`, `vitest`). Packages with install scripts must be declared in `allowBuilds` (`pnpm-workspace.yaml`).
+
+Baseline: 15 of 28 Jest suites pass. The failures predate the modernization (see phase 0 in the plan); do not treat them as regressions, but do not add new ones.
 
 Environment variables: `REACT_APP_API_URL` (`<server>/api`), read only in `src/config.js`.
 
@@ -61,6 +64,5 @@ Domain: `Module` → has `Lesson`s → each lesson has `Microlearning`s (learnin
 
 - `src/api/requestMethods.js` reads the token once, when the module loads, so `userRequest` can use a stale token until the page reloads. Fix scheduled for phase 4.
 - The `auth` flag in `localStorage` only controls what the UI shows; the API is what enforces permissions.
-- `pages/LearningCapsule`, `pages/Practice` and `pages/UpdateUser` have no route: the app uses `LearningCapsuleAll` and `PracticeAll`. Removal scheduled for phase 1.
 - `chart.js` is not imported directly, but `react-chartjs-2` requires it.
 - Cypress specs create admins through `signup` with `roles`, which API `v3.0.0` no longer allows. See phase 4.

@@ -43,21 +43,46 @@ El orden cambia un poco respecto a la lista de objetivos, porque cada fase neces
 
 ## Fase 0 — Línea base
 
-- [ ] Crear la rama `feature/pnpm` desde `develop`.
-- [ ] Ejecutar los 30 archivos de tests con Node 24 y anotar qué pasa y qué falla.
-- [ ] Comprobar que el build de Create React App funciona.
-- [ ] Levantar la API `v3.0.0` y anotar qué pantallas fallan.
+- [x] Crear la rama `feature/pnpm` desde `develop`.
+- [x] Ejecutar los 30 archivos de tests con Node 24 y anotar qué pasa y qué falla.
+- [x] Comprobar que el build de Create React App funciona.
+- [x] Levantar la API `v3.0.0` y anotar qué pantallas fallan.
+
+### Resultado (noviembre de 2026, Node 24.22.1)
+
+**Instalación:** `npm ci` falla porque `package-lock.json` no está sincronizado con `package.json` (npm 11 exige `@testing-library/dom` y otras dependencias que el lock no tiene). La línea base se tomó con `pnpm import`, que conserva las versiones resueltas del lock.
+
+**Tests (Jest):** 17 de 30 suites pasan; 33 de 52 tests pasan. Los fallos ya existían y no dependen de la API:
+
+| Causa | Suites |
+|---|---|
+| `lottie-web` usa `canvas`, que jsdom no implementa, y la suite no llega a ejecutarse | `LoginUser`, `SignUp` |
+| `sweetalert2-react-content` falla en jsdom (`querySelector` de `null`) al abrir la alerta de error de la carga inicial, porque los tests no simulan la API, y el formulario no llega a renderizarse | `AddModules`, `AddLesson`, `AddMicrolearning`, `AddCard`, `UpdateModule`, `UpdateLesson`, `UpdateMicrolearning`, `UpdateCard`, `UpdateIcon` |
+| El test espera textos o datos que no se renderizan sin la API | `LoginAdmin`, `Home` |
+
+**Build:** `react-scripts build` compila con 13 advertencias de `react-hooks/exhaustive-deps`. Con `CI=true` falla, porque CRA convierte las advertencias en errores.
+
+**API `v3.0.0`:** se repitieron con curl las peticiones del front, con los mismos datos. Todos los endpoints que usa responden según el contrato 3.0. Los fallos están en cómo el front maneja las respuestas:
+
+| Pantalla | Qué falla |
+|---|---|
+| Todas las de administración y las de estudiante con sesión | Tras iniciar sesión, `userRequest` envía `Bearer undefined` hasta recargar la página, porque `requestMethods.js` lee el token al cargar el módulo. La API responde 401. |
+| `SignUp` | Lee `data.message`, así que no muestra el error de la API. El mínimo de la contraseña ahora es 8. |
+| `AddModules` y `UpdateModule` | Un duplicado ahora es 409: se muestra el mensaje genérico en lugar del de duplicado. |
+| `ShowModules` y `ShowLessons` | Borrar con contenido responde 409 y se muestra un mensaje genérico. |
+| `ShowLessons`, `ViewLesson`, `UpdateIcon` y `Section` | El ícono por `/lesson/icon/:id` sigue funcionando gracias a la redirección 302, pero hay que pasar a `icon_url`. |
+| Cypress | `signup` con `roles` crea un estudiante, así que los specs de administración no pueden iniciar sesión como admin (403). |
 
 ## Fase 1 — pnpm y limpieza
 
 ### pnpm
-- [ ] `pnpm import`, borrar `package-lock.json` y fijar `packageManager`.
-- [ ] Declarar en `allowBuilds` los paquetes con scripts de instalación.
+- [x] `pnpm import`, borrar `package-lock.json` y fijar `packageManager`.
+- [x] Declarar en `allowBuilds` los paquetes con scripts de instalación: `cypress` sí, `core-js` y `core-js-pure` no (solo muestran un mensaje).
 
 ### Código sin uso
-- [ ] Páginas sin ruta: `pages/LearningCapsule`, `pages/Practice` y `pages/UpdateUser`. Las rutas usan `LearningCapsuleAll` y `PracticeAll`. Conservar el historial en `v-tesis`.
-- [ ] `getLearnContent` y `getCards` paginados de `apiCallsUser.js`, si dejan de usarse junto con esas páginas.
-- [ ] `src/i18n/`, `reportWebVitals.js` y componentes sin referencias. Comprobar cada uno antes de borrarlo.
+- [x] Páginas sin ruta: `pages/LearningCapsule`, `pages/Practice` y `pages/UpdateUser`. Las rutas usan `LearningCapsuleAll` y `PracticeAll`. Conservar el historial en `v-tesis`.
+- [x] `getLearnContent` y `getCards` paginados de `apiCallsUser.js`, si dejan de usarse junto con esas páginas.
+- [x] `src/i18n/`, `reportWebVitals.js` y componentes sin referencias. Comprobar cada uno antes de borrarlo. Se calculó qué archivos no son alcanzables desde `src/index.js` y se borraron además `components/Navigation`, `components/NavigationAdmin` (con sus tests), `components/card/KnowledgeCard.jsx` (importaba un CSS que no existe), 5 CSS, 3 animaciones y 3 SVG sin uso.
 
 ### Dependencias a eliminar
 | Paquete | Motivo |
@@ -68,6 +93,8 @@ El orden cambia un poco respecto a la lista de objetivos, porque cada fase neces
 | `reactstrap` | Solo lo usa `pages/Practice`, que no tiene ruta. |
 
 `chart.js` no se importa directamente, pero **no se elimina**: es requerido por `react-chartjs-2`.
+
+- [x] Dependencias eliminadas. Tras la fase 1, tests y build quedan igual que en la línea base (sin las 2 suites borradas: 15 de 28 pasan).
 
 ## Fase 2 — Vite y Vitest
 
@@ -110,7 +137,7 @@ Local: `VITE_API_URL=http://localhost:5000/api` y `CORS_ORIGINS=http://localhost
 | `AddModules` y `UpdateModule` | Un duplicado ahora es 409, no 400. Mostrar el mensaje de la API. |
 | `SignUp` y formularios de contraseña | Mínimo de 8 caracteres. |
 | `ShowModules` y `ShowLessons` | Mostrar `data.error` cuando el borrado responde 409 por tener contenido. |
-| `AddLesson`, `KnowledgeCard` y similares | Quitar las comprobaciones de `data.error` en respuestas correctas: axios ya lanza una excepción ante un error. |
+| `AddLesson` y similares | Quitar las comprobaciones de `data.error` en respuestas correctas: axios ya lanza una excepción ante un error. |
 | Formularios con archivos | Solo PNG, JPEG, GIF y WEBP. Ícono: 1 MB. Resto: 10 MB. Mostrar el error 413. |
 | `ShowLessons`, `ViewLesson`, `UpdateIcon` y `Section` | Usar `lesson.icon_url?.url` en lugar de `/lesson/icon/:id` y unificar `url_buffer` y `url` en `ShowImage`. |
 | `LoginAdmin` | Mostrar el mensaje de la API. Un usuario sin rol de admin ahora responde 403. |
